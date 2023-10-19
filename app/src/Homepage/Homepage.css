@@ -8,3 +8,11 @@
   height: 11vh;
   text-align: center;
 }
+
+/* Sidebar css */
+.sidebar {
+  background-color: #F0F0F0;
+  height: 100%;
+  width: 15%;
+  position: fixed;
+}
