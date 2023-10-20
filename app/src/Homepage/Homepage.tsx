@@ -1,10 +1,11 @@
-import {Header} from './Homepage-components';
+import {Header, Sidebar} from './Homepage-components';
 import './Homepage.css';
 
 function App() {
   return (
     <div className="App">
       <Header/>
+      <Sidebar/>
     </div>
   );
 }
