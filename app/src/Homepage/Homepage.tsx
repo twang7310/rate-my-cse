@@ -1,11 +1,15 @@
-import {Header, Sidebar} from './Homepage-components';
+import {Header, Sidebar, LevelTab} from './Homepage-components';
 import './Homepage.css';
 
 function App() {
   return (
     <div className="App">
       <Header/>
-      <Sidebar/>
+      <Sidebar>
+        <LevelTab classlevel='1'/>
+        <LevelTab classlevel='2'/>
+        <LevelTab classlevel='3'/>
+      </Sidebar>
     </div>
   );
 }
