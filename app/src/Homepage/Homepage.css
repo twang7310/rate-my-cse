@@ -6,6 +6,9 @@
 .header {
   background-color: #6100AC;
   height: 11vh;
+  top: '0px';
+  width: 100%;
+  position: fixed;
   text-align: center;
 }
 
