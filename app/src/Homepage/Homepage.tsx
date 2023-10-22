@@ -6,9 +6,10 @@ function App() {
     <div className="App">
       <Header/>
       <Sidebar>
-        <LevelTab classlevel='1'/>
-        <LevelTab classlevel='2'/>
-        <LevelTab classlevel='3'/>
+        <LevelTab classlevel='CSE 100s'/>
+        <LevelTab classlevel='CSE 300s'/>
+        <LevelTab classlevel='CSE 400s'/>
+        <LevelTab classlevel='CSE 500s'/>
       </Sidebar>
     </div>
   );
