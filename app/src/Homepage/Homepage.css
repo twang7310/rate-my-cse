@@ -6,7 +6,10 @@
 .header {
   background-color: #4b2e83;
   height: 11vh;
+  width: 100%;
+  position: fixed;
   text-align: center;
+  z-index: 1;
 }
 
 /* Sidebar css */
