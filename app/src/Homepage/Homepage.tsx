@@ -4,8 +4,8 @@ import './Homepage.css';
 function App() {
   return (
     <div className="App">
-      <Sidebar/>
       <Header/>
+      <Sidebar/>
     </div>
   );
 }

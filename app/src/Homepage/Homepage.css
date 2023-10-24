@@ -9,6 +9,7 @@
   width: 100%;
   position: fixed;
   text-align: center;
+  z-index: 1;
 }
 
 /* Sidebar css */
