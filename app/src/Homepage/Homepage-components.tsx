@@ -28,3 +28,11 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
         </button>
     );
 }
+
+export const InnerPage: React.FC = () => {
+    return (
+        <div className="innerpage">
+            {/* This is the content of the inner page */}
+        </div>
+    );
+}
