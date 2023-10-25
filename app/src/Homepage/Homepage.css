@@ -31,3 +31,13 @@
   /* margin-bottom: 10px; */
   font-size: 100%;
 }
+
+.innerpage {
+  background-color: #d3f4fe;
+  position: absolute;
+  top: 15%;
+  left: 20%;
+  right: 5%;
+  height: 200vh;
+  text-align: center;
+}
