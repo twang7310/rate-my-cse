@@ -14,9 +14,10 @@
 
 /* Sidebar css */
 .sidebar {
-  background-color: #F0F0F0;
-  height: 100%;
+  background-color: #f0f0f0;
+  height: 89%;
   width: 15%;
+  bottom: 0%;
   position: fixed;
 }
 
