@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import App from './Homepage';
 
-test('Checks App has correct button names within the sidebar', () => {
+test('Checks App has correct button names and in order within the sidebar', () => {
   render(<App />);
 
   // Find the Sidebar element by class name
