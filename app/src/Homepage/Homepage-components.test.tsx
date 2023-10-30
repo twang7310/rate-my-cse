@@ -4,22 +4,22 @@ import { LevelTab } from './Homepage-components';
 test('Renders LevelTab components with correct names', () => {
   render(
     <>
-      <LevelTab classlevel='CSE 100s' />
-      <LevelTab classlevel='CSE 300s' />
-      <LevelTab classlevel='CSE 400s' />
-      <LevelTab classlevel='CSE 500s' />
+      <LevelTab classlevel='test1' />
+      <LevelTab classlevel='random' />
+      <LevelTab classlevel='123' />
+      <LevelTab classlevel='class' />
     </>
   );
 
-  const cse100sLevelTab = screen.getByText('CSE 100s');
-  const cse300sLevelTab = screen.getByText('CSE 300s');
-  const cse400sLevelTab = screen.getByText('CSE 400s');
-  const cse500sLevelTab = screen.getByText('CSE 500s');
+  const tab1 = screen.getByText('test1');
+  const tab2 = screen.getByText('random');
+  const tab3 = screen.getByText('123');
+  const tab4 = screen.getByText('class');
 
-  expect(cse100sLevelTab).toBeInTheDocument();
-  expect(cse300sLevelTab).toBeInTheDocument();
-  expect(cse400sLevelTab).toBeInTheDocument();
-  expect(cse500sLevelTab).toBeInTheDocument();
+  expect(tab1).toBeInTheDocument();
+  expect(tab2).toBeInTheDocument();
+  expect(tab3).toBeInTheDocument();
+  expect(tab4).toBeInTheDocument();
 });
 
 

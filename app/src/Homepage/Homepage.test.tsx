@@ -18,4 +18,13 @@ test('Checks App has correct button names within the sidebar', () => {
   expect(sidebarElement).toContainElement(cse300sLevelTab);
   expect(sidebarElement).toContainElement(cse400sLevelTab);
   expect(sidebarElement).toContainElement(cse500sLevelTab);
+
+  // Check the order
+  const levelTabs = [cse100sLevelTab, cse300sLevelTab, cse400sLevelTab, cse500sLevelTab];
+  for (let i = 0; i < levelTabs.length - 1; i++) {
+    // Find out what level we are on, skipping 200-level classes since they don't exist
+    let level = i >= 1 ? i + 2 : i + 1;
+    expect(sidebarElement).toContainElement(screen.getByText(`CSE ${level * 100}s`));
+    expect(levelTabs[i].compareDocumentPosition(levelTabs[i + 1]) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  }
 });
