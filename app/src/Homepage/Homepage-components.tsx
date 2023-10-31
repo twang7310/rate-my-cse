@@ -21,9 +21,15 @@ export const Sidebar: React.FC<SidebarProps> = ( props: SidebarProps ) => {
 }
 
 
-export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
+export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {   
+    
+    const handleClick = () => {
+        console.log('Button clicked: ' + classlevel);
+        
+    };
+    
     return (
-        <button className="leveltab">
+        <button className="leveltab" onClick={ handleClick }>
             {classlevel}
         </button>
     );
