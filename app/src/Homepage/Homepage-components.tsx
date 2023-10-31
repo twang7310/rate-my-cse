@@ -23,7 +23,7 @@ export const Sidebar: React.FC<SidebarProps> = ( props: SidebarProps ) => {
 
 export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
     return (
-        <button className="leveltab">
+        <button className="leveltab" data-testid={`levelTab-${classlevel}`}>
             {classlevel}
         </button>
     );
