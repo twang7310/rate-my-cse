@@ -6,6 +6,7 @@ function App() {
     <div className='App'>
       <Header/>
       <Sidebar>
+        <LevelTab classlevel='Home'/>
         <LevelTab classlevel='CSE 100s'/>
         <LevelTab classlevel='CSE 300s'/>
         <LevelTab classlevel='CSE 400s'/>
