@@ -3,7 +3,7 @@ import './Homepage.css';
 
 function App() {
   return (
-    <div className="App">
+    <div className='App'>
       <Header/>
       <Sidebar>
         <LevelTab classlevel='Home'/>
