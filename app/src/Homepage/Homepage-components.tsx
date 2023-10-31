@@ -29,7 +29,9 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
     };
     
     return (
-        <button className="leveltab" data-testid={`levelTab-${classlevel}`} onClick={ handleClick }>
+        <button className="leveltab" data-testid={`levelTab-${classlevel}`}
+                onClick={ handleClick }
+        >
             {classlevel}
         </button>
     );
