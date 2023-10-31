@@ -8,14 +8,24 @@
   height: 11vh;
   width: 100%;
   position: fixed;
-  text-align: center;
   z-index: 1;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.logo {
+  color: white;
+  font-size: 2.5vw;
+  font-weight: 700;
+  margin-left: 2%;
 }
 
 /* Sidebar css */
 .sidebar {
   background-color: #f0f0f0;
-  height: 89%;
+  height: 89vh;
   width: 15%;
   bottom: 0%;
   position: fixed;
@@ -28,7 +38,7 @@
   width: 100%;
   display: inline-block;
   border: none;
-  font-size: 130%;
+  font-size: 140%;
 }
 
 .leveltab:hover {

@@ -1,10 +1,12 @@
-import {Header, Sidebar, LevelTab, InnerPage} from './Homepage-components';
+import {Header, Sidebar, LevelTab, InnerPage, Logo} from './Homepage-components';
 import './Homepage.css';
 
 function App() {
   return (
     <div className='App'>
-      <Header/>
+      <Header>
+        <Logo/>
+      </Header>
       <Sidebar>
         <LevelTab classlevel='Home'/>
         <LevelTab classlevel='CSE 100s'/>

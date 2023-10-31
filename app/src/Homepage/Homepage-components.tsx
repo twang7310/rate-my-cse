@@ -1,18 +1,33 @@
 import React from 'react';
 
-export const Header: React.FC = () => {
+type ChildrenProps = {
+    children: React.ReactNode;
+}
+
+export const Header: React.FC<ChildrenProps> = ( props: ChildrenProps ) => {
     return (
         <div className="header">
-            {/* This is the content of the header */}
+            {props.children}
         </div>
     );
 }
 
-type SidebarProps = {
-    children: React.ReactNode;
+
+export const Logo: React.FC = () => {   
+    
+    const handleClick = () => {
+        console.log('Button clicked: ' + this);
+        
+    };
+    
+    return (
+        <h1 className="logo" onClick={ handleClick }>
+            RateMyCSE
+        </h1>
+    );
 }
 
-export const Sidebar: React.FC<SidebarProps> = ( props: SidebarProps ) => {
+export const Sidebar: React.FC<ChildrenProps> = ( props: ChildrenProps ) => {
     return (
         <div className="sidebar">
             {props.children}
