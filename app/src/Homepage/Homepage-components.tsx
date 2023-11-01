@@ -1,5 +1,6 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
+import {GetDefaultRoute} from '../utils';
 
 type LayoutProps = {
     children: React.ReactNode;
@@ -47,14 +48,12 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
     
     const handleClick = () => {
         if (classlevel === 'Home') {
-            // If 'Home' button, route to default homepage
-            navigate('/rate-my-cse/');
+            // Default route
+            navigate('/' + GetDefaultRoute() + '/');
         } else {
-            // Else 'CSE X00s' button, split classlevel into an array of
-            // tokens by the " " delimiter and get second element, 'X00s', 
-            // to route to corresponding '/cseX00s' page
+            // Gets correct 'X00s' from classlevel and routes to that page
             const levelWithoutCSE : string = classlevel.split(" ", 2)[1];
-            navigate('/rate-my-cse/cse' + levelWithoutCSE);
+            navigate('/' + GetDefaultRoute() + '/cse' + levelWithoutCSE);
         }
     };
     
