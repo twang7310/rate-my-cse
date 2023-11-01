@@ -11,10 +11,10 @@ export const HomeLayout: React.FC<LayoutProps> = ( props: LayoutProps ) => {
             <Header/>
             <Sidebar>
                 <LevelTab classlevel='Home'/>
-                <LevelTab classlevel='100s'/>
-                <LevelTab classlevel='300s'/>
-                <LevelTab classlevel='400s'/>
-                <LevelTab classlevel='500s'/>
+                <LevelTab classlevel='CSE 100s'/>
+                <LevelTab classlevel='CSE 300s'/>
+                <LevelTab classlevel='CSE 400s'/>
+                <LevelTab classlevel='CSE 500s'/>
             </Sidebar>
             {props.children}
         </div>
@@ -50,22 +50,15 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
         if (classlevel === 'Home') {
             navigate('/rate-my-cse/');
         } else {
-            navigate('/rate-my-cse/cse' + classlevel);
+            navigate('/rate-my-cse/cse' + classlevel.split(" ", 2)[1]);
         }
     };
-
-    let label : string;
-    if (classlevel === 'Home') {
-        label = classlevel;
-    } else {
-        label = 'CSE ' + classlevel;
-    }
     
     return (
         <button className="leveltab" data-testid={`levelTab-${classlevel}`}
                 onClick={ handleClick }
         >
-            {label}
+            {classlevel}
         </button>
     );
 }
