@@ -1,6 +1,7 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import {InnerPage, HomeLayout} from './Homepage-components';
 import {GetDefaultRoute} from '../Helpers/utils';
+import './Homepage.css';
 
 function App() {
   const classPrefix = 'cse';
