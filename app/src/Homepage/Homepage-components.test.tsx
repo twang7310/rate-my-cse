@@ -1,5 +1,5 @@
 import {render, screen} from '@testing-library/react';
-import {LevelTab} from './Homepage-components';
+import {GetStringAfterSpace, LevelTab} from './Homepage-components';
 import {BrowserRouter as Router} from 'react-router-dom';
 
 test('Renders LevelTab components with correct names', () => {
@@ -25,4 +25,14 @@ test('Renders LevelTab components with correct names', () => {
   expect(tab4).toBeInTheDocument();
 });
 
+test('GetWordAfterSpace returns string of text after space', () => {
+  const str1 = "CSE 900s"
+  const str2 = "100 200"
+  const str3 = "CSE 403"
+  const str4 = "word1 word2"
 
+  expect(GetStringAfterSpace(str1)).toEqual("900s");
+  expect(GetStringAfterSpace(str2)).toEqual("200");
+  expect(GetStringAfterSpace(str3)).toEqual("403");
+  expect(GetStringAfterSpace(str4)).toEqual("word2");
+});

@@ -42,6 +42,9 @@ export const Sidebar: React.FC<SidebarProps> = ( props: SidebarProps ) => {
     );
 }
 
+export const GetStringAfterSpace = ( label : string ) => {
+    return label.split(" ", 2)[1];
+}
 
 export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {   
     const navigate = useNavigate();
@@ -51,9 +54,8 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
             // Default route
             navigate('/' + GetDefaultRoute() + '/');
         } else {
-            // Gets correct 'X00s' from classlevel and routes to that page
-            const levelWithoutCSE : string = classlevel.split(" ", 2)[1];
-            navigate('/' + GetDefaultRoute() + '/cse' + levelWithoutCSE);
+            // Gets 'X00s' from 'CSE X00s' classlevel and routes to that page
+            navigate('/' + GetDefaultRoute() + '/cse' + GetStringAfterSpace(classlevel));
         }
     };
     
