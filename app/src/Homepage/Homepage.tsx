@@ -1,18 +1,22 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import {InnerPage, HomeLayout} from './Homepage-components';
-import {GetDefaultRoute} from '../utils';
-import './Homepage.css';
+import {GetDefaultRoute} from '../Helpers/utils';
 
 function App() {
+  const classPrefix = 'cse';
+  const classNumbers = ['100s', '300s', '400s', '500s'];
+
   return (
     <Router>
       <HomeLayout>
         <Routes>
-          <Route path={GetDefaultRoute() + '/'} element={<InnerPage/>} />
-          <Route path={GetDefaultRoute() + '/cse100s'} element='cse100s page'/>
-          <Route path={GetDefaultRoute() + '/cse300s'} element='cse300s page'/>
-          <Route path={GetDefaultRoute() + '/cse400s'} element='cse400s page'/>
-          <Route path={GetDefaultRoute() + '/cse500s'} element='cse500s page'/>
+          <Route path={GetDefaultRoute()} element={<InnerPage />} />
+          {classNumbers.map((classNumber) => (
+            <Route
+              key={classNumber}
+              path={GetDefaultRoute() + classPrefix + classNumber}
+            />
+          ))}
         </Routes>
       </HomeLayout>
     </Router>
