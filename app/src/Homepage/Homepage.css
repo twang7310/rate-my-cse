@@ -24,13 +24,17 @@
 /* Classtab css */
 .leveltab {
   text-align: center;
-  display: inline-block;
-  /* border: none; */
-  /* background-color: green; */
-  /* color: white; */
+  height: 10%;
   width: 100%;
-  /* margin-bottom: 10px; */
-  font-size: 100%;
+  display: inline-block;
+  border: none;
+  font-size: 130%;
+}
+
+.leveltab:hover {
+  background-color: rgba(255, 255, 255, 0.897);
+  font-weight: bold;
+  background: linear-gradient(to right, #00f 10%, transparent 10%);
 }
 
 .innerpage {
