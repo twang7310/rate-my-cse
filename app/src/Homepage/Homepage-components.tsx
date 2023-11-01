@@ -42,7 +42,7 @@ export const Sidebar: React.FC<SidebarProps> = ( props: SidebarProps ) => {
     );
 }
 
-export const GetStringAfterSpace = ( label : string ) => {
+export const GetClassNumber = ( label : string ) => {
     return label.split(" ", 2)[1];
 }
 
@@ -55,7 +55,7 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
             navigate('/' + GetDefaultRoute() + '/');
         } else {
             // Gets 'X00s' from 'CSE X00s' classlevel and routes to that page
-            navigate('/' + GetDefaultRoute() + '/cse' + GetStringAfterSpace(classlevel));
+            navigate('/' + GetDefaultRoute() + '/cse' + GetClassNumber(classlevel));
         }
     };
     
