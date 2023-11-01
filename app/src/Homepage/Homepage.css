@@ -65,29 +65,31 @@
   font-weight: normal;
 }
 
-.diff-box {
-  background-color: #fff279;
+.ratingbox {
+  font-family: "Helvetica Neue", sans-serif, Arial;
+  font-weight: bold;
+  font-size: 130%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
   position: absolute;
   margin-top: 20px;
   left: 10%;
   height: 10%;
-  width: 18%;
+  width: 14%;
 }
 
-.work-box {
-  background-color: #ff79b1;
-  position: absolute;
-  margin-top: 20px;
+.ratingbox-diff {
+  background-color: #e087e2;
+}
+
+.ratingbox-work {
+  background-color: #8dbbff;
   left: 41%;
-  height: 10%;
-  width: 18%;
 }
 
-.prac-box {
-  background-color: #fff279;
-  position: absolute;
-  margin-top: 20px;
-  right: 10%;
-  height: 10%;
-  width: 18%;
+.ratingbox-prac {
+  background-color: #88ecaa;
+  left: 72%;
 }

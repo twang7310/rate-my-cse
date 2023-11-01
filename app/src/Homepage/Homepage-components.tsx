@@ -37,6 +37,17 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
     );
 }
 
+const RatingBox: React.FC<{label: string, rating: string}> = ({ label, rating }) => {
+  const dynamicClassName = `ratingbox ratingbox-${rating}`;
+
+  return (
+    <div className={dynamicClassName}>
+      {label}
+    </div>
+  );
+};
+
+
 export const InnerPage: React.FC = () => {
     return (
         <div className="innerpage">
@@ -48,15 +59,9 @@ export const InnerPage: React.FC = () => {
             <h4 className="explanation">
               Students will post ratings based on 3 categories
             </h4>
-            <div className="diff-box">
-              <h3>Difficulty</h3>
-            </div>
-            <div className="work-box">
-              <h3>Workload</h3>
-            </div>
-            <div className="prac-box">
-              <h3>Practicality</h3>
-            </div>
+            <RatingBox label="Difficulty" rating="diff" />
+            <RatingBox label="Workload" rating="work" />
+            <RatingBox label="Practicality" rating="prac" />
           </div>
         </div>
     );
