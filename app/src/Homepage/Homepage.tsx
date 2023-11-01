@@ -1,19 +1,21 @@
-import {Header, Sidebar, LevelTab, InnerPage} from './Homepage-components';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {InnerPage, HomeLayout} from './Homepage-components';
+import {GetDefaultRoute} from '../utils';
 import './Homepage.css';
 
 function App() {
   return (
-    <div className='App'>
-      <Header/>
-      <Sidebar>
-        <LevelTab classlevel='Home'/>
-        <LevelTab classlevel='CSE 100s'/>
-        <LevelTab classlevel='CSE 300s'/>
-        <LevelTab classlevel='CSE 400s'/>
-        <LevelTab classlevel='CSE 500s'/>
-      </Sidebar>
-      <InnerPage/>
-    </div>
+    <Router>
+      <HomeLayout>
+        <Routes>
+          <Route path={GetDefaultRoute() + '/'} element={<InnerPage/>} />
+          <Route path={GetDefaultRoute() + '/cse100s'} element='cse100s page'/>
+          <Route path={GetDefaultRoute() + '/cse300s'} element='cse300s page'/>
+          <Route path={GetDefaultRoute() + '/cse400s'} element='cse400s page'/>
+          <Route path={GetDefaultRoute() + '/cse500s'} element='cse500s page'/>
+        </Routes>
+      </HomeLayout>
+    </Router>
   );
 }
 
