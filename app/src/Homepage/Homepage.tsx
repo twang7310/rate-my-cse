@@ -1,10 +1,10 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import {InnerPage, HomeLayout} from './Homepage-components';
 import './Homepage.css';
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <HomeLayout>
         <Routes>
           <Route path='rate-my-cse/' element={<InnerPage/>} />
@@ -14,7 +14,7 @@ function App() {
           <Route path='rate-my-cse/cse500s' element='cse500s page'/>
         </Routes>
       </HomeLayout>
-    </BrowserRouter>
+    </Router>
   );
 }
 

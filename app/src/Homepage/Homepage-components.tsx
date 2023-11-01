@@ -7,7 +7,7 @@ type LayoutProps = {
 
 export const HomeLayout: React.FC<LayoutProps> = ( props: LayoutProps ) => {
     return (
-        <div className='App'>
+        <div className='homelayout'>
             <Header/>
             <Sidebar>
                 <LevelTab classlevel='Home'/>

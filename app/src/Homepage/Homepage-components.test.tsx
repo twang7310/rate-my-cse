@@ -1,14 +1,17 @@
 import { render, screen } from '@testing-library/react';
 import { LevelTab } from './Homepage-components';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 test('Renders LevelTab components with correct names', () => {
   render(
-    <>
-      <LevelTab classlevel='test1' />
-      <LevelTab classlevel='random' />
-      <LevelTab classlevel='123' />
-      <LevelTab classlevel='class' />
-    </>
+    <div>
+      <Router>
+        <LevelTab classlevel='test1' />
+        <LevelTab classlevel='random' />
+        <LevelTab classlevel='123' />
+        <LevelTab classlevel='class' />
+      </Router>
+    </div>
   );
 
   const tab1 = screen.getByText('test1');
