@@ -1,6 +1,6 @@
-import { render, screen } from '@testing-library/react';
-import { LevelTab } from './Homepage-components';
-import { BrowserRouter as Router } from 'react-router-dom';
+import {render, screen} from '@testing-library/react';
+import {LevelTab} from './Homepage-components';
+import {BrowserRouter as Router} from 'react-router-dom';
 
 test('Renders LevelTab components with correct names', () => {
   render(
