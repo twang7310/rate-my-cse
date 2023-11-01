@@ -35,10 +35,55 @@
 
 .innerpage {
   background-color: #d3f4fe;
+  font-family: monospace, "Ubuntu", "Courier New";
   position: absolute;
   top: 15%;
   left: 20%;
   right: 5%;
   height: 200vh;
   text-align: center;
+}
+
+.welcome {
+  text-align: center;
+  margin-top: 60px;
+  font-size: 300%;
+}
+
+.howitworks {
+  position: absolute;
+  top: 15%;
+  height: 50%;
+  width: 100%;
+}
+
+.explanation {
+  font-weight: normal;
+}
+
+.diff-box {
+  background-color: #fff279;
+  position: absolute;
+  margin-top: 20px;
+  left: 10%;
+  height: 10%;
+  width: 18%;
+}
+
+.work-box {
+  background-color: #ff79b1;
+  position: absolute;
+  margin-top: 20px;
+  left: 41%;
+  height: 10%;
+  width: 18%;
+}
+
+.prac-box {
+  background-color: #fff279;
+  position: absolute;
+  margin-top: 20px;
+  right: 10%;
+  height: 10%;
+  width: 18%;
 }

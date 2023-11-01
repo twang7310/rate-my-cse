@@ -32,7 +32,24 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
 export const InnerPage: React.FC = () => {
     return (
         <div className="innerpage">
-            {/* This is the content of the inner page */}
+          {/* This is the content of the inner page */}
+          <h1 className="welcome">Welcome to RateMyCSE</h1>
+          <h3>Wondering if a UW CSE class is as hard as they say?</h3>
+          <div className="howitworks">
+            <h2>How it works:</h2>
+            <h4 className="explanation">
+              Students will post ratings based on 3 categories
+            </h4>
+            <div className="diff-box">
+              <h3>Difficulty</h3>
+            </div>
+            <div className="work-box">
+              <h3>Workload</h3>
+            </div>
+            <div className="prac-box">
+              <h3>Practicality</h3>
+            </div>
+          </div>
         </div>
     );
 }
