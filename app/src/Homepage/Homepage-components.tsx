@@ -1,6 +1,6 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
-import {GetDefaultRoute} from '../utils';
+import {GetDefaultRoute} from '../Helpers/utils';
 
 type LayoutProps = {
     children: React.ReactNode;
