@@ -5,7 +5,7 @@ type LayoutProps = {
     children: React.ReactNode;
 }
 
-export const Layout: React.FC<LayoutProps> = ( props: LayoutProps ) => {
+export const HomeLayout: React.FC<LayoutProps> = ( props: LayoutProps ) => {
     return (
         <div className='App'>
             <Header/>
