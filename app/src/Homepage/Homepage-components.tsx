@@ -49,33 +49,35 @@ export const GetClassNumber = ( label : string ) => {
 export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
     const navigate = useNavigate();
 
-    const handleClick = async () => {
+    const fetchData = async () => {
+        try {
+            const response = await fetch('/api/data');
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+    const handleClick = () => {
         if (classlevel === 'Home') {
-            // Default route
             navigate('/' + GetDefaultRoute() + '/');
         } else {
-            // Gets 'X00s' from 'CSE X00s' classlevel and routes to that page
             navigate('/' + GetDefaultRoute() + '/cse' + GetClassNumber(classlevel));
-
-            try {
-                const response = await fetch('http://localhost:3001/api/data');
-                const data = await response.json();
-                console.log(data); // Log the data to the console
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
+            fetchData();
         }
     };
 
     return (
-        <button className="leveltab" data-testid={`levelTab-${classlevel}`}
-                onClick={ handleClick }
+        <button
+            className="leveltab"
+            data-testid={`levelTab-${classlevel}`}
+            onClick={handleClick}
         >
             {classlevel}
         </button>
     );
-}
-
+};
 
 export const InnerPage: React.FC = () => {
     return (
