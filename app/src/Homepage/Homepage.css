@@ -47,12 +47,14 @@
   text-align: center;
 }
 
+/* Welcome header */
 .welcome {
   text-align: center;
   margin-top: 60px;
   font-size: 300%;
 }
 
+/* How it works: header */
 .howitworks {
   position: absolute;
   top: 15%;
@@ -60,10 +62,12 @@
   width: 100%;
 }
 
+/* Explanation below the How it works: header */
 .explanation {
   font-weight: normal;
 }
 
+/* The rating boxes for difficulty, workload, and practicality */
 .ratingbox {
   font-weight: bold;
   font-size: 130%;
@@ -93,15 +97,16 @@
   left: 76%;
 }
 
+/* Description below rating boxes */
 .ratingdesc {
   font-weight: bold;
   color: gray;
   margin-top: 100px;
   position: absolute;
   width: 26%;
-  word-wrap: break-word; /* Allow long words to be broken and wrap onto the next line */
-  white-space: normal; /* Wrap text within the container */
-  padding: 10px; /* Add padding for spacing inside the block */
+  word-wrap: break-word;
+  white-space: normal;
+  padding: 10px;
 }
 
 .ratingdesc-diff {

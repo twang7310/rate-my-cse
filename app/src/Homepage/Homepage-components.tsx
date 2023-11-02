@@ -68,11 +68,19 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
     );
 }
 
+/* 
+  Template for the rating boxes.
+
+  Parameters:
+  label - Text in the center of the box.
+  rating - Determines the color and position of the box 
+           (Difficulty, workload, practicality).
+*/
 const RatingBox: React.FC<{label: string, rating: string}> = ({ label, rating }) => {
-  const dynamicClassName = `ratingbox ratingbox-${rating}`;
+  const dynamicclassname = `ratingbox ratingbox-${rating}`;
 
   return (
-    <div className={dynamicClassName}>
+    <div className={dynamicclassname}>
       {label}
     </div>
   );
@@ -83,11 +91,20 @@ type RatingDescProps = {
   children: React.ReactNode;
 }
 
+/*
+  Template for the descriptions underneath the rating boxes that accepts
+  children as the text for the description.
+
+  Parameters:
+  rating - Determines the position of the description
+          (Which of the difficulty, workload, practicality boxes
+           the text should be under)
+*/
 export const RatingDesc: React.FC<RatingDescProps> = ( props: RatingDescProps ) => {
-  const dynamicClassName = `ratingdesc ratingdesc-${props.rating}`;
+  const dynamicclassname = `ratingdesc ratingdesc-${props.rating}`;
   
   return (
-      <div className={dynamicClassName}>
+      <div className={dynamicclassname}>
           {props.children}
       </div>
   );
@@ -96,7 +113,6 @@ export const RatingDesc: React.FC<RatingDescProps> = ( props: RatingDescProps ) 
 export const InnerPage: React.FC = () => {
     return (
         <div className="innerpage">
-          {/* This is the content of the inner page */}
           <h1 className="welcome">
             Welcome to RateMyCSE
           </h1>
@@ -121,7 +137,6 @@ export const InnerPage: React.FC = () => {
               How useful is this class in the real world? Have you
               seen the material in the industry?
             </RatingDesc>
-            
           </div>
         </div>
     );
