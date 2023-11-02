@@ -11,7 +11,6 @@ export const HomeLayout: React.FC<LayoutProps> = ( props: LayoutProps ) => {
         <div className='homelayout'>
             <Header>
                 <Logo/>
-                <Login/>
             </Header>
             <Sidebar>
                 <LevelTab classlevel='Home'/>
@@ -20,7 +19,6 @@ export const HomeLayout: React.FC<LayoutProps> = ( props: LayoutProps ) => {
                 <LevelTab classlevel='CSE 400s'/>
                 <LevelTab classlevel='CSE 500s'/>
             </Sidebar>
-            <LoginPage/>
             {props.children}
         </div>
     );
@@ -38,7 +36,6 @@ export const Header: React.FC<ChildrenProps> = ( props: ChildrenProps ) => {
     );
 }
 
-
 export const Logo: React.FC = () => {
     
     const handleClick = () => {};
@@ -47,25 +44,6 @@ export const Logo: React.FC = () => {
         <h1 className="logo" onClick={ handleClick }>
             RateMyCSE
         </h1>
-    );
-}
-
-export const Login: React.FC = () => {
-
-    const handleClick = () => { };
-    
-    return (
-        <p className="login" onClick={ handleClick }>
-            Sign In
-        </p>
-    );
-}
-
-export const LoginPage: React.FC = () => {
-    return (
-        <div className="loginpage">
-            { }
-        </div>
     );
 }
 
