@@ -10,7 +10,7 @@
   position: fixed;
   z-index: 1;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -19,6 +19,15 @@
   font-size: 2.5vw;
   font-weight: 700;
   margin-left: 2%;
+  user-select: none
+}
+
+.login {
+  color: white;
+  font-size: 2vw;
+  font-weight: 400;
+  margin-right: 2%;
+  user-select: none
 }
 
 /* Sidebar css */
@@ -33,17 +42,19 @@
 /* Classtab css */
 .leveltab {
   text-align: center;
-  height: 10%;
+  height: 9%;
   width: 100%;
   display: inline-block;
   border: none;
+  margin-top: 4%;
   font-size: 140%;
 }
 
 .leveltab:hover {
   background-color: rgba(255, 255, 255, 0.897);
   font-weight: bold;
-  background: linear-gradient(to right, #00f 10%, transparent 10%);
+  background: linear-gradient(to right, #f0f0f0 7%, 7%,
+                            #c985ff 17%, transparent 17%);
 }
 
 .innerpage {
