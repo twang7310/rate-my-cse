@@ -110,11 +110,6 @@ type RatingDescProps = {
 /*
   Template for the descriptions underneath the rating boxes that accepts
   children as the text for the description.
-
-  Parameters:
-  rating - Determines the position of the description
-          (Which of the difficulty, workload, practicality boxes
-           the text should be under)
 */
 export const RatingDesc: React.FC<RatingDescProps> = ( props: RatingDescProps ) => {
   
@@ -137,12 +132,12 @@ export const InnerPage: React.FC = () => {
             <h3 className="explanation">
               Students will post ratings based on 3 categories
             </h3>
-            <div className="flexbox">
+            <div className="ratingsflexbox">
               <RatingBox label="Difficulty" rating="diff" />
               <RatingBox label="Workload" rating="work" />
               <RatingBox label="Practicality" rating="prac" />
             </div>
-            <div className="flexbox">
+            <div className="ratingsflexbox">
               <RatingDesc>
                 A combination of how hard the class material was to 
                 understand and how big of a workload there was
