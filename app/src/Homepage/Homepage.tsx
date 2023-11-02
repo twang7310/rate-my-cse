@@ -9,7 +9,9 @@ type LayoutProps = {
 export const HomeLayout: React.FC<LayoutProps> = ( props: LayoutProps ) => {
     return (
         <div className='homelayout'>
-            <Header/>
+            <Header>
+                <Logo/>
+            </Header>
             <Sidebar>
                 <LevelTab classlevel='Home'/>
                 <LevelTab classlevel='CSE 100s'/>
@@ -22,12 +24,27 @@ export const HomeLayout: React.FC<LayoutProps> = ( props: LayoutProps ) => {
     );
 }
 
-export const Header: React.FC = () => {
-    return (
-        <div className="header">
-            {/* This is the content of the header */}
-        </div>
-    );
+type HeaderProps = {
+  children: React.ReactNode;
+}
+
+export const Header: React.FC<HeaderProps> = ( props: HeaderProps ) => {
+  return (
+      <div className="header">
+          {props.children}
+      </div>
+  );
+}
+
+export const Logo: React.FC = () => {
+    
+  const handleClick = () => {};
+  
+  return (
+      <h1 className="logo" onClick={ handleClick }>
+          RateMyCSE
+      </h1>
+  );
 }
 
 type SidebarProps = {
