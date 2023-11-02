@@ -1,14 +1,17 @@
-import { render, screen } from '@testing-library/react';
-import { LevelTab } from './Homepage-components';
+import {render, screen} from '@testing-library/react';
+import {GetClassNumber, LevelTab} from './Homepage-components';
+import {BrowserRouter as Router} from 'react-router-dom';
 
 test('Renders LevelTab components with correct names', () => {
   render(
-    <>
-      <LevelTab classlevel='test1' />
-      <LevelTab classlevel='random' />
-      <LevelTab classlevel='123' />
-      <LevelTab classlevel='class' />
-    </>
+    <div>
+      <Router>
+        <LevelTab classlevel='test1' />
+        <LevelTab classlevel='random' />
+        <LevelTab classlevel='123' />
+        <LevelTab classlevel='class' />
+      </Router>
+    </div>
   );
 
   const tab1 = screen.getByText('test1');
@@ -22,4 +25,14 @@ test('Renders LevelTab components with correct names', () => {
   expect(tab4).toBeInTheDocument();
 });
 
+test('GetClassNumber returns class number after space', () => {
+  const str1 = "CSE 900s"
+  const str2 = "100 200"
+  const str3 = "CSE 403"
+  const str4 = "CSE 5050505"
 
+  expect(GetClassNumber(str1)).toEqual("900s");
+  expect(GetClassNumber(str2)).toEqual("200");
+  expect(GetClassNumber(str3)).toEqual("403");
+  expect(GetClassNumber(str4)).toEqual("5050505");
+});

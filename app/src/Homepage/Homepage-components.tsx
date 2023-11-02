@@ -1,4 +1,26 @@
 import React from 'react';
+import {useNavigate} from 'react-router-dom';
+import {GetDefaultRoute} from '../Helpers/utils';
+
+type LayoutProps = {
+    children: React.ReactNode;
+}
+
+export const HomeLayout: React.FC<LayoutProps> = ( props: LayoutProps ) => {
+    return (
+        <div className='homelayout'>
+            <Header/>
+            <Sidebar>
+                <LevelTab classlevel='Home'/>
+                <LevelTab classlevel='CSE 100s'/>
+                <LevelTab classlevel='CSE 300s'/>
+                <LevelTab classlevel='CSE 400s'/>
+                <LevelTab classlevel='CSE 500s'/>
+            </Sidebar>
+            {props.children}
+        </div>
+    );
+}
 
 type ChildrenProps = {
     children: React.ReactNode;
@@ -35,12 +57,21 @@ export const Sidebar: React.FC<ChildrenProps> = ( props: ChildrenProps ) => {
     );
 }
 
+export const GetClassNumber = ( label : string ) => {
+    return label.split(" ", 2)[1];
+}
 
 export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {   
+    const navigate = useNavigate();
     
     const handleClick = () => {
-        console.log('Button clicked: ' + classlevel);
-        
+        if (classlevel === 'Home') {
+            // Default route
+            navigate('/' + GetDefaultRoute() + '/');
+        } else {
+            // Gets 'X00s' from 'CSE X00s' classlevel and routes to that page
+            navigate('/' + GetDefaultRoute() + '/cse' + GetClassNumber(classlevel));
+        }
     };
     
     return (
