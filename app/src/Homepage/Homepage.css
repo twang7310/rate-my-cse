@@ -56,7 +56,6 @@
 
 /* How it works: header */
 .howitworks {
-  position: absolute;
   top: 15%;
   height: 50%;
   width: 100%;
@@ -67,57 +66,46 @@
   font-weight: normal;
 }
 
+.flexbox {
+  display: flex;
+  justify-content: space-evenly;
+  height: 15%;
+  width: 100%;
+}
+
 /* The rating boxes for difficulty, workload, and practicality */
 .ratingbox {
   font-weight: bold;
   font-size: 130%;
   display: flex;
   align-items: center;
+  align-self: flex-end;
   justify-content: center;
-  background-color: white;
-  position: absolute;
   margin-top: 20px;
-  left: 10%;
-  height: 10%;
-  width: 14%;
+  height: 10vh;
+  width: 14vw;
 }
 
 .ratingbox-diff {
-  display: flex;
   background-color: #e087e2;
 }
 
 .ratingbox-work {
   background-color: #8dbbff;
-  left: 43%;
 }
 
 .ratingbox-prac {
   background-color: #88ecaa;
-  left: 76%;
 }
 
 /* Description below rating boxes */
 .ratingdesc {
+  align-self: flex-start;
   font-weight: bold;
   color: gray;
-  margin-top: 100px;
-  position: absolute;
-  width: 26%;
+  width: 17vw;
   word-wrap: break-word;
   white-space: normal;
-  padding: 10px;
-}
-
-.ratingdesc-diff {
-  left: 3%;
-}
-
-.ratingdesc-work {
-  left: 38%;
-  width: 23%;
-}
-
-.ratingdesc-prac {
-  left: 69%;
+  padding-top: 10px;
+  min-width: 14vw;
 }

@@ -87,7 +87,6 @@ const RatingBox: React.FC<{label: string, rating: string}> = ({ label, rating })
 };
 
 type RatingDescProps = {
-  rating: string;
   children: React.ReactNode;
 }
 
@@ -101,10 +100,9 @@ type RatingDescProps = {
            the text should be under)
 */
 export const RatingDesc: React.FC<RatingDescProps> = ( props: RatingDescProps ) => {
-  const dynamicclassname = `ratingdesc ratingdesc-${props.rating}`;
   
   return (
-      <div className={dynamicclassname}>
+      <div className="ratingdesc">
           {props.children}
       </div>
   );
@@ -122,21 +120,25 @@ export const InnerPage: React.FC = () => {
             <h3 className="explanation">
               Students will post ratings based on 3 categories
             </h3>
-            <RatingBox label="Difficulty" rating="diff" />
-            <RatingBox label="Workload" rating="work" />
-            <RatingBox label="Practicality" rating="prac" />
-            <RatingDesc rating="diff">
-              A combination of how hard the class material was to 
-              understand and how big of a workload there was
-            </RatingDesc>
-            <RatingDesc rating="work">
-              Based on how much homework there is and how long the 
-              homework takes.
-            </RatingDesc>
-            <RatingDesc rating="prac">
-              How useful is this class in the real world? Have you
-              seen the material in the industry?
-            </RatingDesc>
+            <div className="flexbox">
+              <RatingBox label="Difficulty" rating="diff" />
+              <RatingBox label="Workload" rating="work" />
+              <RatingBox label="Practicality" rating="prac" />
+            </div>
+            <div className="flexbox">
+              <RatingDesc>
+                A combination of how hard the class material was to 
+                understand and how big of a workload there was
+              </RatingDesc>
+              <RatingDesc>
+                Based on how much homework there is and how long the 
+                homework takes.
+              </RatingDesc>
+              <RatingDesc>
+                How useful is this class in the real world? Have you
+                seen the material in the industry?
+              </RatingDesc>
+            </div>
           </div>
         </div>
     );
