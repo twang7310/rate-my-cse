@@ -21,6 +21,23 @@
   margin-left: 2%;
 }
 
+.login {
+  color: white;
+  font-size: 2vw;
+  font-weight: 400;
+  margin-right: 2%;
+}
+
+.loginpage {
+  background-color: gainsboro;
+  position: absolute;
+  top: 15%;
+  left: 30%;
+  right: 30%;
+  height: 70vh;
+  text-align: center;
+}
+
 /* Sidebar css */
 .sidebar {
   background-color: #f0f0f0;
