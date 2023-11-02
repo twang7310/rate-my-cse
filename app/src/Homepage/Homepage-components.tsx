@@ -41,10 +41,7 @@ export const Header: React.FC<ChildrenProps> = ( props: ChildrenProps ) => {
 
 export const Logo: React.FC = () => {
     
-    const handleClick = () => {
-        console.log('Button clicked: ' + this);
-        
-    };
+    const handleClick = () => { };
     
     return (
         <h1 className="logo" onClick={ handleClick }>
@@ -55,9 +52,7 @@ export const Logo: React.FC = () => {
 
 export const Login: React.FC = () => {
 
-    const handleClick = () => {
-        console.log('Button clicked: ' + this);
-    };
+    const handleClick = () => { };
     
     return (
         <p className="login" onClick={ handleClick }>
@@ -69,7 +64,7 @@ export const Login: React.FC = () => {
 export const LoginPage: React.FC = () => {
     return (
         <div className="loginpage">
-            {}
+            { }
         </div>
     );
 }
