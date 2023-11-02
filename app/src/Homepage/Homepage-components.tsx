@@ -49,22 +49,11 @@ export const GetClassNumber = ( label : string ) => {
 export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
     const navigate = useNavigate();
 
-    const fetchData = async () => {
-        try {
-            const response = await fetch('/api/data');
-            const data = await response.json();
-            console.log(data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
-
     const handleClick = () => {
         if (classlevel === 'Home') {
             navigate('/' + GetDefaultRoute() + '/');
         } else {
             navigate('/' + GetDefaultRoute() + '/cse' + GetClassNumber(classlevel));
-            fetchData();
         }
     };
 
