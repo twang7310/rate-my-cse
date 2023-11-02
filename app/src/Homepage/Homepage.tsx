@@ -1,22 +1,109 @@
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import {InnerPage, HomeLayout} from './Homepage-components';
-import {GetDefaultRoute} from '../utils';
-import './Homepage.css';
+import React from 'react';
+import {useNavigate} from 'react-router-dom';
+import {GetDefaultRoute} from '../Helpers/utils';
 
-function App() {
+type LayoutProps = {
+    children: React.ReactNode;
+}
+
+export const HomeLayout: React.FC<LayoutProps> = ( props: LayoutProps ) => {
+    return (
+        <div className='homelayout'>
+            <Header>
+                <Logo/>
+            </Header>
+            <Sidebar>
+                <LevelTab classlevel='Home'/>
+                <LevelTab classlevel='CSE 100s'/>
+                <LevelTab classlevel='CSE 300s'/>
+                <LevelTab classlevel='CSE 400s'/>
+                <LevelTab classlevel='CSE 500s'/>
+            </Sidebar>
+            {props.children}
+        </div>
+    );
+}
+
+type HeaderProps = {
+  children: React.ReactNode;
+}
+
+export const Header: React.FC<HeaderProps> = ( props: HeaderProps ) => {
   return (
-    <Router>
-      <HomeLayout>
-        <Routes>
-          <Route path={GetDefaultRoute() + '/'} element={<InnerPage/>} />
-          <Route path={GetDefaultRoute() + '/cse100s'} element='cse100s page'/>
-          <Route path={GetDefaultRoute() + '/cse300s'} element='cse300s page'/>
-          <Route path={GetDefaultRoute() + '/cse400s'} element='cse400s page'/>
-          <Route path={GetDefaultRoute() + '/cse500s'} element='cse500s page'/>
-        </Routes>
-      </HomeLayout>
-    </Router>
+      <div className="header">
+          {props.children}
+      </div>
   );
 }
 
-export default App;
+export const Logo: React.FC = () => {
+    
+  const handleClick = () => {};
+  
+  return (
+      <h1 className="logo" onClick={ handleClick }>
+          RateMyCSE
+      </h1>
+  );
+}
+
+type SidebarProps = {
+    children: React.ReactNode;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ( props: SidebarProps ) => {
+    return (
+        <div className="sidebar">
+            {props.children}
+        </div>
+    );
+}
+
+export const GetClassNumber = ( label : string ) => {
+    return label.split(" ", 2)[1];
+}
+
+export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {   
+    const navigate = useNavigate();
+    
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/data');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        console.log(data); // Do something with the data
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    
+
+    const handleClick = () => {
+        if (classlevel === 'Home') {
+            // Default route
+            navigate('/' + GetDefaultRoute() + '/');
+        } else {
+            // Gets 'X00s' from 'CSE X00s' classlevel and routes to that page
+            navigate('/' + GetDefaultRoute() + '/cse' + GetClassNumber(classlevel));
+            fetchData();
+        }
+    };
+    
+    return (
+        <button className="leveltab" data-testid={`levelTab-${classlevel}`}
+                onClick={ handleClick }
+        >
+            {classlevel}
+        </button>
+    );
+}
+
+export const InnerPage: React.FC = () => {
+    return (
+        <div className="innerpage">
+            {/* This is the content of the inner page */}
+        </div>
+    );
+}
