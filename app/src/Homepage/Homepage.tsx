@@ -1,6 +1,6 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
-import {GetDefaultRoute} from '../Helpers/utils';
+// import {GetDefaultRoute} from '../Helpers/utils';
 
 type LayoutProps = {
     children: React.ReactNode;
@@ -68,11 +68,11 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
     
     const handleClick = () => {
         if (classlevel === 'Home') {
-            // Default route
-            navigate('/' + GetDefaultRoute() + '/');
+            // // Default route
+            navigate('/');
         } else {
             // Gets 'X00s' from 'CSE X00s' classlevel and routes to that page
-            navigate('/' + GetDefaultRoute() + '/cse' + GetClassNumber(classlevel));
+            navigate( '/cse' + GetClassNumber(classlevel));
         }
     };
     
