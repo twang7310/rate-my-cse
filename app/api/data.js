@@ -4,11 +4,6 @@ const pool = require('./db');
 // and returns list of all classes in that level
 // 3 -> 300-level classes
 export default async (req, res) => {
-  const classLevel = req.query.level;
-
-  if (!classLevel) {
-    return res.status(400).json({ error: 'Class level parameter is required' });
-  }
 
   const query = 'SELECT * FROM courses';
 

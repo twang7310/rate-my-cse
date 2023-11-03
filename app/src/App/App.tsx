@@ -17,7 +17,6 @@ function App() {
             <Route
               key={classNumber}
               path={GetDefaultRoute() + classPrefix + classNumber}
-              element={<ClassList classLevel={classNumber[0]} />}
             />
           ))}
         </Routes>

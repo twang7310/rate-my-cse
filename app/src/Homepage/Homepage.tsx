@@ -69,7 +69,7 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
     const fetchData = async () => {
         console.log(`/api/data?level=${GetClassNumber(classlevel)[0]}`);
         try {
-          const response = await fetch(`/api/GetClassData?level=${GetClassNumber(classlevel)[0]}`);
+          const response = await fetch(`/api/data`);
           const data = await response.text();
           console.log(data);
         } catch (error) {
