@@ -2,6 +2,7 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import {InnerPage, HomeLayout} from '../Homepage/Homepage';
 import {GetDefaultRoute} from '../Helpers/utils';
 import '../Homepage/Homepage.css';
+import ClassList from '../Directory/ClassList';
 
 function App() {
   const classPrefix = 'cse';
@@ -16,6 +17,7 @@ function App() {
             <Route
               key={classNumber}
               path={GetDefaultRoute() + classPrefix + classNumber}
+              element={<ClassList classLevel={classNumber[0]} />}
             />
           ))}
         </Routes>

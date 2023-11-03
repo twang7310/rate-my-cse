@@ -65,6 +65,17 @@ export const GetClassNumber = ( label : string ) => {
 
 export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {   
     const navigate = useNavigate();
+
+    const fetchData = async () => {
+        console.log(`/api/data?level=${GetClassNumber(classlevel)[0]}`);
+        try {
+          const response = await fetch(`/api/GetClassData?level=${GetClassNumber(classlevel)[0]}`);
+          const data = await response.text();
+          console.log(data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
     
     const handleClick = () => {
         if (classlevel === 'Home') {
@@ -73,6 +84,7 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
         } else {
             // Gets 'X00s' from 'CSE X00s' classlevel and routes to that page
             navigate('/' + GetDefaultRoute() + '/cse' + GetClassNumber(classlevel));
+            fetchData();
         }
     };
     
