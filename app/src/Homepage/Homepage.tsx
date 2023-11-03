@@ -140,7 +140,8 @@ export const InnerPage: React.FC = () => {
             <div className="ratingsflexbox">
               <RatingDesc>
                 A combination of how hard the class material was to 
-                understand and how big of a workload there was
+                understand and how much effort the class takes to
+                pass.
               </RatingDesc>
               <RatingDesc>
                 Based on how much homework there is and how long the 

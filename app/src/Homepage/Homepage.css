@@ -33,7 +33,7 @@
 /* Classtab css */
 .leveltab {
   text-align: center;
-  height: 10%;
+  min-height: 10%;
   width: 100%;
   display: inline-block;
   border: none;
@@ -52,7 +52,7 @@
   top: 15%;
   left: 20%;
   right: 5%;
-  height: 200vh;
+  min-height: 200vh;
   text-align: center;
 }
 
@@ -78,7 +78,7 @@
 .ratingsflexbox {
   display: flex;
   justify-content: space-around;
-  height: 11%;
+  min-height: 11%;
   width: 100%;
 }
 
@@ -108,11 +108,12 @@
 
 /* Description below rating boxes */
 .ratingdesc {
+  text-align: center;
   align-self: flex-start;
   font-weight: bold;
   color: gray;
   word-wrap: break-word;
   white-space: normal;
   padding-top: 10px;
-  width: 17vw;
+  width: 16vw;
 }
