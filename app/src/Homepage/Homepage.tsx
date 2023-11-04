@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import {GetDefaultRoute} from '../Helpers/utils';
 
@@ -66,17 +66,6 @@ export const GetClassNumber = ( label : string ) => {
 export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {   
     const navigate = useNavigate();
 
-    const fetchData = async () => {
-        console.log(`/api/data?level=${GetClassNumber(classlevel)[0]}`);
-        try {
-          const response = await fetch(`/api/data`);
-          const data = await response.text();
-          console.log(data);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-    
     const handleClick = () => {
         if (classlevel === 'Home') {
             // Default route
@@ -84,7 +73,6 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
         } else {
             // Gets 'X00s' from 'CSE X00s' classlevel and routes to that page
             navigate('/' + GetDefaultRoute() + '/cse' + GetClassNumber(classlevel));
-            fetchData();
         }
     };
     
@@ -104,3 +92,37 @@ export const InnerPage: React.FC = () => {
         </div>
     );
 }
+
+interface ClassListProps {
+    classLevelNumber: string;
+  }
+  
+export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
+    const [classList, setClassList] = useState<any[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+        try {
+            const response = await fetch(`/api/GetClassData?level=${classLevelNumber}`);
+            const data = await response.json();
+            setClassList(data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+        };
+
+        fetchData();
+    }, [classLevelNumber]);
+
+    return (
+        <div className="class-list">
+        {classList.map((classItem) => (
+            <div key={classItem.id} className="card">
+            <h3>{classItem.name}</h3>
+            <p>Number: {classItem.number}</p>
+            <p>Description: {classItem.description}</p>
+            </div>
+        ))}
+        </div>
+    );
+};  

@@ -1,8 +1,7 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import {InnerPage, HomeLayout} from '../Homepage/Homepage';
+import {InnerPage, HomeLayout, ClassList} from '../Homepage/Homepage';
 import {GetDefaultRoute} from '../Helpers/utils';
 import '../Homepage/Homepage.css';
-import ClassList from '../Directory/ClassList';
 
 function App() {
   const classPrefix = 'cse';
@@ -15,8 +14,8 @@ function App() {
           <Route path={GetDefaultRoute()} element={<InnerPage />} />
           {classNumbers.map((classNumber) => (
             <Route
-              key={classNumber}
-              path={GetDefaultRoute() + classPrefix + classNumber}
+              path={GetDefaultRoute() + "/" + classPrefix + classNumber}
+              element={<ClassList classLevelNumber={classNumber[0]} />}
             />
           ))}
         </Routes>
