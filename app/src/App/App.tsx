@@ -1,9 +1,10 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import {InnerPage, HomeLayout} from '../Homepage/Homepage';
-import {LoginPage} from '../LoginPage/LoginPage';
+import {LoginPage} from '../Login/LoginPage';
+import {SignupPage} from '../Login/SignupPage';
 import {GetDefaultRoute} from '../Helpers/utils';
 import '../Homepage/Homepage.css';
-import '../LoginPage/LoginPage.css';
+import '../Login/Login.css';
 
 function App() {
   const classPrefix = 'cse';
@@ -21,6 +22,7 @@ function App() {
             />
           ))}
           <Route path={GetDefaultRoute() + '/login'} element={<LoginPage/>}/>
+          <Route path={GetDefaultRoute() + '/signup'} element={<SignupPage/>}/>
         </Routes>
       </HomeLayout>
     </Router>

@@ -1,0 +1,45 @@
+.loginpage {
+  background-color: #f0f0f0;
+  position: absolute;
+  top: 15%;
+  left: 30%;
+  right: 30%;
+  height: 80vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginpage h1, .signuppage h1 {
+  margin-top: 10%;
+  margin-bottom: 6%;
+  user-select: none;
+}
+
+.loginpage p {
+  font-size: 2.3vh;
+  user-select: none;
+}
+
+#forgot-psw, #sign-up-button, #sign-in-button {
+  color: #2400ff;
+  font-size: 2vh; 
+  font-weight: 700;
+  margin: 2%;
+  border: none;
+  cursor: pointer;
+}
+
+.signuppage {
+  background-color: #f0f0f0;
+  position: absolute;
+  top: 15%;
+  left: 30%;
+  right: 30%;
+  height: 80vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -42,7 +42,7 @@ export const Logo: React.FC = () => {
     const navigate = useNavigate();
     
     const handleClick = () => {
-        navigate('/home');
+        navigate(GetDefaultRoute() + '/');
     };
 
     return (
@@ -75,7 +75,7 @@ export const Sidebar: React.FC<SidebarProps> = ( props: SidebarProps ) => {
 
     const location = useLocation();
 
-    if (location.pathname.match(/rate-my-cse\/login/)) {
+    if (location.pathname.match(/rate-my-cse\/(login|signup)/)) {
         return null;
     }
 
