@@ -1,5 +1,5 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import {InnerPage, HomeLayout, ClassList} from '../Homepage/Homepage';
+import {HomePage, HomeLayout, ClassList} from '../Homepage/Homepage';
 import {GetDefaultRoute} from '../Helpers/utils';
 import '../Homepage/Homepage.css';
 
@@ -11,7 +11,7 @@ function App() {
     <Router>
       <HomeLayout>
         <Routes>
-          <Route path={GetDefaultRoute()} element={<InnerPage />} />
+          <Route path={GetDefaultRoute()} element={<HomePage />} />
           {classNumbers.map((classNumber) => (
             <Route
               path={GetDefaultRoute() + "/" + classPrefix + classNumber}

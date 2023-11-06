@@ -85,9 +85,9 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
     );
 }
 
-export const InnerPage: React.FC = () => {
+export const HomePage: React.FC = () => {
     return (
-        <div className="innerpage">
+        <div className="homepage">
             {/* This is the content of the inner page */}
         </div>
     );
@@ -95,7 +95,7 @@ export const InnerPage: React.FC = () => {
 
 interface ClassListProps {
     classLevelNumber: string;
-  }
+}
   
 export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
     const [classList, setClassList] = useState<any[]>([]);
@@ -115,14 +115,18 @@ export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
     }, [classLevelNumber]);
 
     return (
-        <div className="class-list">
-        {classList.map((classItem) => (
-            <div key={classItem.id} className="card">
-            <h3>{classItem.name}</h3>
-            <p>Number: {classItem.number}</p>
-            <p>Description: {classItem.description}</p>
-            </div>
-        ))}
+        <div className="innerpage">
+          <div className="class-list">
+            {classList.map((classItem) => (
+              <div key={classItem.id} className="card">
+                <div className="class-info">
+                  <p className="class-number bold">{`CSE ${classItem.number}`}</p>
+                  <p className="class-name bold">{classItem.name}</p>
+                </div>
+                <p className="class-description">Description: {classItem.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
-    );
+      );
 };  
