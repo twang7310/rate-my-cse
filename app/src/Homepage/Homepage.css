@@ -33,7 +33,7 @@
 /* Classtab css */
 .leveltab {
   text-align: center;
-  height: 10%;
+  min-height: 10%;
   width: 100%;
   display: inline-block;
   border: none;
@@ -48,6 +48,16 @@
 
 .homepage {
   background-color: #d3f4fe;
+  position: absolute;
+  top: 15%;
+  left: 20%;
+  right: 5%;
+  min-height: 200vh;
+  text-align: center;
+}
+
+/* Class directory */
+.innerpage {
   position: absolute;
   top: 15%;
   left: 20%;
