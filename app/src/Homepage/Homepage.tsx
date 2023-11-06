@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {GetDefaultRoute} from '../Helpers/utils';
 
@@ -65,7 +65,7 @@ export const GetClassNumber = ( label : string ) => {
 
 export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {   
     const navigate = useNavigate();
-    
+
     const handleClick = () => {
         if (classlevel === 'Home') {
             // Default route
@@ -120,9 +120,9 @@ export const RatingDesc: React.FC<RatingDescProps> = ( props: RatingDescProps ) 
   );
 }
 
-export const InnerPage: React.FC = () => {
+export const HomePage: React.FC = () => {
     return (
-        <div className="innerpage">
+        <div className="homepage">
           <h1 className="welcome">
             Welcome to RateMyCSE
           </h1>
@@ -156,3 +156,41 @@ export const InnerPage: React.FC = () => {
         </div>
     );
 }
+
+interface ClassListProps {
+    classLevelNumber: string;
+}
+  
+export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
+    const [classList, setClassList] = useState<any[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+        try {
+            const response = await fetch(`/api/GetClassData?level=${classLevelNumber}`);
+            const data = await response.json();
+            setClassList(data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+        };
+
+        fetchData();
+    }, [classLevelNumber]);
+
+    return (
+        <div className="innerpage">
+          <div className="class-list">
+            {classList.map((classItem) => (
+              <div key={classItem.id} className="card">
+                <div className="class-info">
+                  <p className="class-number bold">{`CSE ${classItem.number}`}</p>
+                  <p className="class-name bold">{classItem.name}</p>
+                </div>
+                <p className="class-description">Description: {classItem.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+};  
