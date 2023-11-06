@@ -1,6 +1,7 @@
 import {render, screen} from '@testing-library/react';
 import {GetClassNumber, LevelTab} from './Homepage';
 import {BrowserRouter as Router} from 'react-router-dom';
+import React from 'react';
 
 test('Renders LevelTab components with correct names', () => {
   render(
