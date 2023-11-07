@@ -94,10 +94,10 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
            (Difficulty, workload, practicality).
 */
 const RatingBox: React.FC<{label: string, rating: string}> = ({ label, rating }) => {
-  const dynamicclassname = `ratingbox ratingbox-${rating}`;
+  const dynamicClassName = `ratingbox ratingbox-${rating}`;
 
   return (
-    <div className={dynamicclassname}>
+    <div className={dynamicClassName}>
       {label}
     </div>
   );
@@ -157,6 +157,52 @@ export const HomePage: React.FC = () => {
     );
 }
 
+export const ClassRating: React.FC<{category: string, rating: number, type: string}> = ({category, rating, type}) => {
+  const dynamicClassName = `rating-pair-rating ratingbox-${type}`;
+
+  let display : string;
+  if (rating === null) {
+    display = "N/A";
+  } else {
+    display = rating + "/5";
+  }
+
+  return(
+    <div className="rating-pair">
+      <div className="rating-pair-category">{category}</div>
+      <div className={dynamicClassName}>{display}</div>
+    </div>
+  );
+}
+
+interface ClassCardProps {
+  num: number;
+  name: string;
+  desc: string;
+  rating1: number;
+  rating2: number;
+  rating3: number;
+}
+
+export const ClassCard: React.FC<ClassCardProps> = (props) => {
+  return (
+    <div className="card">
+      <div className="class-info">
+        <div className="class-title">
+          <p className="class-number bold">{`CSE ${props.num}`}</p>
+          <p className="class-name bold">{props.name}</p>
+        </div>
+        <p className="class-description">Description: {props.desc}</p>
+      </div>
+      <div className="class-ratings">
+        <ClassRating category="Difficulty" type="diff" rating={props.rating1}/>
+        <ClassRating category="Workload" type="work" rating={props.rating2}/>
+        <ClassRating category="Practicality" type="prac" rating={props.rating3}/>
+      </div>
+    </div>
+  );
+}
+
 interface ClassListProps {
     classLevelNumber: string;
 }
@@ -166,15 +212,14 @@ export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
 
     useEffect(() => {
         const fetchData = async () => {
-        try {
-            const response = await fetch(`/api/GetClassData?level=${classLevelNumber}`);
-            const data = await response.json();
-            setClassList(data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
+          try {
+              const response = await fetch(`/api/GetClassData?level=${classLevelNumber}`);
+              const data = await response.json();
+              setClassList(data);
+          } catch (error) {
+              console.error('Error fetching data:', error);
+          }
         };
-
         fetchData();
     }, [classLevelNumber]);
 
@@ -182,15 +227,15 @@ export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
         <div className="innerpage">
           <div className="class-list">
             {classList.map((classItem) => (
-              <div key={classItem.id} className="card">
-                <div className="class-info">
-                  <p className="class-number bold">{`CSE ${classItem.number}`}</p>
-                  <p className="class-name bold">{classItem.name}</p>
-                </div>
-                <p className="class-description">Description: {classItem.description}</p>
-              </div>
+              <ClassCard key={classItem.class_id} 
+              num={classItem.number} 
+              name={classItem.name} 
+              desc={classItem.description} 
+              rating1={classItem.rating_one} 
+              rating2={classItem.rating_two} 
+              rating3={classItem.rating_three}/>
             ))}
           </div>
         </div>
-      );
-};  
+    );
+};
