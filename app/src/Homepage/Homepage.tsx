@@ -158,7 +158,7 @@ export const HomePage: React.FC = () => {
 }
 
 export const ClassRating: React.FC<{category: string, rating: number, type: string}> = ({category, rating, type}) => {
-  const dynamicclassname = `ratings ratingbox-${type}`;
+  const dynamicclassname = `rating-pair-rating ratingbox-${type}`;
 
   let display : string;
   if (rating === null) {
@@ -169,7 +169,7 @@ export const ClassRating: React.FC<{category: string, rating: number, type: stri
 
   return(
     <div className="rating-pair">
-      <div className="rating-category">{category}</div>
+      <div className="rating-pair-category">{category}</div>
       <div className={dynamicclassname}>{display}</div>
     </div>
   );
