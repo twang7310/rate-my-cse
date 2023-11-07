@@ -33,7 +33,7 @@
 /* Classtab css */
 .leveltab {
   text-align: center;
-  height: 10%;
+  min-height: 10%;
   width: 100%;
   display: inline-block;
   border: none;
@@ -46,12 +46,123 @@
   background: linear-gradient(to right, #00f 10%, transparent 10%);
 }
 
-.innerpage {
+.homepage {
   background-color: #d3f4fe;
+  position: absolute;
+  top: 15%;
+  left: 20%;
+  right: 5%;
+  min-height: 200vh;
+  text-align: center;
+}
+
+/* Class directory */
+.innerpage {
   position: absolute;
   top: 15%;
   left: 20%;
   right: 5%;
   height: 200vh;
   text-align: center;
+}
+
+/* Class directory */
+.innerpage {
+  position: absolute;
+  top: 15%;
+  left: 20%;
+  right: 5%;
+  height: 200vh;
+}
+
+.card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  background-color: #fff;
+  flex-grow: 1;
+}
+
+.class-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.class-info {
+  display: flex;
+  align-items: center;
+}
+
+.class-number {
+  font-size: x-large;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.class-name {
+  margin-left: 10px;
+}
+
+/* Welcome header */
+.welcome {
+  text-align: center;
+  margin-top: 60px;
+  font-size: 300%;
+}
+
+/* How it works: header */
+.howitworks {
+  top: 15%;
+  height: 50%;
+  width: 100%;
+}
+
+/* Explanation below the How it works: header */
+.explanation {
+  font-weight: normal;
+}
+
+.ratingsflexbox {
+  display: flex;
+  justify-content: space-around;
+  min-height: 11%;
+  width: 100%;
+}
+
+/* The rating boxes for difficulty, workload, and practicality */
+.ratingbox {
+  font-weight: bold;
+  font-size: 130%;
+  display: flex;
+  align-items: center;
+  align-self: flex-end;
+  justify-content: center;
+  height: 10vh;
+  min-width: 12vw;
+}
+
+.ratingbox-diff {
+  background-color: #e087e2;
+}
+
+.ratingbox-work {
+  background-color: #8dbbff;
+}
+
+.ratingbox-prac {
+  background-color: #88ecaa;
+}
+
+/* Description below rating boxes */
+.ratingdesc {
+  text-align: center;
+  align-self: flex-start;
+  font-weight: bold;
+  color: gray;
+  word-wrap: break-word;
+  white-space: normal;
+  padding-top: 10px;
+  width: 16vw;
 }

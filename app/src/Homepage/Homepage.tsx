@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 // import {GetDefaultRoute} from '../Helpers/utils';
 
@@ -65,7 +65,7 @@ export const GetClassNumber = ( label : string ) => {
 
 export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {   
     const navigate = useNavigate();
-    
+
     const handleClick = () => {
         if (classlevel === 'Home') {
             // // Default route
@@ -85,10 +85,112 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
     );
 }
 
-export const InnerPage: React.FC = () => {
+/* 
+  Template for the rating boxes.
+
+  Parameters:
+  label - Text in the center of the box.
+  rating - Determines the color and position of the box 
+           (Difficulty, workload, practicality).
+*/
+const RatingBox: React.FC<{label: string, rating: string}> = ({ label, rating }) => {
+  const dynamicclassname = `ratingbox ratingbox-${rating}`;
+
+  return (
+    <div className={dynamicclassname}>
+      {label}
+    </div>
+  );
+};
+
+type RatingDescProps = {
+  children: React.ReactNode;
+}
+
+/*
+  Template for the descriptions underneath the rating boxes that accepts
+  children as the text for the description.
+*/
+export const RatingDesc: React.FC<RatingDescProps> = ( props: RatingDescProps ) => {
+  
+  return (
+      <div className="ratingdesc">
+          {props.children}
+      </div>
+  );
+}
+
+export const HomePage: React.FC = () => {
     return (
-        <div className="innerpage">
-            {/* This is the content of the inner page */}
+        <div className="homepage">
+          <h1 className="welcome">
+            Welcome to RateMyCSE
+          </h1>
+          <h3>Wondering if a UW CSE class is as hard as they say?</h3>
+          <div className="howitworks">
+            <h2>How it works:</h2>
+            <h3 className="explanation">
+              Students will post ratings based on 3 categories
+            </h3>
+            <div className="ratingsflexbox">
+              <RatingBox label="Difficulty" rating="diff" />
+              <RatingBox label="Workload" rating="work" />
+              <RatingBox label="Practicality" rating="prac" />
+            </div>
+            <div className="ratingsflexbox">
+              <RatingDesc>
+                A combination of how hard the class material was to 
+                understand and how much effort the class takes to
+                pass.
+              </RatingDesc>
+              <RatingDesc>
+                Based on how much homework there is and how long the 
+                homework takes.
+              </RatingDesc>
+              <RatingDesc>
+                How useful is this class in the real world? Have you
+                seen the material in the industry?
+              </RatingDesc>
+            </div>
+          </div>
         </div>
     );
 }
+
+interface ClassListProps {
+    classLevelNumber: string;
+}
+  
+export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
+    const [classList, setClassList] = useState<any[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+        try {
+            const response = await fetch(`/api/GetClassData?level=${classLevelNumber}`);
+            const data = await response.json();
+            setClassList(data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+        };
+
+        fetchData();
+    }, [classLevelNumber]);
+
+    return (
+        <div className="innerpage">
+          <div className="class-list">
+            {classList.map((classItem) => (
+              <div key={classItem.id} className="card">
+                <div className="class-info">
+                  <p className="class-number bold">{`CSE ${classItem.number}`}</p>
+                  <p className="class-name bold">{classItem.name}</p>
+                </div>
+                <p className="class-description">Description: {classItem.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+};  
