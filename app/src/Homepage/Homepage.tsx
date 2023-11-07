@@ -152,7 +152,6 @@ export const HomePage: React.FC = () => {
                 seen the material in the industry?
               </RatingDesc>
             </div>
-            <ClassCard name='Computer Communication and Networks' num={561} desc='Fundamentals of data transmission: coding, message formats, and protocols. Organization of computer networks. Examples of network implementations. Prerequisite: either CSE 451 or equivalent.' rating1={2.5} rating2={3} rating3={5}/>
           </div>
         </div>
     );
