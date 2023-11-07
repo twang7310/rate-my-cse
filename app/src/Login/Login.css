@@ -4,7 +4,8 @@
   top: 15%;
   left: 30%;
   right: 30%;
-  height: 80vh;
+  min-height: 80vh;
+  min-width: fit-content;
   text-align: center;
   display: flex;
   flex-direction: column;
