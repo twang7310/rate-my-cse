@@ -1,5 +1,5 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import {InnerPage, HomeLayout} from '../Homepage/Homepage';
+import {HomePage, HomeLayout, ClassList} from '../Homepage/Homepage';
 import {LoginPage} from '../Login/LoginPage';
 import {SignupPage} from '../Login/SignupPage';
 import {GetDefaultRoute} from '../Helpers/utils';
@@ -14,11 +14,11 @@ function App() {
     <Router>
       <HomeLayout>
         <Routes>
-          <Route path={GetDefaultRoute()} element={<InnerPage/>} />
+          <Route path={GetDefaultRoute()} element={<HomePage />} />
           {classNumbers.map((classNumber) => (
             <Route
-              key={classNumber}
-              path={GetDefaultRoute() + classPrefix + classNumber}
+              path={GetDefaultRoute() + "/" + classPrefix + classNumber}
+              element={<ClassList classLevelNumber={classNumber[0]} />}
             />
           ))}
           <Route path={GetDefaultRoute() + '/login'} element={<LoginPage/>}/>
