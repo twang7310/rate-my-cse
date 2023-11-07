@@ -81,7 +81,7 @@
   display: flex;
   justify-content: space-between;
   text-align: left;
-  padding: 10px;
+  padding: 1%;
   margin: 10px;
   background-color: #fff;
   flex-grow: 1;
@@ -100,11 +100,12 @@
 }
 
 .class-number {
+  margin-right: 5px;
   font-size: x-large;
 }
 
 .class-name {
-  margin-left: 10px;
+  margin-left: 2%;
 }
 
 /* Class card average ratings */

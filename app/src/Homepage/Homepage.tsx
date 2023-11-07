@@ -94,10 +94,10 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
            (Difficulty, workload, practicality).
 */
 const RatingBox: React.FC<{label: string, rating: string}> = ({ label, rating }) => {
-  const dynamicclassname = `ratingbox ratingbox-${rating}`;
+  const dynamicClassName = `ratingbox ratingbox-${rating}`;
 
   return (
-    <div className={dynamicclassname}>
+    <div className={dynamicClassName}>
       {label}
     </div>
   );
@@ -152,13 +152,14 @@ export const HomePage: React.FC = () => {
                 seen the material in the industry?
               </RatingDesc>
             </div>
+            <ClassCard name='Computer Communication and Networks' num={561} desc='Fundamentals of data transmission: coding, message formats, and protocols. Organization of computer networks. Examples of network implementations. Prerequisite: either CSE 451 or equivalent.' rating1={2.5} rating2={3} rating3={5}/>
           </div>
         </div>
     );
 }
 
 export const ClassRating: React.FC<{category: string, rating: number, type: string}> = ({category, rating, type}) => {
-  const dynamicclassname = `rating-pair-rating ratingbox-${type}`;
+  const dynamicClassName = `rating-pair-rating ratingbox-${type}`;
 
   let display : string;
   if (rating === null) {
@@ -170,7 +171,7 @@ export const ClassRating: React.FC<{category: string, rating: number, type: stri
   return(
     <div className="rating-pair">
       <div className="rating-pair-category">{category}</div>
-      <div className={dynamicclassname}>{display}</div>
+      <div className={dynamicClassName}>{display}</div>
     </div>
   );
 }
