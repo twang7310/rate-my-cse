@@ -1,6 +1,5 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import {InnerPage, HomeLayout} from '../Homepage/Homepage';
-// import {GetDefaultRoute} from '../Helpers/utils';
+import {HomePage, HomeLayout} from '../Homepage/Homepage';
 import '../Homepage/Homepage.css';
 
 function App() {
@@ -11,7 +10,7 @@ function App() {
     <Router>
       <HomeLayout>
         <Routes>
-          <Route path={"/"} element={<InnerPage />} />
+          <Route path={"/"} element={<HomePage />} />
           {classNumbers.map((classNumber) => (
             <Route
               key={classNumber}
