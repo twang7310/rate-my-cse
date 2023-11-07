@@ -237,5 +237,5 @@ export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
             ))}
           </div>
         </div>
-      );
+    );
 };
