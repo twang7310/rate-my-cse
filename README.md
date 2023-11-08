@@ -39,4 +39,4 @@ To run a dynamic version, set up Vercel using [this documentation](https://docs.
 vercel
 ```
 
-To deploy to production, we deploy our repository to Vercel and set that deployment as the production website. This can only be done by our GitHub repository owner,
+To deploy to production, we deploy our repository to Vercel and set that deployment as the production website. This can only be done by our GitHub repository owner.
