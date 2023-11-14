@@ -2,7 +2,7 @@
 RateMyCSE is a course reviewing website specifically for the students of the University of Washington studying computer science. It is a place where you can find everything you need on a CSE class in order to build a balanced schedule. You can read written reviews from students who have taken the class, the average difficulty, workload, and practicality ratings of each class, see tags for classes that have coding, exams, or group projects (work in progress). You can also provide insight for other students by leaving your own reviews and ratings.
 
 # How to install and run RateMyCSE
-RateMyCSE is a free, public website. You can access it by visiting rate-my-cse.vercel.app
+RateMyCSE is a free, public website. You can access it by visiting [rate-my-cse.vercel.app](https://rate-my-cse.vercel.app/)
 
 # How to use RateMyCSE
 
@@ -17,10 +17,10 @@ RateMyCSE is a free, public website. You can access it by visiting rate-my-cse.v
       - No Exams: If the course does not have a midterm or final
 3. (Work in progress) Once you have spotted your desired course, click anywhere on the class card (the white box containing the course) and you will be taken to the course page. There you can find the average ratings for that course (difficulty, workload, and practicality) as well as students’ written opinions and a course description. To view the official course website, you can click on the button that says “Course Website”.
 
-### Search Bar (work in progress)
+### Search Bar (Work in Progress)
 - On the home page there will be a search bar where you can enter the name of the course you’re looking for or the course number
 
-## Creating an Account
+## Creating an Account (Work in Progress)
 1. Click on “Sign In” on the top right.
 2. Enter your uw.edu email and click the “Verify” button.
 3. You should be sent an email with a verification link. If you have not received an email, you can click on “Resend email” under the “Verify” button.
@@ -28,7 +28,7 @@ RateMyCSE is a free, public website. You can access it by visiting rate-my-cse.v
 5. Enter the same uw.edu email you just verified, create a password, and click “Create Account”.
 6. You have successfully created a RateMyCSE account! Now you can rate and review courses yourself.
 
-## Signing into your Account
+## Signing into your Account (Work in Progress)
 1. Cick on “Sign In” on the top right.
 2. Enter the uw.edu email associated with your RateMyCSE account, and the password for your RateMyCSE account.
     - (Work in progress) If you forgot your password, click on the “Forgot password?”
