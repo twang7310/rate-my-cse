@@ -2,6 +2,7 @@ import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {GetClassNumber, HomeLayout, LevelTab} from './Homepage';
 import {BrowserRouter as Router} from 'react-router-dom';
+import React from 'react';
 
 test('Checks HomeLayout has correct button names and in order within the sidebar', () => {
   render(

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useLocation} from 'react-router-dom';
 import {GetDefaultRoute} from '../Helpers/utils';
 
 type LayoutProps = {
@@ -11,6 +11,7 @@ export const HomeLayout: React.FC<LayoutProps> = ( props: LayoutProps ) => {
         <div className='homelayout'>
             <Header>
                 <Logo/>
+                <Login/>
             </Header>
             <Sidebar>
                 <LevelTab classlevel='Home'/>
@@ -25,26 +26,45 @@ export const HomeLayout: React.FC<LayoutProps> = ( props: LayoutProps ) => {
 }
 
 type HeaderProps = {
-  children: React.ReactNode;
+    children: React.ReactNode;
 }
 
 export const Header: React.FC<HeaderProps> = ( props: HeaderProps ) => {
   return (
-      <div className="header">
-          {props.children}
-      </div>
+        <div className="header">
+            {props.children}
+        </div>
   );
 }
 
 export const Logo: React.FC = () => {
+
+    const navigate = useNavigate();
     
-  const handleClick = () => {};
-  
-  return (
-      <h1 className="logo" onClick={ handleClick }>
-          RateMyCSE
-      </h1>
-  );
+    const handleClick = () => {
+        navigate(GetDefaultRoute() + '/');
+    };
+
+    return (
+        <h1 className="logo" onClick={ handleClick }>
+            RateMyCSE
+        </h1>
+    );
+}
+
+export const Login: React.FC = () => {
+
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate('/' + GetDefaultRoute() + '/login');
+    };
+
+    return (
+        <p className="login" onClick={ handleClick }>
+            Sign In
+        </p>
+    );
 }
 
 type SidebarProps = {
@@ -52,6 +72,13 @@ type SidebarProps = {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ( props: SidebarProps ) => {
+
+    const location = useLocation();
+
+    if (location.pathname.match(/rate-my-cse\/(login|signup)/)) {
+        return null;
+    }
+
     return (
         <div className="sidebar">
             {props.children}
@@ -65,6 +92,20 @@ export const GetClassNumber = ( label : string ) => {
 
 export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {   
     const navigate = useNavigate();
+    
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/data');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        console.log(data); // Do something with the data
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    
 
     const handleClick = () => {
         if (classlevel === 'Home') {
@@ -73,6 +114,7 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
         } else {
             // Gets 'X00s' from 'CSE X00s' classlevel and routes to that page
             navigate('/' + GetDefaultRoute() + '/cse' + GetClassNumber(classlevel));
+            fetchData();
         }
     };
     
