@@ -85,17 +85,17 @@ test('HomeLayout sidebar buttons navigate to correct routes', () => {
   const tab500s = screen.getByText('CSE 500s');
 
   userEvent.click(tabHome);
-  expect(window.location.pathname).toEqual('/rate-my-cse/');
+  expect(window.location.pathname).toEqual('/');
 
   userEvent.click(tab100s);
-  expect(window.location.pathname).toEqual('/rate-my-cse/cse100s');
+  expect(window.location.pathname).toEqual('/cse100s');
 
   userEvent.click(tab300s);
-  expect(window.location.pathname).toEqual('/rate-my-cse/cse300s');
+  expect(window.location.pathname).toEqual('/cse300s');
 
   userEvent.click(tab400s);
-  expect(window.location.pathname).toEqual('/rate-my-cse/cse400s');
+  expect(window.location.pathname).toEqual('/cse400s');
 
   userEvent.click(tab500s);
-  expect(window.location.pathname).toEqual('/rate-my-cse/cse500s');
+  expect(window.location.pathname).toEqual('/cse500s');
 });

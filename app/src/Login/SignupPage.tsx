@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Box, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { GetDefaultRoute } from '../Helpers/utils';
-
 
 export const SignupPage: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -30,7 +28,7 @@ export const SignupPage: React.FC = () => {
     }
 
     function handleSignin() {
-        navigate('/' + GetDefaultRoute() + '/login');
+        navigate('/login');
     }
 
     return (

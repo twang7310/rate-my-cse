@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate, useLocation} from 'react-router-dom';
-import {GetDefaultRoute} from '../Helpers/utils';
+import {useLocation, useNavigate} from 'react-router-dom';
 
 type LayoutProps = {
     children: React.ReactNode;
@@ -42,7 +41,7 @@ export const Logo: React.FC = () => {
     const navigate = useNavigate();
     
     const handleClick = () => {
-        navigate(GetDefaultRoute() + '/');
+        navigate('/');
     };
 
     return (
@@ -57,7 +56,7 @@ export const Login: React.FC = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/' + GetDefaultRoute() + '/login');
+        navigate('/login');
     };
 
     return (
@@ -92,7 +91,7 @@ export const GetClassNumber = ( label : string ) => {
 
 export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {   
     const navigate = useNavigate();
-    
+
     const fetchData = async () => {
       try {
         const response = await fetch('/api/data');
@@ -106,14 +105,13 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
       }
     };
     
-
     const handleClick = () => {
         if (classlevel === 'Home') {
-            // Default route
-            navigate('/' + GetDefaultRoute() + '/');
+            // // Default route
+            navigate('/');
         } else {
             // Gets 'X00s' from 'CSE X00s' classlevel and routes to that page
-            navigate('/' + GetDefaultRoute() + '/cse' + GetClassNumber(classlevel));
+            navigate('/cse' + GetClassNumber(classlevel));
             fetchData();
         }
     };

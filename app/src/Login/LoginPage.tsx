@@ -3,8 +3,6 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import {useNavigate} from 'react-router-dom';
-import {GetDefaultRoute} from '../Helpers/utils';
-
 
 export const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -17,7 +15,7 @@ export const LoginPage: React.FC = () => {
     }
 
     function handleSignup() {
-        navigate('/' + GetDefaultRoute() + '/signup');
+        navigate('/signup');
     }
 
     function handleForgot() {

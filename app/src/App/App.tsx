@@ -2,7 +2,6 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import {HomePage, HomeLayout, ClassList} from '../Homepage/Homepage';
 import {LoginPage} from '../Login/LoginPage';
 import {SignupPage} from '../Login/SignupPage';
-import {GetDefaultRoute} from '../Helpers/utils';
 import '../Homepage/Homepage.css';
 import '../Login/Login.css';
 
@@ -14,15 +13,15 @@ function App() {
     <Router>
       <HomeLayout>
         <Routes>
-          <Route path={GetDefaultRoute()} element={<HomePage />} />
+          <Route path={"/"} element={<HomePage />} />
           {classNumbers.map((classNumber) => (
             <Route
-              path={GetDefaultRoute() + "/" + classPrefix + classNumber}
+              path={"/" + classPrefix + classNumber}
               element={<ClassList classLevelNumber={classNumber[0]} />}
             />
           ))}
-          <Route path={GetDefaultRoute() + '/login'} element={<LoginPage/>}/>
-          <Route path={GetDefaultRoute() + '/signup'} element={<SignupPage/>}/>
+          <Route path={'/login'} element={<LoginPage/>}/>
+          <Route path={'/signup'} element={<SignupPage/>}/>
         </Routes>
       </HomeLayout>
     </Router>
