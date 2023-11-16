@@ -20,7 +20,7 @@ Main application
 - `src`: Application code
     - `App`: routing logic and page definitions
     - `Homepage`: logic and styling of header, sidebar, homepage, and class tabs
-    - `Helpers`: global helper functions
+    - <strike>`Helpers`: global helper functions</strike>
 -  `api`: API endpoints to query database, used by Vercel
     - To create a new endpoint for a unique query, add a file `[name].js` to this folder to create the endpoint `/api/[name]`
 
