@@ -91,7 +91,7 @@ export const GetClassNumber = ( label : string ) => {
 
 export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {   
     const navigate = useNavigate();
-    
+
     const fetchData = async () => {
       try {
         const response = await fetch('/api/data');
@@ -105,7 +105,6 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
       }
     };
     
-
     const handleClick = () => {
         if (classlevel === 'Home') {
             // // Default route
@@ -113,6 +112,7 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
         } else {
             // Gets 'X00s' from 'CSE X00s' classlevel and routes to that page
             navigate('/cse' + GetClassNumber(classlevel));
+            fetchData();
         }
     };
     
