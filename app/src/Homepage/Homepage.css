@@ -1,65 +1,5 @@
-.App {
-  text-align: center;
-}
 
-/* Header css */
-.header {
-  background-color: #4b2e83;
-  height: 11vh;
-  width: 100%;
-  position: fixed;
-  z-index: 1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  color: white;
-  font-size: 2.5vw;
-  font-weight: 700;
-  margin-left: 2%;
-  user-select: none;
-  cursor: pointer;
-}
-
-.login {
-  color: white;
-  font-size: 2vw;
-  font-weight: 400;
-  margin-right: 2%;
-  user-select: none;
-  cursor: pointer;
-}
-
-/* Sidebar css */
-.sidebar {
-  background-color: #f0f0f0;
-  height: 89vh;
-  width: 15%;
-  bottom: 0%;
-  position: fixed;
-}
-
-/* Classtab css */
-.leveltab {
-  text-align: center;
-  min-height: 9%;
-  width: 100%;
-  display: inline-block;
-  border: none;
-  margin-top: 4%;
-  font-size: 140%;
-}
-
-.leveltab:hover,
-.leveltab.clicked {
-  background-color: rgba(255, 255, 255, 0.897);
-  font-weight: bold;
-  background: linear-gradient(to right, #f0f0f0 7%, 7%,
-                            #c985ff 17%, transparent 17%);
-}
-
+/* Homepage container/background */
 .homepage {
   background-color: #d3f4fe;
   position: absolute;
@@ -68,90 +8,6 @@
   right: 5%;
   min-height: 200vh;
   text-align: center;
-}
-
-/* Class directory */
-.innerpage {
-  position: absolute;
-  top: 15%;
-  left: 20%;
-  right: 5%;
-  height: 200vh;
-  text-align: center;
-}
-
-.class-list {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.bold {
-  font-weight: bold;
-}
-
-/* Class directory card */
-.card {
-  border: 1px solid #ccc;
-  display: flex;
-  justify-content: space-between;
-  text-align: left;
-  padding: 1%;
-  margin: 10px;
-  background-color: #fff;
-  flex-grow: 1;
-  overflow: scroll;
-}
-
-/* Class card header and description */
-.class-info {
-  margin-right: 7%;
-  margin-left: 0.5%;
-}
-
-.class-title {
-  display: flex;
-  align-items: center;
-}
-
-.class-number {
-  margin-right: 5px;
-  font-size: x-large;
-}
-
-.class-name {
-  margin-left: 2%;
-}
-
-/* Class card average ratings */
-.class-ratings {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  margin-right: 1%;
-}
-
-.rating-pair {
-  display: flex;
-  justify-content: space-between;
-}
-
-.rating-pair-category {
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  min-width: 60px;
-  margin-right: 1.5vw;
-}
-
-.rating-pair-rating {
-  font-weight: bold;
-  display: flex;
-  font-size: 130%;
-  min-width: 60px;
-  width: 10vh;
-  min-height: 5vh;
-  align-items: center;
-  justify-content: center;
 }
 
 /* Welcome header */
@@ -192,6 +48,7 @@
   min-width: 12vw;
 }
 
+/* Rating box colors */
 .ratingbox-diff {
   background-color: #e087e2;
 }

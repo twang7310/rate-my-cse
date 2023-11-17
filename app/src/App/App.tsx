@@ -1,9 +1,9 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import {HomePage, HomeLayout, ClassList} from '../Homepage/Homepage';
+import {HomeLayout} from '../Layout/Layout';
+import {HomePage} from '../Homepage/Homepage';
+import {ClassList} from '../Directories/Directory';
 import {LoginPage} from '../Login/LoginPage';
 import {SignupPage} from '../Login/SignupPage';
-import '../Homepage/Homepage.css';
-import '../Login/Login.css';
 
 function App() {
   const classPrefix = 'cse';

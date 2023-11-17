@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { TextField, Box, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import React, {useState} from 'react';
+import {TextField, Box, Button} from '@mui/material';
+import {useNavigate} from 'react-router-dom';
+import './Login.css'
 
 export const SignupPage: React.FC = () => {
     const [email, setEmail] = useState('');
