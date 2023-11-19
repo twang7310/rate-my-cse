@@ -1,0 +1,83 @@
+/* Class directory container */
+.innerpage {
+  position: absolute;
+  top: 15%;
+  left: 20%;
+  right: 5%;
+  height: 200vh;
+  text-align: center;
+}
+
+.class-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+/* Class directory card */
+.card {
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  padding: 1%;
+  margin: 10px;
+  background-color: #fff;
+  flex-grow: 1;
+  overflow: scroll;
+}
+
+/* Class card header and description */
+.class-info {
+  margin-right: 7%;
+  margin-left: 0.5%;
+}
+
+.class-title {
+  display: flex;
+  align-items: center;
+}
+
+.class-number {
+  margin-right: 5px;
+  font-size: x-large;
+}
+
+.class-name {
+  margin-left: 2%;
+}
+
+/* Class card average ratings */
+.class-ratings {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-right: 1%;
+}
+
+.rating-pair {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rating-pair-category {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  min-width: 60px;
+  margin-right: 1.5vw;
+}
+
+.rating-pair-rating {
+  font-weight: bold;
+  display: flex;
+  font-size: 130%;
+  min-width: 60px;
+  width: 10vh;
+  min-height: 5vh;
+  align-items: center;
+  justify-content: center;
+}

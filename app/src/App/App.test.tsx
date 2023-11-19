@@ -1,35 +1,52 @@
-import {render, screen} from '@testing-library/react';
-import App from './App';
+import {render, screen} from "@testing-library/react";
+import App from "./App";
+import userEvent from "@testing-library/user-event";
 
-test('Checks route paths are correct', () => {
-  render(<App />);
+test('HomeLayout sidebar buttons navigate to correct routes', () => {
+  render(<App/>);
 
-  // Routes expected for site
-  const expectedRoutes = ['rate-my-cse', 'rate-my-cse/cse100s', 'rate-my-cse/cse300s', 
-                  'rate-my-cse/cse400s', 'rate-my-cse/cse500s']
+  const tabHome = screen.getByText('Home');
+  const tab100s = screen.getByText('CSE 100s');
+  const tab300s = screen.getByText('CSE 300s');
+  const tab400s = screen.getByText('CSE 400s');
+  const tab500s = screen.getByText('CSE 500s');
 
-  // Get all Route elements in App
-  const routes = document.getElementsByTagName('Routes');
+  userEvent.click(tabHome);
+  expect(window.location.pathname).toEqual('/');
 
-  // Verify all existing routes match expected one
-  for (var i = 0; i < routes.length; i++) {
-    expect(expectedRoutes).toContain(routes[i].getAttribute('path'));
-  }
+  userEvent.click(tab100s);
+  expect(window.location.pathname).toEqual('/cse100s');
+
+  userEvent.click(tab300s);
+  expect(window.location.pathname).toEqual('/cse300s');
+
+  userEvent.click(tab400s);
+  expect(window.location.pathname).toEqual('/cse400s');
+
+  userEvent.click(tab500s);
+  expect(window.location.pathname).toEqual('/cse500s');
 });
 
-test('Checks routes are in correct order', () => {
-  render(<App />);
+test('Header logo navigates to default route', () => {
+  render(<App/>);
 
-  // Routes expected for site
-  const expectedRoutes = ['rate-my-cse', 'rate-my-cse/cse100s', 'rate-my-cse/cse300s', 
-                  'rate-my-cse/cse400s', 'rate-my-cse/cse500s']
+  const otherTab = screen.getByText('CSE 500s');
+  userEvent.click(otherTab);
+  expect(window.location.pathname).toEqual('/cse500s');
 
-  // Get all Route elements in App
-  const routes = document.getElementsByTagName('Routes');
+  const logo = screen.getByText('RateMyCSE');
+  userEvent.click(logo);
+  expect(window.location.pathname).toEqual('/');
+});
 
-  // Routes match expected ordering of routes defined in expectedRoutes
-  for (var i = 0; i < routes.length; i++) {
-    expect(routes[i].getAttribute('path')).toEqual(expectedRoutes[i]);
-    expect(routes[i].compareDocumentPosition(routes[i + 1]) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-  }
+test('Sign In navigates to correct route', () => {
+  render(<App/>);
+
+  const otherTab = screen.getByText('CSE 400s');
+  userEvent.click(otherTab);
+  expect(window.location.pathname).toEqual('/cse400s');
+
+  const signin = screen.getByText('Sign In');
+  userEvent.click(signin);
+  expect(window.location.pathname).toEqual('/login');
 });

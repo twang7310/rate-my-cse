@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import {useNavigate} from 'react-router-dom';
+import './Login.css'
 
 export const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');

@@ -5,7 +5,7 @@ for their quarters; a collection of student opinions and experiences about speci
 
 [User Manual](https://github.com/twang7310/rate-my-cse/blob/main/user-manual.md)
 
-[Developer Guide](https://github.com/twang7310/rate-my-cse/blob/main/developer-guide.md)
+[Developer Guidelines](https://github.com/twang7310/rate-my-cse/blob/main/developer-guidelines.md)
 
 ## Current Use Cases
 - The user can navigate between course directory pages, which display all courses of a level (100s, 300s, 400s, 500s) with their, name, description, and average review ratings in the three rating categories. Once one of these pages is navigated to, all this information on all relevant classes is fetched from the database and parsed into a displayed list of these 'class cards'.
