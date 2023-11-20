@@ -70,7 +70,7 @@ export const ClassCard: React.FC<ClassCardProps> = (props) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/cse' + props.num);
+        navigate('/course/' + props.num);
     }
 
     return (
