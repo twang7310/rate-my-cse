@@ -28,6 +28,7 @@
   background-color: #fff;
   flex-grow: 1;
   overflow: scroll;
+  cursor: pointer;
 }
 
 /* Class card header and description */
