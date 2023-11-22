@@ -4,7 +4,7 @@ import './CoursePage.css'
 
 export const CoursePage: React.FC = () => {
     const { classNum } = useParams();
-    const [course, setCourse] = useState<any>([]);
+    const [course, setCourse] = useState<any[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,8 +22,16 @@ export const CoursePage: React.FC = () => {
 
     return (
        <div className="coursepage">
-            <h1>{ classNum }</h1>
-            <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, consectetur ullam. Ipsum reiciendis libero quidem rerum assumenda. Consectetur quis in omnis laboriosam? Laboriosam odio, veritatis dolorum eos et est temporibus?</h1>
+            {course.map((courseObject) => (
+                    <>
+                    <p>{ courseObject.number }</p>
+                    <p>{ courseObject.name }</p>
+                    <p>{ courseObject.description }</p>
+                    <p>{ courseObject.rating_one }</p>
+                    <p>{ courseObject.rating_two }</p>
+                    <p>{ courseObject.rating_three }</p>
+                    </>
+            ))}
        </div>
     );
 }
