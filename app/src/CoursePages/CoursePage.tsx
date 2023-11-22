@@ -3,9 +3,18 @@ import {useParams} from "react-router-dom";
 import './CoursePage.css'
 
 export const CoursePage: React.FC = () => {
+
+    // useParams acquires the portion of the URL (:classNum) that
+    // changes in respect to the class card that was clicked.
     const { classNum } = useParams();
+
+    // Although we are only requesting one course, the API call and SQL
+    // aren't certain if there is only one and so it must return
+    // an array.
     const [course, setCourse] = useState<any[]>([]);
 
+    // useEffect to update the course page with the data fetched by
+    // making an API call for the course with the number classNum.
     useEffect(() => {
         const fetchData = async () => {
             try {

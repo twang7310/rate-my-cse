@@ -19,8 +19,7 @@ function App() {
             <Route
               path={"/" + classPrefix + classNumber}
               element={<ClassList classLevelNumber={classNumber[0]} />}
-            >
-            </Route>
+            />
           ))}
           <Route path={'/login'} element={<LoginPage/>}/>
           <Route path={'/signup'} element={<SignupPage/>}/>
