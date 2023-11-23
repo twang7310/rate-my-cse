@@ -4,6 +4,7 @@ import {HomePage} from '../Homepage/Homepage';
 import {ClassList} from '../Directories/Directory';
 import {LoginPage} from '../Login/LoginPage';
 import {SignupPage} from '../Login/SignupPage';
+import {CoursePage} from '../CoursePages/CoursePage';
 
 function App() {
   const classPrefix = 'cse';
@@ -22,6 +23,7 @@ function App() {
           ))}
           <Route path={'/login'} element={<LoginPage/>}/>
           <Route path={'/signup'} element={<SignupPage/>}/>
+          <Route path={'/course/:classNum'} element={<CoursePage/>}/>
         </Routes>
       </HomeLayout>
     </Router>

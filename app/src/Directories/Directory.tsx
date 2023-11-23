@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import './Directory.css'
 
 interface ClassListProps {
@@ -66,8 +67,14 @@ interface ClassCardProps {
 }
   
 export const ClassCard: React.FC<ClassCardProps> = (props) => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate('/course/' + props.num);
+    }
+
     return (
-        <div className="card">
+        <div className="card" onClick={ handleClick }>
             <div className="class-info">
                 <div className="class-title">
                     <p className="class-number bold">{`CSE ${props.num}`}</p>
