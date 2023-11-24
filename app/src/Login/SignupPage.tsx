@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
 import {TextField, Box, Button} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
+import {CognitoUser, CognitoUserAttribute} from 'amazon-cognito-identity-js';
+import userpool from '../userpool';
 import './Login.css'
 
 export const SignupPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [psw1, setPsw1] = useState('');
     const [psw2, setPsw2] = useState('');
+    const [code, setCode] = useState('');
     const [isEmailInvalid, setIsEmailInvalid] = useState(false);
     const [isPswInvalid, setIsPswInvalid] = useState(false);
     const [pswHelperText, setPswHelperText] = useState(' ');
@@ -26,6 +29,36 @@ export const SignupPage: React.FC = () => {
             setIsPswInvalid(false);
             setPswHelperText(' ');
         }
+
+        const attributeList = [];
+          attributeList.push(
+            new CognitoUserAttribute({
+              Name: 'email',
+              Value: email,
+            })
+          );
+          userpool.signUp(email, psw1, attributeList, attributeList, (err, data) => {
+            if (err) {
+              console.log(err);
+              alert("Couldn't sign up");
+            } else {
+              alert('User Added Successfully');
+            }
+          });
+
+          // Verification code
+          if (code != null) {
+            const cognitoUser = new CognitoUser({ Username: email, Pool: userpool });
+            cognitoUser.confirmRegistration(code, true, (confirmationErr, confirmationData) => {
+            if (confirmationErr) {
+                console.error(confirmationErr);
+                alert("Couldn't confirm registration");
+            } else {
+                alert('User Added Successfully');
+                // Optionally, you can redirect the user to a login page after successful confirmation.
+            }
+            });
+          }
     }
 
     function handleSignin() {
@@ -105,6 +138,25 @@ export const SignupPage: React.FC = () => {
             >
                 Verify UW Email
             </Button>
+
+            <Box
+                sx={{
+                    width: '75%'
+                }}
+            >
+                <TextField
+                    error={isPswInvalid}
+                    helperText={pswHelperText}
+                    fullWidth
+                    id='repeat-password'
+                    label='Verification'
+                    variant='outlined'
+                    margin='normal'
+                    onInput={ (e) => {
+                        setCode((e.target as HTMLInputElement).value)
+                    }}
+                />
+            </Box>
 
             <Box
                 sx={{
