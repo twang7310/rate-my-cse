@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import './CoursePage.css'
 
 export const CoursePage: React.FC = () => {
@@ -29,6 +29,12 @@ export const CoursePage: React.FC = () => {
         fetchData();
     }, [classNum]);
 
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate('/course/' + classNum + '/rate')
+    }
+
     return (
        <div className="coursepage">
             {course.map((courseObject) => (
@@ -41,6 +47,7 @@ export const CoursePage: React.FC = () => {
                     <p>{ courseObject.rating_three }</p>
                     </>
             ))}
+            <button onClick={handleClick}>Review</button>
        </div>
     );
 }
