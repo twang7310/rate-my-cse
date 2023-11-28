@@ -27,7 +27,7 @@ export const ReviewPage: React.FC = () => {
             {course.map((courseObject) => (
                 <ReviewHeader num={courseObject.number} name={courseObject.name}/>
             ))}
-            <div className="rating-contents">
+            <div className="page-contents">
                 <ReviewHolder classNum={classNum!}/>
                 <div className="rating-instr">
                     <RatingDesc rating={1}/>
