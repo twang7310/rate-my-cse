@@ -37,6 +37,8 @@ cd app
 npm run start
 ```
 
+Warning: This build will not include base functionality like the course directories, reviews, etc. It is not the preferred build. For a functioning build, follow the instructions below.
+
 ### Dynamic Build (Full Functionality)
 
 To also see backend interaction with database, install Vercel and MySQL:
