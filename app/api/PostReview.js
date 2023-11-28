@@ -5,7 +5,7 @@ export default async (req, res) => {
   const {reviewer, rating_one, rating_two, rating_three, text, course_number} = req.body;
   
   // SQL query to insert data into the database
-  const query = 'INSERT INTO reviews (reviewer, rating_one, rating_two, rating_three, text, class_id) VALUES (?, ?, ?, ?, ?, (SELECT class_id FROM Courses WHERE number = ?))';
+  const query = 'INSERT INTO reviews (reviewer, rating_one, rating_two, rating_three, text, class_id) VALUES (?, ?, ?, ?, ?, (SELECT class_id FROM courses WHERE number = ?))';
   const queryParams = [reviewer, rating_one, rating_two, rating_three, text, course_number];
   
   // Execute the query
