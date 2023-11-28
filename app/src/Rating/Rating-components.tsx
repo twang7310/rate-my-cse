@@ -102,13 +102,9 @@ export const Comment: React.FC<CommentProps> = (props) => {
 export const RatingDesc: React.FC<{rating: number}> = ({rating}) => {
     let labels : string[] = ["Difficulty", "Workload", "Practicality"];
     let descs : string[] = [
-        "A combination of how hard the class material was to \
-        understand and how much effort the class takes to \
-        pass.",
-        "Based on how much homework there is and how long the \
-        homework takes.",
-        "How useful is this class in the real world? Have you \
-        seen the material in the industry?"
+        "A combination of how hard the class material was to understand and how much effort the class takes to pass.",
+        "Based on how much homework there is and how long the homework takes.",
+        "How useful is this class in the real world? Have you seen the material in the industry?"
     ];
 
     return (
