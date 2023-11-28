@@ -37,7 +37,7 @@ cd app
 npm run start
 ```
 
-Warning: This build will not include base functionality like the course directories, reviews, etc. It is not the preferred build. For a functioning build, follow the instructions below.
+Warning: This build will not include base functionality like the course directories, reviews, etc. It is not the preferred build. For a full, functioning website, follow the instructions below.
 
 ### Dynamic Build (Full Functionality)
 
