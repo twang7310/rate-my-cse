@@ -2,8 +2,8 @@
 
 1. Navigate to [our GitHub page](https://github.com/twang7310/rate-my-cse) and clone the repository to your IDE
     - See [this documentation](https://docs.google.com/document/d/1LwtVxxJOj7jnUVf5e_kKqspS8TplsrqHjAzqN-fwkPc/edit?usp=sharing) to set up in VSCode
-2. Navigate into the `app` directory and install packages with the following commands:
-    - If Node.js is not installed, download Node.js, then run commands
+2. If not already installed, install Node.js using [any of these options](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs)
+3. Navigate into the `app` directory and install packages with the following commands:
 ```bash
 cd app
 npm install
@@ -19,8 +19,10 @@ Weekly status reports
 Main application
 - `src`: Application code
     - `App`: routing logic and page definitions
-    - `Homepage`: logic and styling of header, sidebar, homepage, and class tabs
-    - <strike>`Helpers`: global helper functions</strike>
+    - `CoursePages`: logic and styling of course pages
+    - `Homepage`: logic and styling homepage
+    - `Layout`: logic and styling of the site layout (header and sidebar)
+    - `Login`: logic and styling of the login and signup pages
 -  `api`: API endpoints to query database, used by Vercel
     - To create a new endpoint for a unique query, add a file `[name].js` to this folder to create the endpoint `/api/[name]`
 
