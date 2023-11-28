@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {ReviewState} from './Rating'
+import './Rating.css'
 
 export const ReviewHeader: React.FC<{num : string, name: string}> = ({num, name}) => {
     return (

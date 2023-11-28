@@ -1,7 +1,7 @@
 import {useNavigate, useParams} from "react-router-dom";
-import './Rating.css'
 import {useEffect, useState} from "react";
 import {Comment, RatingDesc, RatingScale, ReviewHeader} from "./Rating-components";
+import './Rating.css'
 
 export const ReviewPage: React.FC = () => {
     const {classNum} = useParams();
