@@ -1,13 +1,33 @@
-import { useNavigate, useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import './Rating.css'
-import { useState } from "react";
+import {useEffect, useState} from "react";
 
 export const ReviewPage: React.FC = () => {
     const {classNum} = useParams();
 
+    const [course, setCourse] = useState<any[]>([]);
+
+    // useEffect to update the course page with the data fetched by
+    // making an API call for the course with the number classNum.
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`/api/GetCourseData?num=${classNum}`);
+                const data = await response.json();
+                setCourse(data);
+                console.log(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+    }, [classNum]);
+
     return (
         <div className="rating-innerpage">
-            <ReviewHeader num={classNum!} name="The Hardware/Software Interface"/>
+            {course.map((courseObject) => (
+                <ReviewHeader num={courseObject.number} name={courseObject.name}/>
+            ))}
             <div className="rating-contents">
                 <ReviewHolder classNum={classNum!}/>
                 <div className="rating-instr">
@@ -45,14 +65,23 @@ export const RatingDesc: React.FC<{rating: number}> = ({rating}) => {
 }
 
 interface ReviewState {
-    comment : string;
-    rating1 : number;
-    rating2 : number;
-    rating3 : number;
+    reviewer : string;
+    rating_one : number;
+    rating_two : number;
+    rating_three : number;
+    text : string;
+    course_number : string;
 }
 
 export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
-    const initialState : ReviewState = {comment: '', rating1: 0, rating2: 0, rating3: 0}
+    const initialState : ReviewState = {
+        reviewer: 'test_user',  
+        rating_one: 0, 
+        rating_two: 0, 
+        rating_three: 0,
+        text: '',
+        course_number : classNum,
+    };
     const [ratingContents, setRatingContents] = useState<ReviewState>(initialState);
 
     const navigate = useNavigate();
@@ -60,6 +89,28 @@ export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
     const handleBackClick = () => {
         navigate('/course/' + classNum);
     }
+
+    const handleSubmitClick = async () => {
+        postReview();
+        navigate('/course/' + classNum);
+    }
+
+    const postReview = async () => {
+        try {
+            const response = await fetch('/api/PostReview', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(ratingContents),
+            });
+
+            const result = await response.json();
+            console.log(result);
+        } catch (error) {
+            console.error('Error posting review:', error);
+        }
+    };
 
     return (
         <div className="rating-inputs">
@@ -69,7 +120,7 @@ export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
                 <RatingScale category={3} setReview={setRatingContents}/>
             </div>
             <Comment setReview={setRatingContents}/>
-            <button className="review-button">Submit</button>
+            <button className="review-button" onClick={handleSubmitClick}>Submit</button>
             <button className="review-button" onClick={handleBackClick}>Back</button>
         </div>
     );
@@ -103,11 +154,11 @@ export const RatingScale: React.FC<RatingScaleProps> = (props) => {
 
     let fieldToSet : string;
     if (props.category === 1) {
-        fieldToSet = 'rating1';
+        fieldToSet = 'rating_one';
     } else if (props.category === 2) {
-        fieldToSet = 'rating2';
+        fieldToSet = 'rating_two';
     } else {
-        fieldToSet = 'rating3';
+        fieldToSet = 'rating_three';
     }
 
     const handleRatingClick = (rating : number) => {
@@ -155,7 +206,7 @@ export const Comment: React.FC<CommentProps> = (props) => {
         setInput(e.target.value);
         props.setReview((oldState) => ({
             ...oldState,
-            comment : e.target.value,
+            text : e.target.value,
         }));
     }
 
