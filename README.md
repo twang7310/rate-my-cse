@@ -26,7 +26,7 @@ To build and test the system locally, built-in React scripts are used.
 
 To build, enter the `app` directory and run this command to generate a deployable version of the application in a build directory:
 ```bash
-npm build
+npm run build
 ```
 
 To test, enter the `app` directory and run this command to run all the project's Jest tests:
