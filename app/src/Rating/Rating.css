@@ -11,11 +11,12 @@
     text-align: center;
     padding-left: 2.5vw;
     padding-right: 2.5vw;
-    overflow: scroll;
+    overflow: hidden;
 }
 
 .rating-contents {
     display: flex;
+    justify-content: space-between;
 }
 
 /* Text header of review page */
@@ -26,18 +27,18 @@
 }
 
 .logo-start {
-    font-size: 3.8vh;
+    font-size: clamp(1px, 3.8vh, 4vw);
     font-weight: 700;
     margin-right: 1vw;
 }
 
 .course-num {
-    font-size: 3.8vh;
+    font-size: clamp(1px, 3.8vh, 4vw);
     margin-right: 2.2vw;
 }
 
 .course-name {
-    font-size: 2.3vh;
+    font-size: clamp(1px, 2.3vh, 2.5vw);
 }
 
 .rating-inputs {
@@ -48,12 +49,13 @@
 /* Rating selection bars */
 
 .rating-group {
+    margin-left: 2vw;
     display: flex;
     margin-bottom: 1.3vh;
 }
 
 .rating-name {
-    font-size: 1.2vw;
+    font-size: clamp(1px, 1.2vw, 3vh);
     display: flex;
     align-items: center;
     min-width: 20%;
@@ -82,6 +84,15 @@
     cursor: pointer;
 }
 
+.numeric-rating {
+    font-weight: bold;
+    font-size: clamp(1px, 1.2vw, 3vh);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 3.5vw;
+}
+
 /* Rating colors */
 
 .rating-1 {
@@ -101,7 +112,7 @@
 .comment-header {
     margin-top: 5.5vh;
     font-weight: bold;
-    font-size: 1.7vw;
+    font-size: clamp(1px, 1.7vw, 3.5vh);
     margin-bottom: 1vh;
 }
 
@@ -115,7 +126,7 @@
     resize: none;
     box-sizing: border-box;
     height: 25vh;
-    width: 38vw;
+    width: 42vw;
 }
 
 .comment-field:focus {
@@ -134,15 +145,21 @@
     width: 10vw;
     height: 4.8vh;
     margin-top: 2vh;
-    margin-right: 1vw;
+    margin-right: 1.6vw;
     outline: none;
     border: none;
 }
 
 /* Leftside Rating Descriptions */
 
+.rating-instr {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
 .rating-desc {
-    margin-left: 15vw;
+    margin-right: 5vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -150,22 +167,20 @@
 
 .rating-box {
     font-weight: bold;
-    font-size: clamp(14px, 1.5vw, 5vh);
+    font-size: clamp(10px, 2.5vw, 2.5vh);
     display: flex;
     justify-content: center;
     align-items: center;
     width: 10vw;
-    min-width: 90px;
-    height: clamp(1px, 10vh, 8vh);
-    max-height: 10vw;
+    height: 9vh;
+    min-width: 55%;
     margin-bottom: 0.5vh;
 }
 
 .rating-text {
-    margin-top: 0;
-    margin-bottom: 2vh;
-    width: clamp(1px, 20vw, 200px);
-    font-size: clamp(1px, 1.5vw, 15px);
+    width: clamp(1px, 23vw, 220px);
+    font-size: clamp(1px, 1.9vh, 15px);
     color: #737373;
     font-weight: bold;
+    margin-bottom: 1vh;
 }

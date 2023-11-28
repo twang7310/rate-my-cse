@@ -37,9 +37,9 @@ export const RatingDesc: React.FC<{rating: number}> = ({rating}) => {
             <div className={`rating-box rating-${rating}`}>
                 {labels[rating-1]}
             </div>
-            <p className="rating-text">
+            <div className="rating-text">
                 {descs[rating-1]}
-            </p>
+            </div>
         </div>
     );
 }
@@ -136,6 +136,9 @@ export const RatingScale: React.FC<RatingScaleProps> = (props) => {
                         />
                     </div>
                 ))}
+            </div>
+            <div className="numeric-rating">
+                {selectedRating}/5
             </div>
         </div>
     );
