@@ -32,7 +32,7 @@ export const CoursePage: React.FC = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/course/' + classNum + '/rate')
+        navigate('/course/' + classNum + '/review')
     }
 
     return (

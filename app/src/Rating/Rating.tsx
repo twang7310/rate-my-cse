@@ -40,12 +40,12 @@ export const ReviewPage: React.FC = () => {
 }
 
 export interface ReviewState {
-    reviewer : string;
-    rating_one : number;
-    rating_two : number;
-    rating_three : number;
-    text : string;
-    course_number : string;
+    reviewer: string;
+    rating_one: number;
+    rating_two: number;
+    rating_three: number;
+    text: string;
+    course_number: string;
 }
 
 export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
@@ -65,11 +65,6 @@ export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
         navigate('/course/' + classNum);
     }
 
-    const handleSubmitClick = async () => {
-        postReview();
-        navigate('/course/' + classNum);
-    }
-
     const postReview = async () => {
         try {
             const response = await fetch('/api/PostReview', {
@@ -79,11 +74,10 @@ export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
                 },
                 body: JSON.stringify(ratingContents),
             });
-
-            const result = await response.json();
-            console.log(result);
+            await response.json();
+            navigate('/course/' + classNum);
         } catch (error) {
-            console.error('Error posting review:', error);
+            alert('Error posting reivew');
         }
     };
 
@@ -95,7 +89,7 @@ export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
                 <RatingScale category={3} setReview={setRatingContents}/>
             </div>
             <Comment setReview={setRatingContents}/>
-            <button className="review-button" onClick={handleSubmitClick}>Submit</button>
+            <button className="review-button" onClick={postReview}>Submit</button>
             <button className="review-button" onClick={handleBackClick}>Back</button>
         </div>
     );

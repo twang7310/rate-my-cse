@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState} from "react";
 import {ReviewState} from './Rating'
 import './Rating.css'
 
@@ -19,8 +19,8 @@ export const ReviewHeader: React.FC<{num : string, name: string}> = ({num, name}
 }
 
 interface RatingScaleProps {
-    category : number;
-    setReview : React.Dispatch<React.SetStateAction<ReviewState>>;
+    category: number;
+    setReview: React.Dispatch<React.SetStateAction<ReviewState>>;
 }
 
 export const RatingScale: React.FC<RatingScaleProps> = (props) => {
@@ -72,7 +72,7 @@ export const RatingScale: React.FC<RatingScaleProps> = (props) => {
 }
 
 interface CommentProps {
-    setReview : React.Dispatch<React.SetStateAction<ReviewState>>;
+    setReview: React.Dispatch<React.SetStateAction<ReviewState>>;
 }
 
 export const Comment: React.FC<CommentProps> = (props) => {
