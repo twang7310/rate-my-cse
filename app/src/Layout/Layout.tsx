@@ -6,20 +6,18 @@ type LayoutProps = {
 
 export const HomeLayout: React.FC<LayoutProps> = ( props: LayoutProps ) => {
     return (
-        <div>
-            <div className="homelayout">
-                <Header>
-                    <Logo/>
-                    <Login/>
-                </Header>
-                <Sidebar>
-                    <LevelTab classlevel='Home'/>
-                    <LevelTab classlevel='CSE 100s'/>
-                    <LevelTab classlevel='CSE 300s'/>
-                    <LevelTab classlevel='CSE 400s'/>
-                    <LevelTab classlevel='CSE 500s'/>
-                </Sidebar>
-            </div>
+        <div className="homelayout">
+            <Header>
+                <Logo/>
+                <Login/>
+            </Header>
+            <Sidebar>
+                <LevelTab classlevel='Home'/>
+                <LevelTab classlevel='CSE 100s'/>
+                <LevelTab classlevel='CSE 300s'/>
+                <LevelTab classlevel='CSE 400s'/>
+                <LevelTab classlevel='CSE 500s'/>
+            </Sidebar>
             {props.children}
         </div>
     );
