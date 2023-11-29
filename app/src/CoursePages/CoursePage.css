@@ -11,6 +11,7 @@
 
 .topbox {
   display: flex;
+  flex-direction: column;
   height: 20rem;
   text-align: center;
   background-color: #d3f5ff;
