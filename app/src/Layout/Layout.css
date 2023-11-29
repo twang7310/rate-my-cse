@@ -46,6 +46,8 @@
   border: none;
   margin-top: 4%;
   font-size: clamp(1px, 140%, 4vw);
+  color: black;
+  text-decoration: none;
 }
 
 .leveltab:hover,
