@@ -1,7 +1,23 @@
 .coursepage {
+  display: flex;
+  flex-direction: column;
   position: absolute;
-  top: 15%;
-  left: 20%;
-  right: 5%;
-  height: 200vh;
+  top: 11%;
+  left: 15%;
+  right: 0%;
+  margin: 3%;
+  gap: 1rem;
+}
+
+.topbox {
+  display: flex;
+  height: 20rem;
+  text-align: center;
+  background-color: #d3f5ff;
+}
+
+.bottombox {
+  height: auto;
+  text-align: center;
+  background-color: #d3f5ff;
 }
