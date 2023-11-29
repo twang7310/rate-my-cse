@@ -15,11 +15,9 @@ export const authenticate=(Email,Password)=>{
 
         user.authenticateUser(authDetails,{
             onSuccess:(result)=>{
-                console.log("login successful");
                 resolve(result);
             },
             onFailure:(err)=>{
-                console.log("login failed",err);
                 reject(err);
             }
         });

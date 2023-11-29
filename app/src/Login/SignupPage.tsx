@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import {CognitoUser, CognitoUserAttribute} from 'amazon-cognito-identity-js';
 import userpool from '../userpool';
 import './Login.css'
+import { authenticate } from '../services/authenticate';
 
 export const SignupPage: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -37,17 +38,29 @@ export const SignupPage: React.FC = () => {
               Value: email,
             })
           );
-          userpool.signUp(email, psw1, attributeList, attributeList, (err, data) => {
+
+        userpool.signUp(email, psw1, attributeList, attributeList, (err, data) => {
             if (err) {
-              console.log(err);
-              alert("Couldn't sign up");
-            } else {
-              alert('User Added Successfully');
+                const cognitoUser = new CognitoUser({ Username: email, Pool: userpool });
+
+                if (!authenticate(email, psw1).catch((authError) => {})) {
+                    if (err.message === 'An account with the given email already exists')
+                    cognitoUser.resendConfirmationCode((resendErr, result) => {
+                    if (resendErr) {
+                        console.error(resendErr);
+                        alert("Couldn't resend the verification code");
+                        } else {
+                        alert('Verification code resent successfully');
+                        }
+                    });
+                } else {
+                    alert('User is already verified. Please sign in.');
+                }
             }
-          });
+        });
 
           // Verification code
-          if (code != null) {
+          if (code.length > 0) {
             const cognitoUser = new CognitoUser({ Username: email, Pool: userpool });
             cognitoUser.confirmRegistration(code, true, (confirmationErr, confirmationData) => {
             if (confirmationErr) {

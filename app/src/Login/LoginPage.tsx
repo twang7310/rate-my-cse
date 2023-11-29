@@ -3,16 +3,35 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import {useNavigate} from 'react-router-dom';
+import { authenticate } from '../services/authenticate';
 import './Login.css'
+
+let isUserSignedIn = false;
+let user = "";
+
+export function getSignInStatus() {
+  return isUserSignedIn;
+}
+
+export function getEmail() {
+    return user;
+}
 
 export const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isInvalidLogin, setIsInvalidLogin] = useState(false);
     const navigate = useNavigate();
 
     function handleSubmit() {
-        console.log(email);
-        console.log(password);
+        authenticate(email,password)
+          .then((data)=>{
+            isUserSignedIn = true;
+            user = email;
+            navigate('../');
+          },(err)=>{
+            setIsInvalidLogin(true);
+          })
     }
 
     function handleSignup() {
@@ -34,6 +53,7 @@ export const LoginPage: React.FC = () => {
             >
                 <TextField
                     fullWidth
+                    error={isInvalidLogin}
                     id='email'
                     label='UW Email'
                     variant='outlined'
@@ -52,6 +72,7 @@ export const LoginPage: React.FC = () => {
             >
                 <TextField
                     fullWidth
+                    error={isInvalidLogin}
                     id='password'
                     label='Password'
                     variant='outlined'
