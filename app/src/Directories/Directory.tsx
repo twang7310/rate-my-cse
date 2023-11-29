@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import './Directory.css'
+import '../Homepage/Homepage.css'
 
 interface ClassListProps {
     classLevelNumber: string;
