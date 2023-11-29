@@ -24,23 +24,29 @@ The folder for our weekly status reports.
 
 To build and test the system locally, built-in React scripts are used. 
 
-To build, enter the `app` directory and run this command to generate a deployable version of the application in a build directory:
+Before either, enter the `app` directory and run this command to install project dependencies:
+```bash
+npm install
+```
+
+To build, run this command in the `app` directory to generate a deployable version of the application in a build directory:
 ```bash
 npm run build
 ```
 
-To test, enter the `app` directory and run this command to run all the project's Jest tests:
+To test, run this command in the `app` directory to run all the project's Jest tests:
 ```bash
 npm test
 ```
 
 ## Run
-To run the system locally, run this React script in the `app` directory to run a static version of the website on the localhost site provided to you:
+To run the system locally, run these React scripts in the `app` directory to run a static version of the website (with very limited functionality) on the localhost site provided to you:
 ```bash
+npm install
 npm start
 ```
 
-To run a dynamic version, set up Vercel using [this documentation](https://docs.google.com/document/d/1B64yPUQdTuXjUSW5-lY_u1_KKsJCz6n7-R-Csg8UUMg/edit?usp=sharing), then run this command in the repo's default directory, following the instructions to log in and connect to project and view the site at the provided Preview link:
+To run full, dynamic version of the site, set up Vercel using [this documentation](https://docs.google.com/document/d/1B64yPUQdTuXjUSW5-lY_u1_KKsJCz6n7-R-Csg8UUMg/edit?usp=sharing), then run this command in the repo's default directory, following the instructions to log in and connect to project and view the site at the provided Preview link:
 ```bash
 vercel
 ```
