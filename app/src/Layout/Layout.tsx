@@ -6,7 +6,7 @@ type LayoutProps = {
 
 export const HomeLayout: React.FC<LayoutProps> = ( props: LayoutProps ) => {
     return (
-        <div className="homelayout">
+        <div className='homelayout'>
             <Header>
                 <Logo/>
                 <Login/>
