@@ -53,11 +53,11 @@ export const RatingBox: React.FC<{label: string, rating: string}> = ({ label, ra
             {label}
         </div>
     );
-  };
+};
   
-  type RatingDescProps = {
+type RatingDescProps = {
     children: React.ReactNode;
-  }
+}
   
 
 /* 

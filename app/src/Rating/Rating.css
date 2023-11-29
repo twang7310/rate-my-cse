@@ -1,0 +1,192 @@
+/* Rating page container */
+.rating-innerpage {
+    background-color: #d3f4fe;
+    position: absolute;
+    top: 14%;
+    left: 17%;
+    right: 2%;
+    bottom: 3%;
+    height: auto;
+    text-align: center;
+    padding-left: 2.5vw;
+    padding-right: 2.5vw;
+    overflow: hidden;
+}
+
+/* Text header of review page */
+
+.review-header {
+    display: flex;
+    align-items: center;
+}
+
+.logo-start {
+    font-size: clamp(1px, 3.8vh, 4vw);
+    font-weight: 700;
+    margin-right: 1vw;
+}
+
+.course-num {
+    font-size: clamp(1px, 3.8vh, 4vw);
+    margin-right: 2.2vw;
+}
+
+.course-name {
+    font-size: clamp(1px, 2.3vh, 2.5vw);
+}
+
+.rating-inputs {
+    text-align: left;
+    margin-top: 5vh;
+}
+
+/* Contents of review page (not the header) */
+.page-contents {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Rating selection bars */
+
+.rating-group {
+    margin-left: 2vw;
+    display: flex;
+    margin-bottom: 1.3vh;
+}
+
+.rating-name {
+    font-size: clamp(1px, 1.2vw, 3vh);
+    display: flex;
+    align-items: center;
+    min-width: 20%;
+    font-weight: bold;
+    justify-content: right;
+    margin-right: 1vw;
+}
+
+.rating-scale {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rating-square {
+    display: flex;
+    margin-right: 0.6vw;
+}
+
+.half-square {
+    width: clamp(1px, 2.2vw, 3vh);
+    height: clamp(1px, 4.4vw, 6vh);
+    max-width: 15px;
+    max-height: 30px;
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+.numeric-rating {
+    font-weight: bold;
+    font-size: clamp(1px, 1.2vw, 3vh);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 3.5vw;
+}
+
+/* Rating colors */
+
+.rating-1 {
+    background-color: #e087e2;
+}
+  
+.rating-2 {
+    background-color: #8dbbff;
+}
+  
+.rating-3 {
+    background-color: #88ecaa;
+}
+
+/* Comment Box */
+
+.comment-header {
+    margin-top: 5.5vh;
+    font-weight: bold;
+    font-size: clamp(1px, 1.7vw, 3.5vh);
+    margin-bottom: 1vh;
+}
+
+.comment-field {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    border: 1px solid;
+    outline: none;
+    padding: 10px;
+    resize: none;
+    box-sizing: border-box;
+    height: 25vh;
+    width: 42vw;
+}
+
+.comment-field:focus {
+    box-shadow: 0 0 1px black;
+}
+
+/* Buttons */
+
+.review-button {
+    background-color: #b175ff;
+    color: white;
+    font-weight: bold;
+    font-size: clamp(1px, 2.1vh, 2.9vw);
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.4);
+    min-width: 60px;
+    width: 10vw;
+    height: 4.8vh;
+    margin-top: 2vh;
+    margin-right: 1.6vw;
+    outline: none;
+    border: none;
+}
+
+.review-button:active {
+    background-color: #a36bec;
+    box-shadow: inset 0 0 3px rgba(72, 72, 72, 0.4);
+}
+
+/* Leftside Rating Descriptions */
+
+.rating-instr {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.rating-desc {
+    margin-right: 5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rating-box {
+    font-weight: bold;
+    font-size: clamp(1px, 2.5vw, 2.5vh);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10vw;
+    height: 9vh;
+    max-height: 9vw;
+    min-width: 68%;
+    margin-bottom: 0.5vh;
+}
+
+.rating-text {
+    width: clamp(1px, 23vw, 220px);
+    font-size: clamp(1px, 1.9vh, 2vw);
+    color: #737373;
+    font-weight: bold;
+    margin-bottom: 1vh;
+}
