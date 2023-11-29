@@ -48,7 +48,7 @@ npm install
 npm start
 ```
 
-To run full, dynamic version of the site, set up Vercel using [this documentation](https://docs.google.com/document/d/1B64yPUQdTuXjUSW5-lY_u1_KKsJCz6n7-R-Csg8UUMg/edit?usp=sharing), then run this command in the repo's default directory, following the instructions to log in and connect to project and view the site at the provided Preview link:
+To run a full, dynamic version of the site, set up Vercel using [this documentation](https://docs.google.com/document/d/1B64yPUQdTuXjUSW5-lY_u1_KKsJCz6n7-R-Csg8UUMg/edit?usp=sharing), then run this command in the repo's default directory, following the instructions to log in and connect to project and view the site at the provided Preview link:
 ```bash
 vercel
 ```
