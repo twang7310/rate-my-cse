@@ -9,6 +9,8 @@ for their quarters; a collection of student opinions and experiences about speci
 
 ## Current Use Cases
 - The user can navigate between course directory pages, which display all courses of a level (100s, 300s, 400s, 500s) with their, name, description, and average review ratings in the three rating categories. Once one of these pages is navigated to, all this information on all relevant classes is fetched from the database and parsed into a displayed list of these 'class cards'.
+- The user can click on a course from a directory page and be to that course's page, which displays that course's name, description, and average review ratings (fetched from the database), and has a button which takes the user to that course's review page.
+- On a course's review page, the user can leave a comment reviewing that course and select their ratings out of 5 on the three review categories. They can click the submit button to submit their review to the database, which returns them to the course page, or hit the back button to return without submitting.
 
 ## Repository Layout
 We are in our early stages of development. Our current repo layout is:
