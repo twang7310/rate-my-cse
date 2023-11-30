@@ -3,7 +3,7 @@ import {TextField, Box, Button} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import './Login.css'
 
-const emailRegex = new RegExp('^[a-zA-Z0-9_]+@uw\.edu$');
+const emailRegex = new RegExp('^[a-zA-Z0-9_]+@uw.edu$');
 const capitalRegex = new RegExp('[A-Z]');
 const numberRegex = new RegExp('[0-9]');
 const specialRegex = new RegExp('[!@#$%^&*(),.?":{}|<>]');
