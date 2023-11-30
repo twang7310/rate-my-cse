@@ -4,10 +4,10 @@
   height: 11vh;
   width: 100%;
   position: fixed;
-  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 1;
 }
 
 .logo {
@@ -33,7 +33,7 @@
   background-color: #f0f0f0;
   height: 89vh;
   width: 15%;
-  bottom: 0%;
+  top: 11vh;
   position: fixed;
 }
 
@@ -45,7 +45,9 @@
   display: inline-block;
   border: none;
   margin-top: 4%;
-  font-size: 140%;
+  font-size: clamp(1px, 140%, 3vw);
+  color: black;
+  text-decoration: none;
 }
 
 .leveltab:hover,
