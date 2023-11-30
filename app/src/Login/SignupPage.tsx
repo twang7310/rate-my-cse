@@ -3,6 +3,11 @@ import {TextField, Box, Button} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import './Login.css'
 
+const emailRegex = new RegExp('^[a-zA-Z0-9_]+@uw\.edu$');
+const capitalRegex = new RegExp('[A-Z]');
+const numberRegex = new RegExp('[0-9]');
+const specialRegex = new RegExp('[!@#$%^&*(),.?":{}|<>]');
+
 export const SignupPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [psw1, setPsw1] = useState('');
@@ -16,9 +21,8 @@ export const SignupPage: React.FC = () => {
     const navigate = useNavigate();
 
     function handleSubmit() {
-        // Check email
-        let parts = email.split('@');
-        if (parts.length !== 2 || parts[1] !== 'uw.edu') {
+        // Check email is valid
+        if (!email.match(emailRegex)) {
             setIsEmailInvalid(true);
             setEmailHelperText('Please use your @uw.edu email to sign up.');
             return;
@@ -33,19 +37,19 @@ export const SignupPage: React.FC = () => {
             return;
         }
         // Check psw1 has at least one capital letter
-        if (!psw1.match(/[A-Z]/)) {
+        if (!psw1.match(capitalRegex)) {
             setIsPsw1Invalid(true);
             setPsw1HelperText('Password must contain at least one capital letter.');
             return;
         }
         // Check psw1 has at least one number
-        if (!psw1.match(/[0-9]/)) {
+        if (!psw1.match(numberRegex)) {
             setIsPsw1Invalid(true);
             setPsw1HelperText('Password must contain at least one number.');
             return;
         }
         // Check psw1 has at least one special character
-        if (!psw1.match(/[!@#$%^&*(),.?":{}|<>]/)) {
+        if (!psw1.match(specialRegex)) {
             setIsPsw1Invalid(true);
             setPsw1HelperText('Password must contain at least one special character.');
             return;
