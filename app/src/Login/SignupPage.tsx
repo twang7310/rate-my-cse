@@ -58,20 +58,6 @@ export const SignupPage: React.FC = () => {
                 }
             }
         });
-
-          // Verification code
-          if (code.length > 0) {
-            const cognitoUser = new CognitoUser({ Username: email, Pool: userpool });
-            cognitoUser.confirmRegistration(code, true, (confirmationErr, confirmationData) => {
-            if (confirmationErr) {
-                console.error(confirmationErr);
-                alert("Couldn't confirm registration");
-            } else {
-                alert('User Added Successfully');
-                // Optionally, you can redirect the user to a login page after successful confirmation.
-            }
-            });
-          }
     }
 
     function handleSignin() {
@@ -162,7 +148,7 @@ export const SignupPage: React.FC = () => {
                     helperText={pswHelperText}
                     fullWidth
                     id='repeat-password'
-                    label='Verification'
+                    label='Forgot Password'
                     variant='outlined'
                     margin='normal'
                     onInput={ (e) => {
