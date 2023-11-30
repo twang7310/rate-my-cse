@@ -6,29 +6,67 @@ import userpool from '../userpool';
 import './Login.css'
 import { authenticate } from '../services/authenticate';
 
+const emailRegex = new RegExp('^[a-zA-Z0-9_]+@uw.edu$');
+const capitalRegex = new RegExp('[A-Z]');
+const numberRegex = new RegExp('[0-9]');
+const specialRegex = new RegExp('[!@#$%^&*(),.?":{}|<>]');
+
 export const SignupPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [psw1, setPsw1] = useState('');
     const [psw2, setPsw2] = useState('');
     const [code, setCode] = useState('');
     const [isEmailInvalid, setIsEmailInvalid] = useState(false);
-    const [isPswInvalid, setIsPswInvalid] = useState(false);
-    const [pswHelperText, setPswHelperText] = useState(' ');
+    const [emailHelperText, setEmailHelperText] = useState('');
+    const [isPsw1Invalid, setIsPsw1Invalid] = useState(false);
+    const [psw1HelperText, setPsw1HelperText] = useState('');
+    const [isPsw2Invalid, setIsPsw2Invalid] = useState(false);
+    const [psw2HelperText, setPsw2HelperText] = useState('');
     const navigate = useNavigate();
 
     function handleSubmit() {
-        let parts = email.split('@');
-        if (parts.length !== 2 || parts[1] !== 'uw.edu') {
+        // Check email is valid
+        if (!email.match(emailRegex)) {
             setIsEmailInvalid(true);
+            setEmailHelperText('Please use your @uw.edu email to sign up.');
+            return;
         } else {
             setIsEmailInvalid(false);
+            setEmailHelperText('');
         }
+        // Check psw1 has at least 8 characters
+        if (psw1.length < 8) {
+            setIsPsw1Invalid(true);
+            setPsw1HelperText('Password must be at least 8 characters long.');
+            return;
+        }
+        // Check psw1 has at least one capital letter
+        if (!psw1.match(capitalRegex)) {
+            setIsPsw1Invalid(true);
+            setPsw1HelperText('Password must contain at least one capital letter.');
+            return;
+        }
+        // Check psw1 has at least one number
+        if (!psw1.match(numberRegex)) {
+            setIsPsw1Invalid(true);
+            setPsw1HelperText('Password must contain at least one number.');
+            return;
+        }
+        // Check psw1 has at least one special character
+        if (!psw1.match(specialRegex)) {
+            setIsPsw1Invalid(true);
+            setPsw1HelperText('Password must contain at least one special character.');
+            return;
+        }
+        setIsPsw1Invalid(false);
+        setPsw1HelperText('');
+        // Check psw1 and psw2 match
         if (psw1 !== psw2) {
-            setIsPswInvalid(true);
-            setPswHelperText('Passwords do not match. Please try again.');
+            setIsPsw2Invalid(true);
+            setPsw2HelperText('Passwords do not match. Please try again.');
         } else {
-            setIsPswInvalid(false);
-            setPswHelperText(' ');
+            setIsPsw2Invalid(false);
+            setPsw2HelperText('');
         }
 
         const attributeList = [];
@@ -76,6 +114,7 @@ export const SignupPage: React.FC = () => {
                 <TextField
                     fullWidth
                     error={isEmailInvalid}
+                    helperText={emailHelperText}
                     id='email'
                     label='UW Email'
                     variant='outlined'
@@ -93,6 +132,8 @@ export const SignupPage: React.FC = () => {
                 }}
             >
                 <TextField
+                    error={isPsw1Invalid}
+                    helperText={psw1HelperText}
                     fullWidth
                     id='password'
                     label='Password'
@@ -110,8 +151,8 @@ export const SignupPage: React.FC = () => {
                 }}
             >
                 <TextField
-                    error={isPswInvalid}
-                    helperText={pswHelperText}
+                    error={isPsw2Invalid}
+                    helperText={psw2HelperText}
                     fullWidth
                     id='repeat-password'
                     label='Repeat Password'

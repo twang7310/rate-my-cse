@@ -6,7 +6,7 @@ export const HomePage: React.FC = () => {
             <h1 className="welcome">
                 Welcome to RateMyCSE
             </h1>
-            <h3>Wondering if a UW CSE class is as hard as they say?</h3>
+            <h3 className="tagline">Wondering if a UW CSE class is as hard as they say?</h3>
             <div className="howitworks">
                 <h2>How it works:</h2>
                 <h3 className="explanation">
@@ -53,11 +53,11 @@ export const RatingBox: React.FC<{label: string, rating: string}> = ({ label, ra
             {label}
         </div>
     );
-  };
+};
   
-  type RatingDescProps = {
+type RatingDescProps = {
     children: React.ReactNode;
-  }
+}
   
 
 /* 

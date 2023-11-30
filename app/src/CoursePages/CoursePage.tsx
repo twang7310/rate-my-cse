@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import './CoursePage.css'
 
 export const CoursePage: React.FC = () => {
@@ -29,18 +29,30 @@ export const CoursePage: React.FC = () => {
         fetchData();
     }, [classNum]);
 
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate('/course/' + classNum + '/review')
+    }
+
     return (
-       <div className="coursepage">
-            {course.map((courseObject) => (
-                    <>
-                    <p>{ courseObject.number }</p>
-                    <p>{ courseObject.name }</p>
-                    <p>{ courseObject.description }</p>
-                    <p>{ courseObject.rating_one }</p>
-                    <p>{ courseObject.rating_two }</p>
-                    <p>{ courseObject.rating_three }</p>
-                    </>
-            ))}
-       </div>
+      <div className="coursepage">
+        <div className="topbox">
+          {course.map((courseObject) => (
+            <>
+            <p>{ courseObject.number }</p>
+            <p>{ courseObject.name }</p>
+            <p>{ courseObject.description }</p>
+            <p>{ courseObject.rating_one }</p>
+            <p>{ courseObject.rating_two }</p>
+            <p>{ courseObject.rating_three }</p>
+            </>
+          ))}
+          <button onClick={handleClick}>Review</button>
+        </div>
+        <div className="bottombox">
+          <h1>User Reviews</h1>
+        </div>
+      </div>
     );
 }

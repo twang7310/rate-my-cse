@@ -23,11 +23,11 @@
   display: flex;
   justify-content: space-between;
   text-align: left;
-  padding: 1%;
+  padding: clamp(5px, 1%, 1%);
   margin: 10px;
   background-color: #fff;
   flex-grow: 1;
-  overflow: scroll;
+  overflow: hidden;
   cursor: pointer;
 }
 
@@ -44,18 +44,24 @@
 
 .class-number {
   margin-right: 5px;
-  font-size: x-large;
+  font-size: clamp(1px, 24px, 4vw);
 }
 
 .class-name {
-  margin-left: 2%;
+  margin-left: clamp(3px, 2%, 2%);
+  font-size: clamp(1px, 16px, 2.3vw);
+  max-width: 20vw;
+}
+
+.class-description {
+  font-size: clamp(1px, 16px, 2.5vw);
 }
 
 /* Class card average ratings */
 .class-ratings {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   margin-right: 1%;
 }
 
@@ -66,19 +72,21 @@
 
 .rating-pair-category {
   font-weight: bold;
+  font-size: clamp(1px, 16px, 2.3vw);
   display: flex;
   align-items: center;
-  min-width: 60px;
   margin-right: 1.5vw;
 }
 
 .rating-pair-rating {
   font-weight: bold;
   display: flex;
-  font-size: 130%;
-  min-width: 60px;
-  width: 10vh;
-  min-height: 5vh;
+  font-size: clamp(1px, 130%, 3.5vw);
+  min-width: 5ch;
+  width: 5.5vw;
+  height: 5vh;
+  min-height: 2.1ch;
+  max-height: 7vw;
   align-items: center;
   justify-content: center;
 }
