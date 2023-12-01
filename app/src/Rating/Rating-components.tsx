@@ -25,10 +25,11 @@ interface RatingScaleProps {
 
 export const RatingScale: React.FC<RatingScaleProps> = (props) => {
     const [selectedRating, setSelectedRating] = useState(0);
+    const [hoverRating, setHoverRating] = useState(0);
 
-    let categoryNames : string[] = ['Difficulty', 'Workload', 'Practicality'];
+    let categoryNames: string[] = ['Difficulty', 'Workload', 'Practicality'];
 
-    let fieldToSet : string;
+    let fieldToSet: string;
     if (props.category === 1) {
         fieldToSet = 'rating_one';
     } else if (props.category === 2) {
@@ -37,7 +38,7 @@ export const RatingScale: React.FC<RatingScaleProps> = (props) => {
         fieldToSet = 'rating_three';
     }
 
-    const handleRatingClick = (rating : number) => {
+    const handleRatingClick = (rating: number) => {
         setSelectedRating(rating);
         props.setReview((oldState) => ({
             ...oldState,
@@ -45,27 +46,37 @@ export const RatingScale: React.FC<RatingScaleProps> = (props) => {
         }));
     };
 
+    const handleRatingHover = (rating: number)=> {
+        setHoverRating(rating);
+    };
+
+    const handleHoverLeave = () => {
+        setHoverRating(0);
+    };
+
     return (
         <div className="rating-group">
             <div className="rating-name">
                 {categoryNames[props.category-1]}
             </div>
-            <div className="rating-scale">
+            <div className="rating-scale" onMouseLeave={() => handleHoverLeave()}>
                 {[1, 2, 3, 4, 5].map((rating) => (
                     <div key={rating} className="rating-square">
                         <div
-                            className={`half-square ${(rating - 0.5) <= selectedRating ? `rating-${props.category}` : ''}`}
+                            className={`half-square ${(rating - 0.5) <= (hoverRating || selectedRating) ? `rating-${props.category}` : ''}`}
                             onClick={() => handleRatingClick(rating - 0.5)}
+                            onMouseEnter={() => handleRatingHover(rating - 0.5)}
                         />
                         <div
-                            className={`half-square ${rating <= selectedRating ? `rating-${props.category}` : ''}`}
+                            className={`half-square ${rating <= (hoverRating || selectedRating) ? `rating-${props.category}` : ''}`}
                             onClick={() => handleRatingClick(rating)}
+                            onMouseEnter={() => handleRatingHover(rating)}
                         />
                     </div>
                 ))}
             </div>
             <div className="numeric-rating">
-                {selectedRating}/5
+                {(hoverRating || selectedRating)}/5
             </div>
         </div>
     );
@@ -88,13 +99,55 @@ export const Comment: React.FC<CommentProps> = (props) => {
 
     return (
         <div>
-            <p className="comment-header">Comment (optional)</p>
+            <p className="comment-header">Comment</p>
             <textarea
                 className="comment-field"
                 id="multilineInput"
                 value={input}
                 onChange={handleInputChange}
                 placeholder="Type review here..."
+            />
+        </div>
+    );
+}
+
+interface InputProps {
+    field: string;
+    setReview: React.Dispatch<React.SetStateAction<ReviewState>>;
+}
+
+export const InputField: React.FC<InputProps> = (props) => {
+    const [input, setInput] = useState('');
+
+    const dynamicClassName = `comment-field small-comment field-${props.field}`;
+
+    let fieldToSet: string;
+    let previewText: string;
+    if (props.field === 'Professor') {
+        fieldToSet = "professor";
+        previewText = "Ex. H. Perkins"
+    } else {
+        fieldToSet = "quarter";
+        previewText = "Ex. Au23"
+    }
+
+    const handleInputChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+        setInput(e.target.value);
+        props.setReview((oldState) => ({
+            ...oldState,
+            [fieldToSet] : e.target.value,
+        }));
+    }
+
+    return (
+        <div className="input-field">
+            <div className="input-name">{props.field}</div>
+            <input
+                className={dynamicClassName}
+                id="multilineInput"
+                value={input}
+                onChange={handleInputChange}
+                placeholder={previewText}
             />
         </div>
     );

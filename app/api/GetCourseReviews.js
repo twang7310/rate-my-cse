@@ -5,7 +5,7 @@ const pool = require('./db');
 export default async (req, res) => {
   const classNumber = req.query.num;
 
-  const query = 'SELECT * FROM reviews WHERE class_id = (SELECT class_id FROM courses WHERE number = ?)';
+  const query = 'SELECT * FROM reviews WHERE class_id = (SELECT class_id FROM courses WHERE number = ?) ORDER BY review_id DESC';
   const queryParams = [`${classNumber}`];
 
   pool.query(query, queryParams, (err, results) => {

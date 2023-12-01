@@ -40,7 +40,7 @@
     margin-top: 5vh;
 }
 
-/* Contents of review page (not the header) */
+/* Contents of review page (everything but the header) */
 .page-contents {
     display: flex;
     justify-content: space-between;
@@ -68,6 +68,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .rating-square {
@@ -81,7 +82,6 @@
     max-width: 15px;
     max-height: 30px;
     background-color: #ddd;
-    cursor: pointer;
 }
 
 .numeric-rating {
@@ -110,7 +110,7 @@
 /* Comment Box */
 
 .comment-header {
-    margin-top: 5.5vh;
+    margin-top: 3vh;
     font-weight: bold;
     font-size: clamp(1px, 1.7vw, 3.5vh);
     margin-bottom: 1vh;
@@ -127,10 +127,39 @@
     box-sizing: border-box;
     height: 25vh;
     width: 42vw;
+    font-size: clamp(1px, 13.5px, 2.8vw);
 }
 
 .comment-field:focus {
-    box-shadow: 0 0 1px black;
+    box-shadow: 0 0 4px #b175ff;
+}
+
+/* Quarter and Professor Boxes */
+
+.other-inputs {
+    margin-top: 5vh;
+    margin-right: 5vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-name {
+    font-weight: bold;
+    font-size: clamp(1px, 1.4vw, 3vh);
+}
+
+.small-comment {
+    font-size: clamp(1px, 13px, 2vw);
+    height: 4vh;
+    padding: 4px;
+}
+
+.field-Quarter {
+    width: 12vw;
+}
+
+.field-Professor {
+    width: 18vw;
 }
 
 /* Buttons */
