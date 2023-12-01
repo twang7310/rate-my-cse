@@ -93,6 +93,8 @@
   justify-content: space-between;
 }
 
+/* Reviews section */
+
 .ratingbox {
   font-weight: bold;
   font-size: clamp(1px, 130%, 3vw);
@@ -122,7 +124,54 @@
   CSS styling for the bottom portion of the course page (the reviews)
 */
 .bottombox {
+  min-height: 40vh;
   height: auto;
   text-align: center;
   background-color: #d3f5ff;
+}
+
+/* Header */
+.page-reviews-header {
+  text-align: left;
+  padding-top: 1.5vh;
+  font-size: clamp(1px, 160%, 3.8vw);
+  margin-left: clamp(25px, 3vw, 3vw);
+  font-weight: bold;
+}
+
+/* Holds all reviews */
+.review-holder {
+  padding-left: 1vw;
+  padding-right: 1vw;
+}
+
+/* Review Card styling */
+
+.review-card {
+  padding: clamp(10px, 20px, 2vw);
+  cursor: auto;
+}
+
+.review-text {
+  display: flex;
+  align-items: center;
+  margin-right: 7vw;
+  font-size: clamp(1px, 16px, 2.5vw);
+}
+
+.review-ratings {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.review-box {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  font-size: clamp(1px, 130%, 3vw);
+  max-height: 6.5vw;
+}
+
+.review-box-category {
+  font-size: clamp(1px, 16px, 2.1vw);
 }

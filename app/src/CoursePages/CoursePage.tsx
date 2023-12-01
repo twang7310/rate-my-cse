@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
+import {ClassRating} from "../Directories/Directory";
 import './CoursePage.css'
 
 export const CoursePage: React.FC = () => {
@@ -76,9 +77,62 @@ export const CoursePage: React.FC = () => {
         </div>
 
         <div className="bottombox">
-          <h1>User Reviews</h1>
+            <div className="page-reviews-header">User Reviews</div>
+            <ReviewHolder classNum={classNum!}/>
         </div>
       </div>
+    );
+}
+
+export const ReviewHolder: React.FC<{classNum: string}> = ({classNum}) => {
+    const [reviews, setReviews] = useState<any[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`/api/GetCourseReviews?num=${classNum}`);
+                console.log(response);
+                const data = await response.json();
+                setReviews(data);
+                console.log(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+    }, [classNum]);
+
+    return (
+        <div className="review-holder">
+            {reviews.map((review) => (
+                <ReviewCard text={review.text} 
+                rating1={review.rating_one}
+                rating2={review.rating_two}
+                rating3={review.rating_three}/>
+            ))}
+        </div>
+    );
+}
+
+interface ReviewCardProps {
+    text: string;
+    rating1: number;
+    rating2: number;
+    rating3: number;
+}
+
+export const ReviewCard: React.FC<ReviewCardProps> = (props) => {
+    return(
+        <div className="card review-card">
+            <div className="review-text">
+                <p>{props.text}</p>
+            </div>
+            <div className="review-ratings">
+                <ClassRating category="Difficulty" rating={props.rating1} type="diff review-box"/>
+                <ClassRating category="Workload" rating={props.rating2} type="work review-box"/>
+                <ClassRating category="Practicality" rating={props.rating3} type="prac review-box"/>
+            </div>
+        </div>
     );
 }
 

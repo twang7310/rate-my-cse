@@ -41,6 +41,7 @@ export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
 
 export const ClassRating: React.FC<{category: string, rating: number, type: string}> = ({category, rating, type}) => {
     const dynamicClassName = `rating-pair-rating ratingbox-${type}`;
+    const dynamicClassCategory = `rating-pair-category ${type}-category`
   
     let display : string;
     if (rating === null) {
@@ -51,7 +52,7 @@ export const ClassRating: React.FC<{category: string, rating: number, type: stri
   
     return(
         <div className="rating-pair">
-            <div className="rating-pair-category">{category}</div>
+            <div className={dynamicClassCategory}>{category}</div>
             <div className={dynamicClassName}>{display}</div>
         </div>
     );
