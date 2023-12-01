@@ -46,6 +46,8 @@ export interface ReviewState {
     rating_three: number;
     text: string;
     course_number: string;
+    quarter: string;
+    professor: string;
 }
 
 export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
@@ -54,8 +56,10 @@ export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
         rating_one: 0, 
         rating_two: 0, 
         rating_three: 0,
-        text: '',
+        text: '(No Comment)',
         course_number : classNum,
+        quarter: 'N/A',
+        professor: 'N/A'
     };
     const [ratingContents, setRatingContents] = useState<ReviewState>(initialState);
 
