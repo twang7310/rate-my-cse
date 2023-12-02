@@ -80,7 +80,7 @@ export const LoginPage: React.FC = () => {
                 },
                 body: JSON.stringify({ username }),
             });
-            const data = await response.json();
+            response.json();
         } catch (error) {
             console.error('Error adding user to database:', error);
         }

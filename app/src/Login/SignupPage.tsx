@@ -4,7 +4,6 @@ import {useNavigate} from 'react-router-dom';
 import {CognitoUser, CognitoUserAttribute} from 'amazon-cognito-identity-js';
 import {getCognitoUserPoolAsync} from '../userpool';
 import './Login.css'
-import {authenticate} from './authenticate';
 
 const emailRegex = new RegExp('^[a-zA-Z0-9_]+@uw.edu$');
 const capitalRegex = new RegExp('[A-Z]');
