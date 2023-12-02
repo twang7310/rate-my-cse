@@ -1,4 +1,5 @@
 import {useLocation, useNavigate} from "react-router-dom";
+import {clearUser, getSignInStatus, getEmail, setSignInStatus} from '../Login/LoginPage';
 import './Layout.css'
 
 type HeaderProps = {
@@ -14,7 +15,6 @@ export const Header: React.FC<HeaderProps> = ( props: HeaderProps ) => {
 }
 
 export const Logo: React.FC = () => {
-
     const navigate = useNavigate();
     
     const handleClick = () => {
@@ -29,17 +29,33 @@ export const Logo: React.FC = () => {
 }
 
 export const Login: React.FC = () => {
-
     const navigate = useNavigate();
+    const isSignedIn = getSignInStatus();
+    const email = getEmail();
 
     const handleClick = () => {
         navigate('/login');
     };
 
+    const handleSignOut = () => {
+        setSignInStatus(false);
+        clearUser();
+        navigate('../');
+    }
+
     return (
-        <p className="login" onClick={ handleClick }>
-            Sign In
-        </p>
+        <div>
+            {isSignedIn ? (
+                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '25px'}}>
+                    <p className="email">{email}</p>
+                    <p className="signout" onClick={handleSignOut}>Sign Out</p>
+                </div>
+            ) : (
+                <p className="login" onClick={handleClick}>
+                    Sign In
+                </p>
+            )}
+        </div>
     );
 }
 
@@ -48,7 +64,6 @@ type SidebarProps = {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ( props: SidebarProps ) => {
-
     const location = useLocation();
 
     if (location.pathname.match(/rate-my-cse\/(login|signup)/)) {
