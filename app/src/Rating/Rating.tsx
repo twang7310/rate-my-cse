@@ -1,6 +1,6 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {Comment, RatingDesc, RatingScale, ReviewHeader} from "./Rating-components";
+import {Comment, InputField, RatingDesc, RatingScale, ReviewHeader} from "./Rating-components";
 import './Rating.css'
 
 export const ReviewPage: React.FC = () => {
@@ -46,6 +46,8 @@ export interface ReviewState {
     rating_three: number;
     text: string;
     course_number: string;
+    quarter: string;
+    professor: string;
 }
 
 export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
@@ -54,8 +56,10 @@ export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
         rating_one: 0, 
         rating_two: 0, 
         rating_three: 0,
-        text: '',
+        text: '(No Comment)',
         course_number : classNum,
+        quarter: 'N/A',
+        professor: 'N/A'
     };
     const [ratingContents, setRatingContents] = useState<ReviewState>(initialState);
 
@@ -87,6 +91,10 @@ export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
                 <RatingScale category={1} setReview={setRatingContents}/>
                 <RatingScale category={2} setReview={setRatingContents}/>
                 <RatingScale category={3} setReview={setRatingContents}/>
+            </div>
+            <div className="other-inputs">
+                <InputField setReview={setRatingContents} field="Quarter Taken"/>
+                <InputField setReview={setRatingContents} field="Professor"/>
             </div>
             <Comment setReview={setRatingContents}/>
             <button className="review-button" onClick={postReview}>Submit</button>

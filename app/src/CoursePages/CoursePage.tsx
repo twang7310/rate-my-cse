@@ -80,10 +80,12 @@ export const ReviewHolder: React.FC<{classNum: string}> = ({classNum}) => {
     return (
         <div className="review-holder">
             {reviews.map((review) => (
-                <ReviewCard text={review.text} 
+                <ReviewCard text={(review.text !== '') ? review.text : '(No Comment)'} 
                 rating1={review.rating_one}
                 rating2={review.rating_two}
-                rating3={review.rating_three}/>
+                rating3={review.rating_three}
+                quarter={(review.quarter !== '') ? review.quarter : 'N/A'}
+                professor={(review.professor !== '') ? review.professor : 'N/A'}/>
             ))}
         </div>
     );
@@ -94,19 +96,33 @@ interface ReviewCardProps {
     rating1: number;
     rating2: number;
     rating3: number;
+    quarter: string;
+    professor: string;
 }
 
 export const ReviewCard: React.FC<ReviewCardProps> = (props) => {
     return(
         <div className="card review-card">
-            <div className="review-text">
-                <p>{props.text}</p>
+            <div className="review-card-left">
+                <ReviewCardHeader quarter={props.quarter} professor={props.professor}/>
+                <div className={`review-text ${(props.text === '(No Comment)') ? 'italics' : ''}`}>
+                    <p>{props.text}</p>
+                </div>
             </div>
             <div className="review-ratings">
                 <ClassRating category="Difficulty" rating={props.rating1} type="diff review-box"/>
                 <ClassRating category="Workload" rating={props.rating2} type="work review-box"/>
                 <ClassRating category="Practicality" rating={props.rating3} type="prac review-box"/>
             </div>
+        </div>
+    );
+}
+
+export const ReviewCardHeader: React.FC<{quarter: string, professor: string}> = ({quarter, professor}) => {
+    return (
+        <div className="review-card-header">
+            <div className="header-quarter"><strong>Quarter Taken:</strong> {quarter}</div>
+            <div className="header-prof"><strong>Professor:</strong> {professor}</div>
         </div>
     );
 }

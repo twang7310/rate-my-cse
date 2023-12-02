@@ -44,30 +44,52 @@
 /* Review Card styling */
 
 .review-card {
-  padding: clamp(10px, 20px, 2vw);
+  padding: clamp(7px, 20px, 2vw);
   cursor: auto;
 }
 
-.review-text {
+.review-card-header {
   display: flex;
-  align-items: center;
-  margin-right: 7vw;
-  font-size: clamp(1px, 16px, 2.5vw);
+  font-size: clamp(1px, 17px, 1.8vw);
+  margin-bottom: clamp(1px, 1.5vh, 1vw);
+}
+
+.header-quarter {
+  width: 14vw;
+  margin-right: 5vw;
+}
+
+.review-text {
+  margin-right: 2vw;
+  margin-left: 1.8vw;
+  font-size: clamp(1px, 16px, 1.5vw);
+  overflow: hidden;
+}
+
+@media (max-width: 1000px) {
+  .review-text {
+    width: 34vw;
+  }
 }
 
 .review-ratings {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
+  margin-left: 5vw;
 }
 
 .review-box {
-  margin-top: 4px;
-  margin-bottom: 4px;
-  font-size: clamp(1px, 130%, 3vw);
-  max-height: 6.5vw;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  font-size: clamp(1px, 130%, 2.2vw);
+  max-height: 3ch;
 }
 
 .review-box-category {
-  font-size: clamp(1px, 16px, 2.1vw);
+  font-size: clamp(1px, 16px, 1.8vw);
+}
+
+.italics {
+  font-style: italic;
 }
