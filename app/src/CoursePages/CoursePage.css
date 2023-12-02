@@ -36,11 +36,9 @@
   background-color: #88ecaa;
 }
 
-/*
-  CSS styling for the top portion of the course page
-*/
+/* CSS styling for the top portion of the course page */
 
-.topbox {
+.top-box {
   display: flex;
   background-color: #d3f5ff;
   padding: 2rem;
@@ -52,49 +50,31 @@
   Left portion of the top box containing the course title, description
   and buttons
 */
-.leftflex {
+
+.left-flexbox {
   display: flex;
   flex-direction: column;
 }
 
-/*
-  Right portion of the top box containing the overall ratings
-*/
-.rightflex {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  width: 40%;
-}
-
-/*
-  Flex-box for the course number and name
-*/
-.coursetitle {
+.course-title {
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
   gap: 1rem;
 }
 
-/*
-  Number for the course (e.g. CSE 351)
-*/
-.coursenum {
+.course-num {
   text-wrap: nowrap;
   margin: 0;
 
 }
 
-/*
-  The name of the course (e.g. "Hardware/Software Interface")
-*/
-.coursename {
+.course-name {
   text-wrap: balance;
   margin: 0;
 }
 
-.coursedesc {
+.course-desc {
   text-align: left;
   max-width: 30rem;
   height: auto;
@@ -108,7 +88,7 @@
   margin-top: 1rem;
 }
 
-.purplebutton {
+.purple-button {
   background-color: #B175FF;
   color: white;
   box-shadow: 3px 4px 4px 0px rgba(255, 255, 255, 0.35) inset;
@@ -124,33 +104,36 @@
   cursor: pointer;
 }
 
-.overallratings-header {
+/* Right portion of the top box containing the overall ratings */
+
+.right-flexbox {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 40%;
+}
+
+.overall-ratings-header {
   font-size: 1.75rem;
   margin: 0 0 2.5rem 0;
 }
 
-/*
-  Flexbox for the rating boxes in the "Overall Ratings" section
-*/
 .ratings-flexbox {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-/*
-  CSS styling for the bottom portion of the course page (the reviews)
-  starts here.
-*/
+/* CSS styling for the bottom portion of the course page (the reviews) */
 
-.bottombox {
+.bottom-box {
   min-height: 40vh;
   height: auto;
   text-align: center;
   background-color: #d3f5ff;
 }
 
-/* Reveiws Section */
+/* Reviews Section */
 
 /* Header */
 .page-reviews-header {

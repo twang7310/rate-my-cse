@@ -32,21 +32,21 @@ export const CoursePage: React.FC = () => {
 
     return (
         <div className="coursepage">
-            <div className="topbox">
+            <div className="top-box">
                 <CourseInfo classNum={ classNum! }
                 courseName={ course.length > 0 ? course[0].name : '...' }
                 desc={ course.length > 0 ? course[0].description : 'Loading...' }/>
-                <div className="rightflex">
-                    <h3 className="overallratings-header">Overall Ratings</h3>
+                <div className="right-flexbox">
+                    <h3 className="overall-ratings-header">Overall Ratings</h3>
                     <div className="ratings-flexbox">
-                        <OverallRatingBox label="Difficulty" rating={ course.length > 0 ? course[0].rating_one : '?/5' }></OverallRatingBox>
-                        <OverallRatingBox label="Workload" rating={ course.length > 0 ? course[0].rating_two : '?/5' }></OverallRatingBox>
-                        <OverallRatingBox label="Practicality" rating={ course.length > 0 ? course[0].rating_three : '?/5' }></OverallRatingBox>
+                        <OverallRatingBox label="Difficulty" rating={ course.length > 0 ? course[0].rating_one : '?/5' }/>
+                        <OverallRatingBox label="Workload" rating={ course.length > 0 ? course[0].rating_two : '?/5' }/>
+                        <OverallRatingBox label="Practicality" rating={ course.length > 0 ? course[0].rating_three : '?/5' }/>
                     </div>
                 </div>
             </div>
 
-            <div className="bottombox">
+            <div className="bottom-box">
                 <div className="page-reviews-header">User Reviews</div>
                 <ReviewHolder classNum={classNum!}/>
             </div>
@@ -62,35 +62,34 @@ interface CourseInfoProps {
 
 export const CourseInfo: React.FC<CourseInfoProps> = (props) => {
     const navigate = useNavigate();
+    const courseWebsiteURL = 'https://courses.cs.washington.edu/courses/cse' + props.classNum + '/';
+    const dawgPathsURL = 'https://dawgpath.uw.edu/course?id=CSE+' + props.classNum + '&campus=seattle';
+
 
     const rateButtonClick = () => {
-      navigate('/course/' + props.classNum + '/review')
+        navigate('/course/' + props.classNum + '/review')
     }
 
     const courseButtonClick = () => {
-      const url = 'https://courses.cs.washington.edu/courses/cse' + props.classNum + '/';
-
-      window.open(url, '_blank');
+        window.open(courseWebsiteURL, '_blank');
     }
 
     const dawgButtonClick = () => {
-      const url = 'https://dawgpath.uw.edu/course?id=CSE+' + props.classNum + '&campus=seattle';
-
-      window.open(url, '_blank');
+        window.open(dawgPathsURL, '_blank');
     }
 
     return (
-        <div className="courseinfo">
-            <div className="leftflex">
-                <div className="coursetitle">
-                    <h1 className="coursenum">{ "CSE " + props.classNum }</h1>
-                    <h2 className="coursename">{ props.courseName }</h2>
+        <div className="course-info">
+            <div className="left-flexbox">
+                <div className="course-title">
+                    <h1 className="course-num">{ "CSE " + props.classNum }</h1>
+                    <h2 className="course-name">{ props.courseName }</h2>
                 </div>
-                <p className="coursedesc">{ props.desc }</p>
+                <p className="course-desc">{ props.desc }</p>
                 <div className="buttons-flexbox">
-                    <button className="purplebutton" onClick={ rateButtonClick }>Rate This Class</button>
-                    <button className="purplebutton" onClick={ courseButtonClick }>Course Website</button>
-                    <button className="purplebutton" onClick={ dawgButtonClick }>Dawg Path</button>
+                    <button className="purple-button" onClick={ rateButtonClick }>Rate This Class</button>
+                    <button className="purple-button" onClick={ courseButtonClick }>Course Website</button>
+                    <button className="purple-button" onClick={ dawgButtonClick }>Dawg Path</button>
                 </div>
             </div>
         </div>
@@ -113,7 +112,7 @@ export const OverallRatingBox: React.FC<{label: string, rating: string}> = ({ la
     };
 
     return (
-        <div className="overallratingbox">
+        <div className="overall-rating-box">
             <h3 style={category}>{label}</h3>
             <div className={dynamicClassName}>
                 <h3>{rating}</h3>
