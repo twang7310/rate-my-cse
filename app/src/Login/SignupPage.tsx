@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import {CognitoUser, CognitoUserAttribute} from 'amazon-cognito-identity-js';
 import {getCognitoUserPoolAsync} from '../userpool';
 import './Login.css'
-import {authenticate} from '../services/authenticate';
+import {authenticate} from './authenticate';
 
 const emailRegex = new RegExp('^[a-zA-Z0-9_]+@uw.edu$');
 const capitalRegex = new RegExp('[A-Z]');
@@ -21,9 +21,10 @@ export const SignupPage: React.FC = () => {
     const [psw1HelperText, setPsw1HelperText] = useState('');
     const [isPsw2Invalid, setIsPsw2Invalid] = useState(false);
     const [psw2HelperText, setPsw2HelperText] = useState('');
+    const [users, setUsers] = useState<any[]>([]);
     const navigate = useNavigate();
 
-    function handleSubmit() {
+    async function handleSubmit() {
         // Check email is valid
         if (!email.match(emailRegex)) {
             setIsEmailInvalid(true);
@@ -67,50 +68,61 @@ export const SignupPage: React.FC = () => {
             setIsPsw2Invalid(false);
             setPsw2HelperText('');
         }
+
         handleSignup();
-        navigate('/login');
     }
 
     const handleSignup = async () => {
         try {
-          const userPool = await getCognitoUserPoolAsync(); // Wait for the user pool to be initialized
+            const userPool = await getCognitoUserPoolAsync(); // Wait for the user pool to be initialized
         
-          const attributeList = [];
-          attributeList.push(
-            new CognitoUserAttribute({
-              Name: 'email',
-              Value: email,
-            })
-          );
+            const attributeList = [];
+            attributeList.push(
+                new CognitoUserAttribute({
+                Name: 'email',
+                Value: email,
+                })
+            );
     
-          userPool.signUp(email, psw1, attributeList, attributeList, (err: { message: string }, data: any) => {
-            if (err) {
-              const cognitoUser = new CognitoUser({ Username: email, Pool: userPool });
-    
-              // Use async/await within the callback for asynchronous operations
-              (async () => {
-                try {
-                  await authenticate(email, psw1);
-                  // User authenticated successfully
-                } catch (authError) {
-                  if (err.message === 'An account with the given email already exists') {
-                    cognitoUser.resendConfirmationCode((resendErr, result) => {
-                      if (resendErr) {
-                        alert("Couldn't resend the verification code.");
-                      }
-                    });
-                  } else {
-                    setIsEmailInvalid(true);
-                    setEmailHelperText('User is already verified. Please sign in.');
-                  }
+            userPool.signUp(email, psw1, attributeList, attributeList, (err: { message: string }, data: any) => {
+                if (err) {
+                    const cognitoUser = new CognitoUser({ Username: email, Pool: userPool });
+        
+                    // Find if the user is already in our database
+                    const fetchData = async () => {
+                        try {
+                            const response = await fetch(`/api/GetUsers?name=${email}`);
+                            const data = await response.json();
+                            setUsers(data);
+                        } catch (error) {
+                            console.error('Error fetching data:', error);
+                        }
+                    };
+                    fetchData();
+
+                    if (err.message === 'An account with the given email already exists.') {
+                        // Not verified yet
+                        if (users.length === 0) {
+                            setIsEmailInvalid(true);
+                            setEmailHelperText('Account already signed up. Please verify this account.');
+                            cognitoUser.resendConfirmationCode((resendErr, result) => {
+                                if (resendErr) {
+                                    console.error(resendErr);
+                                } 
+                            });
+                        } else {
+                            setIsEmailInvalid(true);
+                            setEmailHelperText('User is already verified. Please sign in.');
+                        }
+                    }
+                } else {
+                    navigate('/login');
                 }
-              })();
-            }
-          });
+            });
         } catch (error) {
-          console.error('Error:', error);
+            console.error('Error:', error);
         }
-      };
+    };
 
     function handleSignin() {
         navigate('/login');

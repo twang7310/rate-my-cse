@@ -1,5 +1,5 @@
 import {useLocation, useNavigate} from "react-router-dom";
-import {getSignInStatus, getEmail, setSignInStatus} from '../Login/LoginPage';
+import {clearUser, getSignInStatus, getEmail, setSignInStatus} from '../Login/LoginPage';
 import './Layout.css'
 
 type HeaderProps = {
@@ -39,13 +39,14 @@ export const Login: React.FC = () => {
 
     const handleSignOut = () => {
         setSignInStatus(false);
+        clearUser();
         navigate('../');
     }
 
     return (
         <div>
             {isSignedIn ? (
-                <div>
+                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '25px'}}>
                     <p className="email">{email}</p>
                     <p className="signout" onClick={handleSignOut}>Sign Out</p>
                 </div>

@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import {useNavigate} from 'react-router-dom';
-import {authenticate} from '../services/authenticate';
+import {authenticate} from './authenticate';
 import './Login.css'
 
 let isUserSignedIn = false;
@@ -17,6 +17,10 @@ export function setSignInStatus(b: boolean): void {
     isUserSignedIn = b;
 }
 
+export function clearUser(): void {
+    user = '';
+}
+
 export function getEmail() {
     return user;
 }
@@ -28,7 +32,7 @@ export const LoginPage: React.FC = () => {
     const navigate = useNavigate();
 
     const [users, setUsers] = useState<any[]>([]);
-    
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -39,18 +43,18 @@ export const LoginPage: React.FC = () => {
                 console.error('Error fetching data:', error);
             }
         };
-        fetchData();
+        if (user) {
+            fetchData();
+        }
     });
 
     function handleSubmit() {
         authenticate(email,password)
-          .then((data)=>{
+          .then(async (data)=>{
             isUserSignedIn = true;
             user = email;
-            
-            // This will return an error if user is already in database
-            // Since it won't break user experience, leave for now
-            postUser(user);
+
+            if (users.length === 0) await postUser(user);
 
             // Navigate back to home page
             navigate('../');
