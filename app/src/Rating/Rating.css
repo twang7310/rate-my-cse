@@ -152,6 +152,7 @@
     font-size: clamp(1px, 13px, 2vw);
     height: 4vh;
     padding: 4px;
+    border-radius: 3px;
 }
 
 .field-Quarter {

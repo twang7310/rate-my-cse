@@ -5,15 +5,9 @@ import './Rating.css'
 export const ReviewHeader: React.FC<{num : string, name: string}> = ({num, name}) => {
     return (
         <div className="review-header">
-            <p className="logo-start">
-                Rate My
-            </p>
-            <p className="course-num">
-                CSE {num}
-            </p>
-            <p className="course-name">
-                {name}
-            </p>
+            <p className="logo-start">Rate My</p>
+            <p className="course-num">CSE {num}</p>
+            <p className="course-name">{name}</p>
         </div>
     );
 }
@@ -121,15 +115,8 @@ export const InputField: React.FC<InputProps> = (props) => {
 
     const dynamicClassName = `comment-field small-comment field-${props.field}`;
 
-    let fieldToSet: string;
-    let previewText: string;
-    if (props.field === 'Professor') {
-        fieldToSet = "professor";
-        previewText = "Ex. H. Perkins"
-    } else {
-        fieldToSet = "quarter";
-        previewText = "Ex. Au23"
-    }
+    const fieldToSet: string = (props.field === 'Professor') ? "professor" : "quarter";
+    const previewText: string = (props.field === 'Professor') ? "Ex. H. Perkins" : "Ex. Au23";
 
     const handleInputChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         setInput(e.target.value);
