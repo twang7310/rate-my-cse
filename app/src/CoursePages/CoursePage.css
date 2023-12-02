@@ -11,6 +11,31 @@
   justify-content: space-around;
 }
 
+.ratingbox {
+  font-weight: bold;
+  font-size: clamp(1px, 130%, 3vw);
+  display: flex;
+  align-items: center;
+  align-self: flex-end;
+  justify-content: center;
+  height: 15vh;
+  max-height: 4ch;
+  min-width: 3ch;
+  width: 8vw;
+}
+
+.ratingbox-Difficulty {
+  background-color: #e087e2;
+}
+
+.ratingbox-Workload {
+  background-color: #8dbbff;
+}
+
+.ratingbox-Practicality {
+  background-color: #88ecaa;
+}
+
 /*
   CSS styling for the top portion of the course page
 */
@@ -23,11 +48,18 @@
   justify-content: space-between;
 }
 
+/*
+  Left portion of the top box containing the course title, description
+  and buttons
+*/
 .leftflex {
   display: flex;
   flex-direction: column;
 }
 
+/*
+  Right portion of the top box containing the overall ratings
+*/
 .rightflex {
   display: flex;
   flex-direction: column;
@@ -35,6 +67,9 @@
   width: 40%;
 }
 
+/*
+  Flex-box for the course number and name
+*/
 .coursetitle {
   display: flex;
   align-items: center;
@@ -42,12 +77,18 @@
   gap: 1rem;
 }
 
+/*
+  Number for the course (e.g. CSE 351)
+*/
 .coursenum {
   text-wrap: nowrap;
   margin: 0;
 
 }
 
+/*
+  The name of the course (e.g. "Hardware/Software Interface")
+*/
 .coursename {
   text-wrap: balance;
   margin: 0;
@@ -82,53 +123,34 @@
   background-color: #8B53D3;
   cursor: pointer;
 }
-.overall-ratings {
+
+.overallratings-header {
   font-size: 1.75rem;
   margin: 0 0 2.5rem 0;
 }
 
+/*
+  Flexbox for the rating boxes in the "Overall Ratings" section
+*/
 .ratings-flexbox {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-/* Reviews section */
-
-.ratingbox {
-  font-weight: bold;
-  font-size: clamp(1px, 130%, 3vw);
-  display: flex;
-  align-items: center;
-  align-self: flex-end;
-  justify-content: center;
-  height: 15vh;
-  max-height: 4ch;
-  min-width: 3ch;
-  width: 8vw;
-}
-
-.ratingbox-Difficulty {
-  background-color: #e087e2;
-}
-
-.ratingbox-Workload {
-  background-color: #8dbbff;
-}
-
-.ratingbox-Practicality {
-  background-color: #88ecaa;
-}
-
 /*
   CSS styling for the bottom portion of the course page (the reviews)
+  starts here.
 */
+
 .bottombox {
   min-height: 40vh;
   height: auto;
   text-align: center;
   background-color: #d3f5ff;
 }
+
+/* Reveiws Section */
 
 /* Header */
 .page-reviews-header {
