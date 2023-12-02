@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import {TextField, Box, Button} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import {CognitoUser, CognitoUserAttribute} from 'amazon-cognito-identity-js';
-import userpool from '../userpool';
+import {getCognitoUserPoolAsync} from '../userpool';
 import './Login.css'
-import { authenticate } from '../services/authenticate';
+import {authenticate} from '../services/authenticate';
 
 const emailRegex = new RegExp('^[a-zA-Z0-9_]+@uw.edu$');
 const capitalRegex = new RegExp('[A-Z]');
@@ -15,7 +15,6 @@ export const SignupPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [psw1, setPsw1] = useState('');
     const [psw2, setPsw2] = useState('');
-    const [code, setCode] = useState('');
     const [isEmailInvalid, setIsEmailInvalid] = useState(false);
     const [emailHelperText, setEmailHelperText] = useState('');
     const [isPsw1Invalid, setIsPsw1Invalid] = useState(false);
@@ -68,35 +67,50 @@ export const SignupPage: React.FC = () => {
             setIsPsw2Invalid(false);
             setPsw2HelperText('');
         }
+        handleSignup();
+        navigate('/login');
+    }
 
-        const attributeList = [];
+    const handleSignup = async () => {
+        try {
+          const userPool = await getCognitoUserPoolAsync(); // Wait for the user pool to be initialized
+        
+          const attributeList = [];
           attributeList.push(
             new CognitoUserAttribute({
               Name: 'email',
               Value: email,
             })
           );
-
-        userpool.signUp(email, psw1, attributeList, attributeList, (err, data) => {
+    
+          userPool.signUp(email, psw1, attributeList, attributeList, (err: { message: string }, data: any) => {
             if (err) {
-                const cognitoUser = new CognitoUser({ Username: email, Pool: userpool });
-
-                if (!authenticate(email, psw1).catch((authError) => {})) {
-                    if (err.message === 'An account with the given email already exists')
+              const cognitoUser = new CognitoUser({ Username: email, Pool: userPool });
+    
+              // Use async/await within the callback for asynchronous operations
+              (async () => {
+                try {
+                  await authenticate(email, psw1);
+                  // User authenticated successfully
+                } catch (authError) {
+                  if (err.message === 'An account with the given email already exists') {
                     cognitoUser.resendConfirmationCode((resendErr, result) => {
-                    if (resendErr) {
-                        console.error(resendErr);
-                        alert("Couldn't resend the verification code");
-                        } else {
-                        alert('Verification code resent successfully');
-                        }
+                      if (resendErr) {
+                        alert("Couldn't resend the verification code.");
+                      }
                     });
-                } else {
-                    alert('User is already verified. Please sign in.');
+                  } else {
+                    setIsEmailInvalid(true);
+                    setEmailHelperText('User is already verified. Please sign in.');
+                  }
                 }
+              })();
             }
-        });
-    }
+          });
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
 
     function handleSignin() {
         navigate('/login');
@@ -178,25 +192,6 @@ export const SignupPage: React.FC = () => {
             >
                 Verify UW Email
             </Button>
-
-            <Box
-                sx={{
-                    width: '75%'
-                }}
-            >
-                <TextField
-                    error={isPswInvalid}
-                    helperText={pswHelperText}
-                    fullWidth
-                    id='repeat-password'
-                    label='Forgot Password'
-                    variant='outlined'
-                    margin='normal'
-                    onInput={ (e) => {
-                        setCode((e.target as HTMLInputElement).value)
-                    }}
-                />
-            </Box>
 
             <Box
                 sx={{

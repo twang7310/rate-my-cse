@@ -23,9 +23,29 @@
   color: white;
   font-size: 2vw;
   font-weight: 400;
-  margin-right: 2%;
+  margin-right: 25px;
   user-select: none;
   cursor: pointer;
+}
+
+.email {
+  color: white;
+  font-size: 1.5vw;
+  font-weight: 400;
+  user-select: none;
+  margin: 20px;
+  cursor: pointer;
+}
+
+.signout {
+  color: white;
+  font-size: 1vw;
+  font-weight: 400;
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+  top: -10px;
+  left: 80px;
 }
 
 /* Sidebar css */

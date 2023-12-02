@@ -1,5 +1,5 @@
 import {useLocation, useNavigate} from "react-router-dom";
-import { getSignInStatus, getEmail } from '../Login/LoginPage';
+import {getSignInStatus, getEmail, setSignInStatus} from '../Login/LoginPage';
 import './Layout.css'
 
 type HeaderProps = {
@@ -37,10 +37,24 @@ export const Login: React.FC = () => {
         navigate('/login');
     };
 
+    const handleSignOut = () => {
+        setSignInStatus(false);
+        navigate('../');
+    }
+
     return (
-        <p className="login" onClick={ handleClick }>
-            {isSignedIn ? email : 'Sign In'}
-        </p>
+        <div>
+            {isSignedIn ? (
+                <div>
+                    <p className="email">{email}</p>
+                    <p className="signout" onClick={handleSignOut}>Sign Out</p>
+                </div>
+            ) : (
+                <p className="login" onClick={handleClick}>
+                    Sign In
+                </p>
+            )}
+        </div>
     );
 }
 
