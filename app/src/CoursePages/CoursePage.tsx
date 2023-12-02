@@ -30,33 +30,95 @@ export const CoursePage: React.FC = () => {
         fetchData();
     }, [classNum]);
 
-    const navigate = useNavigate();
+    return (
+        <div className="coursepage">
+            <div className="top-box">
+                <CourseInfo classNum={ classNum! }
+                courseName={ course.length > 0 ? course[0].name : '...' }
+                desc={ course.length > 0 ? course[0].description : 'Loading...' }/>
+                <div className="right-flexbox">
+                    <h3 className="overall-ratings-header">Overall Ratings</h3>
+                    <div className="ratings-flexbox">
+                        <OverallRatingBox label="Difficulty" rating={ course.length > 0 ? course[0].rating_one : '?/5' }/>
+                        <OverallRatingBox label="Workload" rating={ course.length > 0 ? course[0].rating_two : '?/5' }/>
+                        <OverallRatingBox label="Practicality" rating={ course.length > 0 ? course[0].rating_three : '?/5' }/>
+                    </div>
+                </div>
+            </div>
 
-    const handleClick = () => {
-        navigate('/course/' + classNum + '/review')
+            <div className="bottom-box">
+                <div className="page-reviews-header">User Reviews</div>
+                <ReviewHolder classNum={classNum!}/>
+            </div>
+        </div>
+    );
+}
+
+interface CourseInfoProps {
+    classNum: string;
+    courseName: string;
+    desc: string;
+}
+
+export const CourseInfo: React.FC<CourseInfoProps> = (props) => {
+    const navigate = useNavigate();
+    const courseWebsiteURL = 'https://courses.cs.washington.edu/courses/cse' + props.classNum + '/';
+    const dawgPathsURL = 'https://dawgpath.uw.edu/course?id=CSE+' + props.classNum + '&campus=seattle';
+
+
+    const rateButtonClick = () => {
+        navigate('/course/' + props.classNum + '/review')
+    }
+
+    const courseButtonClick = () => {
+        window.open(courseWebsiteURL, '_blank');
+    }
+
+    const dawgButtonClick = () => {
+        window.open(dawgPathsURL, '_blank');
     }
 
     return (
-      <div className="coursepage">
-        <div className="topbox">
-          {course.map((courseObject) => (
-            <>
-            <p>{ courseObject.number }</p>
-            <p>{ courseObject.name }</p>
-            <p>{ courseObject.description }</p>
-            <p>{ courseObject.rating_one }</p>
-            <p>{ courseObject.rating_two }</p>
-            <p>{ courseObject.rating_three }</p>
-            </>
-          ))}
-          <button onClick={handleClick}>Review</button>
+        <div className="course-info">
+            <div className="left-flexbox">
+                <div className="course-title">
+                    <h1 className="course-num">{ "CSE " + props.classNum }</h1>
+                    <h2 className="course-name">{ props.courseName }</h2>
+                </div>
+                <p className="course-desc">{ props.desc }</p>
+                <div className="buttons-flexbox">
+                    <button className="purple-button" onClick={ rateButtonClick }>Rate This Class</button>
+                    <button className="purple-button" onClick={ courseButtonClick }>Course Website</button>
+                    <button className="purple-button" onClick={ dawgButtonClick }>Dawg Path</button>
+                </div>
+            </div>
         </div>
-        <div className="bottombox">
-            <div className="page-reviews-header">User Reviews</div>
-            <ReviewHolder classNum={classNum!}/>
+    )
+}
+
+/* 
+    Template for the rating boxes in the "Overall Ratings" section.
+
+    Parameters:
+    label - Determines the color and position of the box 
+           (Difficulty, workload, practicality).
+    rating - The numerical rating that goes in the center of the box.
+*/
+export const OverallRatingBox: React.FC<{label: string, rating: string}> = ({ label, rating }) => {
+    const dynamicClassName = `ratingbox ratingbox-${label}`;
+
+    const category: React.CSSProperties = {
+       margin: 1.5
+    };
+
+    return (
+        <div className="overall-rating-box">
+            <h3 style={category}>{label}</h3>
+            <div className={dynamicClassName}>
+                <h3>{rating}</h3>
+            </div>
         </div>
-      </div>
-    );
+    )
 }
 
 export const ReviewHolder: React.FC<{classNum: string}> = ({classNum}) => {
