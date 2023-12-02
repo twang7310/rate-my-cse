@@ -5,12 +5,10 @@
     top: 14%;
     left: 17%;
     right: 2%;
-    bottom: 3%;
-    height: auto;
+    min-height: 83%;
     text-align: center;
     padding-left: 2.5vw;
     padding-right: 2.5vw;
-    overflow: hidden;
 }
 
 /* Text header of review page */
@@ -128,6 +126,7 @@
     height: 25vh;
     width: 42vw;
     font-size: clamp(1px, 13.5px, 2.8vw);
+    border-radius: 0;
 }
 
 .comment-field:focus {
@@ -176,6 +175,7 @@
     height: 4.8vh;
     margin-top: 2vh;
     margin-right: 1.6vw;
+    margin-bottom: 2vh;
     outline: none;
     border: none;
 }

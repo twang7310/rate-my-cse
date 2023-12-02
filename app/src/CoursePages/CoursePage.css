@@ -48,10 +48,6 @@
   cursor: auto;
 }
 
-.review-card-left {
-  flex: 1;
-}
-
 .review-card-header {
   display: flex;
   font-size: clamp(1px, 17px, 1.8vw);
