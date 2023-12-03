@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {ClassRating} from "../Directories/Directory";
+import {getSignInStatus} from "../Login/LoginPage";
 import './CoursePage.css'
 
 export const CoursePage: React.FC = () => {
@@ -67,7 +68,12 @@ export const CourseInfo: React.FC<CourseInfoProps> = (props) => {
 
 
     const rateButtonClick = () => {
-        navigate('/course/' + props.classNum + '/review')
+        // User is not logged in
+        if (!getSignInStatus()) {
+            navigate('/login');
+        } else {
+            navigate('/course/' + props.classNum + '/review')
+        }
     }
 
     const courseButtonClick = () => {
