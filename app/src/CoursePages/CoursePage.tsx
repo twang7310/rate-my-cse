@@ -123,6 +123,7 @@ export const OverallRatingBox: React.FC<{label: string, rating: string}> = ({ la
 
 export const ReviewHolder: React.FC<{classNum: string}> = ({classNum}) => {
     const [reviews, setReviews] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -131,7 +132,7 @@ export const ReviewHolder: React.FC<{classNum: string}> = ({classNum}) => {
                 console.log(response);
                 const data = await response.json();
                 setReviews(data);
-                console.log(data);
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -141,14 +142,24 @@ export const ReviewHolder: React.FC<{classNum: string}> = ({classNum}) => {
 
     return (
         <div className="review-holder">
-            {reviews.map((review) => (
-                <ReviewCard text={(review.text !== '') ? review.text : '(No Comment)'} 
-                rating1={review.rating_one}
-                rating2={review.rating_two}
-                rating3={review.rating_three}
-                quarter={(review.quarter !== '') ? review.quarter : 'N/A'}
-                professor={(review.professor !== '') ? review.professor : 'N/A'}/>
-            ))}
+            {loading ? (
+                <div>
+                    <div className="loading-spinner"/>
+                    <div>Loading...</div>
+                </div>
+            ) : (
+                <div>
+                    {reviews.length === 0 && <div className="no-reviews italics">No Reviews. Feel free to rate this course!</div>}
+                    {reviews.length !== 0 && reviews.map((review) => (
+                        <ReviewCard text={(review.text !== '') ? review.text : '(No Comment)'} 
+                        rating1={review.rating_one}
+                        rating2={review.rating_two}
+                        rating3={review.rating_three}
+                        quarter={(review.quarter !== '') ? review.quarter : 'N/A'}
+                        professor={(review.professor !== '') ? review.professor : 'N/A'}/>
+                    ))}
+                </div>
+            )}
         </div>
     );
 }
