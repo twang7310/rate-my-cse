@@ -39,9 +39,9 @@ export const CoursePage: React.FC = () => {
                 <div className="right-flexbox">
                     <h3 className="overall-ratings-header">Overall Ratings</h3>
                     <div className="ratings-flexbox">
-                        <OverallRatingBox label="Difficulty" rating={ course.length > 0 ? course[0].rating_one : '?/5' }/>
-                        <OverallRatingBox label="Workload" rating={ course.length > 0 ? course[0].rating_two : '?/5' }/>
-                        <OverallRatingBox label="Practicality" rating={ course.length > 0 ? course[0].rating_three : '?/5' }/>
+                        <OverallRatingBox label="Difficulty" rating={ course.length > 0 ? course[0].rating_one : null }/>
+                        <OverallRatingBox label="Workload" rating={ course.length > 0 ? course[0].rating_two : null }/>
+                        <OverallRatingBox label="Practicality" rating={ course.length > 0 ? course[0].rating_three : null }/>
                     </div>
                 </div>
             </div>
@@ -105,7 +105,14 @@ export const CourseInfo: React.FC<CourseInfoProps> = (props) => {
     rating - The numerical rating that goes in the center of the box.
 */
 export const OverallRatingBox: React.FC<{label: string, rating: string}> = ({ label, rating }) => {
-    const dynamicClassName = `ratingbox ratingbox-${label}`;
+    const dynamicClassName = `overallratingbox overallratingbox-${label}`;
+    
+    let display: string;
+    if (rating === null) {
+        display = "N/A";
+    } else {
+        display = rating + "/5";
+    }
 
     const category: React.CSSProperties = {
        margin: 1.5
@@ -115,7 +122,7 @@ export const OverallRatingBox: React.FC<{label: string, rating: string}> = ({ la
         <div className="overall-rating-box">
             <h3 style={category}>{label}</h3>
             <div className={dynamicClassName}>
-                <h3>{rating}</h3>
+                <h3>{display}</h3>
             </div>
         </div>
     )
