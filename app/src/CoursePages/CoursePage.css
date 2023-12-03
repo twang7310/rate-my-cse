@@ -63,13 +63,14 @@
   gap: 1rem;
 }
 
-.course-num {
+.course-title-num {
   text-wrap: nowrap;
+  font-size: clamp(1px, 200%, 15vw);
   margin: 0;
 
 }
 
-.course-name {
+.course-title-name {
   text-wrap: balance;
   margin: 0;
 }

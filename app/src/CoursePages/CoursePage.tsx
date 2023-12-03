@@ -82,8 +82,8 @@ export const CourseInfo: React.FC<CourseInfoProps> = (props) => {
         <div className="course-info">
             <div className="left-flexbox">
                 <div className="course-title">
-                    <h1 className="course-num">{ "CSE " + props.classNum }</h1>
-                    <h2 className="course-name">{ props.courseName }</h2>
+                    <h1 className="course-title-num">{ "CSE " + props.classNum }</h1>
+                    <h2 className="course-title-name">{ props.courseName }</h2>
                 </div>
                 <p className="course-desc">{ props.desc }</p>
                 <div className="buttons-flexbox">
