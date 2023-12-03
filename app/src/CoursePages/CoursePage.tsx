@@ -34,7 +34,8 @@ export const CoursePage: React.FC = () => {
             <div className="top-box">
                 <CourseInfo classNum={ classNum! }
                 courseName={ course.length > 0 ? course[0].name : '...' }
-                desc={ course.length > 0 ? course[0].description : 'Loading...' }/>
+                desc={ course.length > 0 ? course[0].description : '' }
+                loaded={course.length > 0}/>
                 <div className="right-flexbox">
                     <h3 className="overall-ratings-header">Overall Ratings</h3>
                     <div className="ratings-flexbox">
@@ -57,6 +58,7 @@ interface CourseInfoProps {
     classNum: string;
     courseName: string;
     desc: string;
+    loaded: boolean;
 }
 
 export const CourseInfo: React.FC<CourseInfoProps> = (props) => {
@@ -84,7 +86,14 @@ export const CourseInfo: React.FC<CourseInfoProps> = (props) => {
                     <h1 className="course-num">{ "CSE " + props.classNum }</h1>
                     <h2 className="course-name">{ props.courseName }</h2>
                 </div>
-                <p className="course-desc">{ props.desc }</p>
+                {props.loaded ? (
+                    <p className="course-desc">{ props.desc }</p>
+                ) : (
+                    <div>
+                        <div className="loading-spinner center"/>
+                        <div className="loading-text">Loading...</div>
+                    </div>
+                )}
                 <div className="buttons-flexbox">
                     <button className="purple-button" onClick={ rateButtonClick }>Rate This Class</button>
                     <button className="purple-button" onClick={ courseButtonClick }>Course Website</button>

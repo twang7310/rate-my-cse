@@ -8,6 +8,7 @@
   top: 15%;
   left: 20%;
   right: 5%;
+  min-height: 70%;
   text-align: center;
   padding: 3%;
 }
@@ -80,6 +81,7 @@
   word-wrap: break-word;
   white-space: normal;
   padding-top: clamp(1px, 10px, 2vw);
+  padding-bottom: 2vh;
   width: 16vw;
   font-size: clamp(1px, 16px, 2vw);
 }

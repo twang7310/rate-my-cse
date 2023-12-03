@@ -22,4 +22,6 @@
 
 .loading-text {
     font-size: clamp(1px, 16px, 4vw);
+    text-align: center;
+    margin-bottom: 1vh;
 }
