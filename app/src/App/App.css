@@ -5,14 +5,21 @@
 /* Loading Spinner */
 
 .loading-spinner {
-    border: 4px solid #b175ff;
-    width: 30px;
-    height: 30px;
+    border: clamp(1px, 4px, 1vw) solid #b175ff;
+    width: clamp(1px, 30px, 3vw);
+    height: clamp(1px, 30px, 3vw);
     animation: spin 1.5s linear infinite;
-    margin: 20px auto;
 }
   
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.center {
+    margin: 2vh auto;
+}
+
+.loading-text {
+    font-size: clamp(1px, 16px, 4vw);
 }

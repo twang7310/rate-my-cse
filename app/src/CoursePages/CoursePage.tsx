@@ -142,8 +142,8 @@ export const ReviewHolder: React.FC<{classNum: string}> = ({classNum}) => {
         <div className="review-holder">
             {loading ? (
                 <div>
-                    <div className="loading-spinner"/>
-                    <div>Loading...</div>
+                    <div className="loading-spinner center"/>
+                    <div className="loading-text">Loading...</div>
                 </div>
             ) : (
                 <div>

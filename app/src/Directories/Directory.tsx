@@ -29,8 +29,8 @@ export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
         <div className="innerpage">
             {loading ? (
                 <div>
-                    <div className="loading-spinner"/>
-                    Loading...
+                    <div className="loading-spinner center"/>
+                    <div className="loading-text">Loading...</div>
                 </div>
             ) : (
                 <div className="class-list">
