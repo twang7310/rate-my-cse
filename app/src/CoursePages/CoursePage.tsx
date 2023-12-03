@@ -22,7 +22,6 @@ export const CoursePage: React.FC = () => {
                 const response = await fetch(`/api/GetCourseData?num=${classNum}`);
                 const data = await response.json();
                 setCourse(data);
-                console.log(data);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -129,7 +128,6 @@ export const ReviewHolder: React.FC<{classNum: string}> = ({classNum}) => {
         const fetchData = async () => {
             try {
                 const response = await fetch(`/api/GetCourseReviews?num=${classNum}`);
-                console.log(response);
                 const data = await response.json();
                 setReviews(data);
                 setLoading(false);
