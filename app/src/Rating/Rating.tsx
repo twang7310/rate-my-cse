@@ -7,6 +7,7 @@ export const ReviewPage: React.FC = () => {
     const {classNum} = useParams();
 
     const [course, setCourse] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -14,7 +15,7 @@ export const ReviewPage: React.FC = () => {
                 const response = await fetch(`/api/GetCourseData?num=${classNum}`);
                 const data = await response.json();
                 setCourse(data);
-                console.log(data);
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -24,9 +25,15 @@ export const ReviewPage: React.FC = () => {
 
     return (
         <div className="rating-innerpage">
-            {course.map((courseObject) => (
-                <ReviewHeader num={courseObject.number} name={courseObject.name}/>
-            ))}
+            {loading ? (
+                <ReviewHeader num={classNum!} name="" loaded={false}/>
+            ) : (
+                <div>
+                    {course.map((courseObject) => (
+                        <ReviewHeader num={courseObject.number} name={courseObject.name} loaded={true}/>
+                    ))}
+                </div>
+            )}
             <div className="page-contents">
                 <ReviewHolder classNum={classNum!}/>
                 <div className="rating-instr">

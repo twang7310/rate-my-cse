@@ -150,6 +150,11 @@
   padding-right: 1vw;
 }
 
+.no-reviews {
+  margin-top: 3vh;
+  font-size: clamp(1px, 16px, 3vw);
+}
+
 /* Review Card styling */
 
 .review-card {
@@ -173,11 +178,12 @@
   margin-left: 1.8vw;
   font-size: clamp(1px, 16px, 1.5vw);
   overflow: hidden;
+  width: 45vw;
 }
 
 @media (max-width: 1000px) {
   .review-text {
-    width: 34vw;
+    width: 32vw;
   }
 }
 
@@ -186,6 +192,12 @@
   flex-direction: column;
   justify-content: space-between;
   margin-left: 5vw;
+}
+
+@media (max-width: 1000px) {
+  .review-ratings {
+    margin-left: 4vw;
+  }
 }
 
 .review-box {
