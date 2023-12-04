@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import './Directory.css'
+import '../App/App.css'
 
 interface ClassListProps {
     classLevelNumber: string;
@@ -8,6 +9,7 @@ interface ClassListProps {
     
 export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
     const [classList, setClassList] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
   
     useEffect(() => {
         const fetchData = async () => {
@@ -15,6 +17,7 @@ export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
                 const response = await fetch(`/api/GetClassData?level=${classLevelNumber}`);
                 const data = await response.json();
                 setClassList(data);
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -24,7 +27,13 @@ export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
   
     return (
         <div className="innerpage">
-            <div className="class-list">
+            {loading ? (
+                <div>
+                    <div className="loading-spinner center"/>
+                    <div className="loading-text">Loading...</div>
+                </div>
+            ) : (
+                <div className="class-list">
                 {classList.map((classItem) => (
                     <ClassCard key={classItem.class_id} 
                     num={classItem.number} 
@@ -34,7 +43,8 @@ export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
                     rating2={classItem.rating_two} 
                     rating3={classItem.rating_three}/>
                 ))}
-            </div>
+                </div>            
+            )}
         </div>
     );
 };

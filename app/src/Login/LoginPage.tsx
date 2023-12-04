@@ -9,7 +9,7 @@ import './Login.css'
 let isUserSignedIn = false;
 let user: string = '';
 
-export function getSignInStatus() {
+export function getSignInStatus(): boolean {
   return isUserSignedIn;
 }
 
@@ -21,7 +21,7 @@ export function clearUser(): void {
     user = '';
 }
 
-export function getEmail() {
+export function getEmail(): string {
     return user;
 }
 

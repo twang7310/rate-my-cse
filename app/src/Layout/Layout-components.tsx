@@ -1,7 +1,6 @@
 import {useLocation, useNavigate} from "react-router-dom";
 import {clearUser, getSignInStatus, getEmail, setSignInStatus} from '../Login/LoginPage';
 import './Layout.css'
-import { useEffect, useLayoutEffect, useState } from "react";
 
 type HeaderProps = {
     children: React.ReactNode;
