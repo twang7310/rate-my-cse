@@ -3,7 +3,9 @@ import {TextField, Box, Button} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import {CognitoUser, CognitoUserAttribute} from 'amazon-cognito-identity-js';
 import {getCognitoUserPoolAsync} from '../userpool';
+import {Link} from 'react-router-dom';
 import './Login.css'
+import Popup from '../Popup/Popup';
 
 const emailRegex = new RegExp('^[a-zA-Z0-9_]+@uw.edu$');
 const capitalRegex = new RegExp('[A-Z]');
@@ -22,6 +24,7 @@ export const SignupPage: React.FC = () => {
     const [psw2HelperText, setPsw2HelperText] = useState('');
     const [users, setUsers] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);
+    const [popupOpen, setPopupOpen] = useState(false);
     const navigate = useNavigate();
 
     async function handleSubmit() {
@@ -121,7 +124,7 @@ export const SignupPage: React.FC = () => {
                     }
                 } else {
                     setLoading(false);
-                    navigate('/login');
+                    setPopupOpen(true);
                 }
             });
         } catch (error) {
@@ -136,6 +139,12 @@ export const SignupPage: React.FC = () => {
 
     return (
         <div className='signuppage'>
+            {popupOpen &&
+                <Popup onClose={() => setPopupOpen(false)} header='Verification Email Sent'>
+                    <p>Check your UW email inbox for your verification email and click the link. Your account will then be ready to log into!</p>
+                    <p>Click here to <Link to="/login" onClick={() => setPopupOpen(false)}>Login</Link></p>
+                </Popup>
+            }
             <h1>Sign up</h1>
 
             <Box
