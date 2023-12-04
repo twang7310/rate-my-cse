@@ -1,6 +1,7 @@
 import {useLocation, useNavigate} from "react-router-dom";
 import {clearUser, getSignInStatus, getEmail, setSignInStatus} from '../Login/LoginPage';
 import './Layout.css'
+import { useEffect, useLayoutEffect, useState } from "react";
 
 type HeaderProps = {
     children: React.ReactNode;
@@ -28,7 +29,41 @@ export const Logo: React.FC = () => {
     );
 }
 
+const SearchBar = () => {
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            performSearch();
+        }
+    };
+
+    const handleSearch = () => {
+        performSearch();
+    };
+
+    const performSearch = () => {
+    const searchInput = document.querySelector<HTMLInputElement>('.search-bar2');
+        if (searchInput && searchInput.value !== '') {
+            const searchQuery = searchInput.value;
+            console.log('Search Query:', searchQuery);
+        }
+    };
+
+    return (
+        <div className="search-container2">
+            <input
+                type="text"
+                placeholder="Search..."
+                className="search-bar2"
+                onKeyDown={handleKeyDown}
+            />
+            <button className="search-button2" onClick={handleSearch} />
+        </div>
+    );
+};
+
 export const Login: React.FC = () => {
+    const location = useLocation();
+
     const navigate = useNavigate();
     const isSignedIn = getSignInStatus();
     const email = getEmail();
@@ -43,20 +78,42 @@ export const Login: React.FC = () => {
         navigate('../');
     }
 
-    return (
-        <div>
-            {isSignedIn ? (
-                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '25px'}}>
-                    <p className="email">{email}</p>
-                    <p className="signout" onClick={handleSignOut}>Sign Out</p>
+    const renderContent = () => {
+        if (location.pathname !== '/') {
+            return (
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', position: 'relative', width: '40%' }}>
+                    <SearchBar />
+                    {isSignedIn ? (
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '25px' }}>
+                            <p className="email">{email}</p>
+                            <p className="signout" onClick={handleSignOut}>Sign Out</p>
+                        </div>
+                    ) : (
+                        <p className="login" onClick={handleClick}>
+                            Sign In
+                        </p>
+                    )}
                 </div>
-            ) : (
-                <p className="login" onClick={handleClick}>
-                    Sign In
-                </p>
-            )}
-        </div>
-    );
+            );
+        } else {
+            return (
+                <div>
+                    {isSignedIn ? (
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '25px' }}>
+                            <p className="email">{email}</p>
+                            <p className="signout" onClick={handleSignOut}>Sign Out</p>
+                        </div>
+                    ) : (
+                        <p className="login" onClick={handleClick}>
+                            Sign In
+                        </p>
+                    )}
+                </div>
+            );
+        }
+    };
+    
+    return renderContent();
 }
 
 type SidebarProps = {

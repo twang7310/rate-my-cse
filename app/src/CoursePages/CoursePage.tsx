@@ -128,10 +128,8 @@ export const ReviewHolder: React.FC<{classNum: string}> = ({classNum}) => {
         const fetchData = async () => {
             try {
                 const response = await fetch(`/api/GetCourseReviews?num=${classNum}`);
-                console.log(response);
                 const data = await response.json();
                 setReviews(data);
-                console.log(data);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
