@@ -204,8 +204,8 @@ export const SignupPage: React.FC = () => {
                     width: '45%',
                     bgcolor: 'black',
                     textTransform: 'none',
-                    fontSize: '2.5vh',
-                    marginTop: '5%'
+                    fontSize: 'clamp(1px, 20px, 2.8vw)',
+                    marginTop: '5%',
                 }}
             >
                 Verify UW Email
@@ -229,7 +229,7 @@ export const SignupPage: React.FC = () => {
                     fontWeight: 700,
                 }}
             >
-                <p>Already have an account?
+                <p className='signin'>Already have an account?
                     <button
                         id='sign-in-button'
                         onClick={() => handleSignin()}

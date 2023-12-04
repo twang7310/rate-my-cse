@@ -34,7 +34,7 @@ export const CoursePage: React.FC = () => {
         <div className="coursepage">
             <div className="top-box">
                 <CourseInfo classNum={ classNum! }
-                courseName={ course.length > 0 ? course[0].name : '...' }
+                courseName={ course.length > 0 ? course[0].name : '' }
                 desc={ course.length > 0 ? course[0].description : '' }
                 loaded={course.length > 0}/>
                 <div className="right-flexbox">
