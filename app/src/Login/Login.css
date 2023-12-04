@@ -11,14 +11,14 @@
   align-items: center;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 600px) {
   .loginpage, .signuppage {
     background-color: #f0f0f0;
     position: absolute;
     top: 15%;
     left: 32.5%;
     right: 17.5%;
-    min-height: 75vh;
+    min-height: 78vh;
     text-align: center;
     display: flex;
     flex-direction: column;
