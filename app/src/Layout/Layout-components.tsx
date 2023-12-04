@@ -41,7 +41,7 @@ const SearchBar = () => {
     };
 
     const performSearch = () => {
-    const searchInput = document.querySelector<HTMLInputElement>('.search-bar2');
+    const searchInput = document.querySelector<HTMLInputElement>('.header-search-bar');
         if (searchInput && searchInput.value !== '') {
             const searchQuery = searchInput.value;
             console.log('Search Query:', searchQuery);
@@ -49,14 +49,14 @@ const SearchBar = () => {
     };
 
     return (
-        <div className="search-container2">
+        <div className="header-search-container">
             <input
                 type="text"
                 placeholder="Search..."
-                className="search-bar2"
+                className="header-search-bar"
                 onKeyDown={handleKeyDown}
             />
-            <button className="search-button2" onClick={handleSearch} />
+            <button className="header-search-button" onClick={handleSearch} />
         </div>
     );
 };
