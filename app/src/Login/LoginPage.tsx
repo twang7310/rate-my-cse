@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -32,7 +32,7 @@ export const LoginPage: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    async function handleSubmit() {
+    function handleSubmit() {
         setLoading(true);
         authenticate(email,password)
           .then(async (data)=>{
