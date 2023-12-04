@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes, useLocation} from 'react-router-dom';
 import {HomeLayout} from '../Layout/Layout';
 import {HomePage} from '../Homepage/Homepage';
 import {ClassList} from '../Directories/Directory';
@@ -6,6 +6,19 @@ import {LoginPage} from '../Login/LoginPage';
 import {SignupPage} from '../Login/SignupPage';
 import {CoursePage} from '../CoursePages/CoursePage';
 import {ReviewPage} from '../Rating/Rating';
+import {useEffect} from 'react';
+
+// Utility component, scrolls to the top of the 
+// page upon route change
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 function App() {
   const classPrefix = 'cse';
@@ -13,6 +26,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop/>
       <HomeLayout>
         <Routes>
           <Route path={"/"} element={<HomePage />} />

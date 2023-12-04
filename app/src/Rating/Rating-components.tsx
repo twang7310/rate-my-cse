@@ -2,12 +2,16 @@ import {useState} from "react";
 import {ReviewState} from './Rating'
 import './Rating.css'
 
-export const ReviewHeader: React.FC<{num : string, name: string}> = ({num, name}) => {
+export const ReviewHeader: React.FC<{num : string, name: string, loaded: boolean}> = ({num, name, loaded}) => {
     return (
         <div className="review-header">
             <p className="logo-start">Rate My</p>
             <p className="course-num">CSE {num}</p>
-            <p className="course-name">{name}</p>
+            {loaded ? (
+                <p className="course-name">{name}</p>
+            ) : (
+                <div className="loading-spinner"/>
+            )}
         </div>
     );
 }

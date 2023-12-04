@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {ClassRating} from "../Directories/Directory";
+import {getSignInStatus} from "../Login/LoginPage";
 import './CoursePage.css'
 
 export const CoursePage: React.FC = () => {
@@ -22,7 +23,6 @@ export const CoursePage: React.FC = () => {
                 const response = await fetch(`/api/GetCourseData?num=${classNum}`);
                 const data = await response.json();
                 setCourse(data);
-                console.log(data);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -35,7 +35,8 @@ export const CoursePage: React.FC = () => {
             <div className="top-box">
                 <CourseInfo classNum={ classNum! }
                 courseName={ course.length > 0 ? course[0].name : '...' }
-                desc={ course.length > 0 ? course[0].description : 'Loading...' }/>
+                desc={ course.length > 0 ? course[0].description : '' }
+                loaded={course.length > 0}/>
                 <div className="right-flexbox">
                     <h3 className="overall-ratings-header">Overall Ratings</h3>
                     <div className="ratings-flexbox">
@@ -58,6 +59,7 @@ interface CourseInfoProps {
     classNum: string;
     courseName: string;
     desc: string;
+    loaded: boolean;
 }
 
 export const CourseInfo: React.FC<CourseInfoProps> = (props) => {
@@ -67,7 +69,12 @@ export const CourseInfo: React.FC<CourseInfoProps> = (props) => {
 
 
     const rateButtonClick = () => {
-        navigate('/course/' + props.classNum + '/review')
+        // User is not logged in
+        if (!getSignInStatus()) {
+            navigate('/login');
+        } else {
+            navigate('/course/' + props.classNum + '/review')
+        }
     }
 
     const courseButtonClick = () => {
@@ -85,7 +92,14 @@ export const CourseInfo: React.FC<CourseInfoProps> = (props) => {
                     <h1 className="course-title-num">{ "CSE " + props.classNum }</h1>
                     <h2 className="course-title-name">{ props.courseName }</h2>
                 </div>
-                <p className="course-desc">{ props.desc }</p>
+                {props.loaded ? (
+                    <p className="course-desc">{ props.desc }</p>
+                ) : (
+                    <div>
+                        <div className="loading-spinner center"/>
+                        <div className="loading-text">Loading...</div>
+                    </div>
+                )}
                 <div className="buttons-flexbox">
                     <button className="purple-button" onClick={ rateButtonClick }>Rate This Class</button>
                     <button className="purple-button" onClick={ courseButtonClick }>Course Website</button>
@@ -131,15 +145,15 @@ export const OverallRatingBox: React.FC<{label: string, rating: string}> = ({ la
 
 export const ReviewHolder: React.FC<{classNum: string}> = ({classNum}) => {
     const [reviews, setReviews] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await fetch(`/api/GetCourseReviews?num=${classNum}`);
-                console.log(response);
                 const data = await response.json();
                 setReviews(data);
-                console.log(data);
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -149,14 +163,24 @@ export const ReviewHolder: React.FC<{classNum: string}> = ({classNum}) => {
 
     return (
         <div className="review-holder">
-            {reviews.map((review) => (
-                <ReviewCard text={(review.text !== '') ? review.text : '(No Comment)'} 
-                rating1={review.rating_one}
-                rating2={review.rating_two}
-                rating3={review.rating_three}
-                quarter={(review.quarter !== '') ? review.quarter : 'N/A'}
-                professor={(review.professor !== '') ? review.professor : 'N/A'}/>
-            ))}
+            {loading ? (
+                <div>
+                    <div className="loading-spinner center"/>
+                    <div className="loading-text">Loading...</div>
+                </div>
+            ) : (
+                <div>
+                    {reviews.length === 0 && <div className="no-reviews italics">No Reviews. Feel free to rate this course!</div>}
+                    {reviews.length !== 0 && reviews.map((review) => (
+                        <ReviewCard text={(review.text !== '') ? review.text : '(No Comment)'} 
+                        rating1={review.rating_one}
+                        rating2={review.rating_two}
+                        rating3={review.rating_three}
+                        quarter={(review.quarter !== '') ? review.quarter : 'N/A'}
+                        professor={(review.professor !== '') ? review.professor : 'N/A'}/>
+                    ))}
+                </div>
+            )}
         </div>
     );
 }
