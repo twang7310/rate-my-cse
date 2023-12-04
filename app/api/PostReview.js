@@ -42,7 +42,12 @@ export default async (req, res) => {
 
     const { avg_rating_one, avg_rating_two, avg_rating_three } = avgResult[0];
 
-    const updateQuery = 'UPDATE courses SET rating_one = ?, rating_two = ?, rating_three = ? WHERE class_id = (SELECT class_id FROM courses WHERE number = ?)';
+    // Update the rating columns in courses with the average of all the reviews
+    const updateQuery = `
+      UPDATE courses 
+      SET rating_one = ?, rating_two = ?, rating_three = ?
+      WHERE number = ?
+      LIMIT 1`;
     const updateQueryParams = [avg_rating_one, avg_rating_two, avg_rating_three, course_number];
 
     // Execute the update query
