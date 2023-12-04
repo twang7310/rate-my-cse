@@ -32,31 +32,17 @@ export const LoginPage: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const [users, setUsers] = useState<any[]>([]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(`/api/GetUsers?name=${user}`);
-                const data = await response.json();
-                setUsers(data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-        if (user) {
-            fetchData();
-        }
-    });
-
-    function handleSubmit() {
+    async function handleSubmit() {
         setLoading(true);
         authenticate(email,password)
           .then(async (data)=>{
             isUserSignedIn = true;
             user = email;
 
-            if (users.length === 0) await postUser(user);
+            // Due to asynchronus behavior, we cannot check if the user already exists
+            // We will just accept that we try to POST duplicate usernames and error out
+            // but that is expected since it is a primary key
+            postUser(user);
 
             // Navigate back to home page
             setLoading(false);
@@ -86,7 +72,7 @@ export const LoginPage: React.FC = () => {
             });
             response.json();
         } catch (error) {
-            console.error('Error adding user to database:', error);
+            console.error('Error during fetch:', error);
         }
     }
     
