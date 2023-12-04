@@ -86,7 +86,6 @@ export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
                 body: JSON.stringify(ratingContents),
             });
             const data = await response.json();
-            console.log(data);
             navigate('/course/' + classNum);
         } catch (error) {
             alert('Error posting reivew');
