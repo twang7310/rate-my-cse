@@ -1,20 +1,33 @@
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import './Directory.css'
 import '../App/App.css'
 
 interface ClassListProps {
-    classLevelNumber: string;
-  }
+    classLevelNumber?: string;
+}
     
 export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
+    const { query } = useParams<{ query: string }>();
     const [classList, setClassList] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
-  
+    let search = false;
+
     useEffect(() => {
+        if (query !== undefined) {
+            search = true;
+        }
+
         const fetchData = async () => {
             try {
-                const response = await fetch(`/api/GetClassData?level=${classLevelNumber}`);
+                let apiUrl = '';
+                if (search) {
+                    apiUrl = `/api/GetCourseData?num=${query}`;
+                } else {
+                    apiUrl = `/api/GetClassData?level=${classLevelNumber}`;
+                }
+                console.log(classLevelNumber);
+                const response = await fetch(apiUrl);
                 const data = await response.json();
                 setClassList(data);
                 setLoading(false);
@@ -22,9 +35,10 @@ export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
                 console.error('Error fetching data:', error);
             }
         };
+
         fetchData();
-    }, [classLevelNumber]);
-  
+    }, [query]);
+
     return (
         <div className="innerpage">
             {loading ? (
@@ -34,15 +48,21 @@ export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
                 </div>
             ) : (
                 <div className="class-list">
-                {classList.map((classItem) => (
-                    <ClassCard key={classItem.class_id} 
-                    num={classItem.number} 
-                    name={classItem.name} 
-                    desc={classItem.description} 
-                    rating1={classItem.rating_one} 
-                    rating2={classItem.rating_two} 
-                    rating3={classItem.rating_three}/>
-                ))}
+                    {classList.length > 0 ? (
+                        classList.map((classItem) => (
+                        <ClassCard
+                            key={classItem.class_id}
+                            num={classItem.number}
+                            name={classItem.name}
+                            desc={classItem.description}
+                            rating1={classItem.rating_one}
+                            rating2={classItem.rating_two}
+                            rating3={classItem.rating_three}
+                        />
+                        ))
+                    ) : (
+                        <p>Class(es) not found.</p>
+                    )}
                 </div>            
             )}
         </div>

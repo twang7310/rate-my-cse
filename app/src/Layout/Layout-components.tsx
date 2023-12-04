@@ -1,5 +1,6 @@
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from 'react-router-dom';
 import {clearUser, getSignInStatus, getEmail, setSignInStatus} from '../Login/LoginPage';
+import {SearchBar} from '../utils/utils';
 import './Layout.css'
 
 type HeaderProps = {
@@ -28,38 +29,6 @@ export const Logo: React.FC = () => {
     );
 }
 
-const SearchBar = () => {
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
-            performSearch();
-        }
-    };
-
-    const handleSearch = () => {
-        performSearch();
-    };
-
-    const performSearch = () => {
-    const searchInput = document.querySelector<HTMLInputElement>('.header-search-bar');
-        if (searchInput && searchInput.value !== '') {
-            const searchQuery = searchInput.value;
-            console.log('Search Query:', searchQuery);
-        }
-    };
-
-    return (
-        <div className="header-search-container">
-            <input
-                type="text"
-                placeholder="Search..."
-                className="header-search-bar"
-                onKeyDown={handleKeyDown}
-            />
-            <button className="header-search-button" onClick={handleSearch} />
-        </div>
-    );
-};
-
 export const Login: React.FC = () => {
     const location = useLocation();
 
@@ -81,7 +50,7 @@ export const Login: React.FC = () => {
         if (location.pathname !== '/') {
             return (
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', position: 'relative', width: '40%' }}>
-                    <SearchBar />
+                    <SearchBar isHeader={true}/>
                     {isSignedIn ? (
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '25px' }}>
                             <p className="email">{email}</p>

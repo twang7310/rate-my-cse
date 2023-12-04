@@ -1,4 +1,6 @@
+import { useNavigate } from 'react-router-dom';
 import './Homepage.css'
+import { SearchBar } from '../utils/utils';
 
 /* 
     Template for the rating boxes.
@@ -36,24 +38,6 @@ export const RatingDesc: React.FC<RatingDescProps> = ( props: RatingDescProps ) 
     );
 }
 
-const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-        performSearch();
-    }
-};
-
-const handleSearch = () => {
-    performSearch();
-};
-
-const performSearch = () => {
-    const searchInput = document.querySelector<HTMLInputElement>('.search-bar');
-    if (searchInput && searchInput.value !== '') {
-        const searchQuery = searchInput.value;
-        console.log('Search Query:', searchQuery);
-    }
-};
-
 export const HomePage: React.FC = () => {
     return (
         <div className="homepage">
@@ -61,15 +45,7 @@ export const HomePage: React.FC = () => {
                 Welcome to RateMyCSE
             </h1>
             <h3 className="tagline">Wondering if a UW CSE class is as hard as they say?</h3>
-            <div className="search-container">
-                <input
-                    type="text"
-                    placeholder="Look up a CSE class"
-                    className="search-bar"
-                    onKeyDown={handleKeyDown}
-                />
-                <button className="search-button" onClick={handleSearch} />
-            </div>
+            <SearchBar isHeader={false}/>
             <div className="howitworks">
                 <h2>How it works:</h2>
                 <h3 className="explanation">
