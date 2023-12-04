@@ -20,7 +20,7 @@ export const LoginPage: React.FC = () => {
     }
 
     function handleForgot() {
-        alert('Can\'t do much! Try again');
+        navigate('/verify-email');
     }
 
     return (
