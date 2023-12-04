@@ -115,7 +115,8 @@ export const OverallRatingBox: React.FC<{label: string, rating: string}> = ({ la
     }
 
     const category: React.CSSProperties = {
-       margin: 1.5
+       margin: 1.5,
+       fontSize: `clamp(1px, 117%, 2vw)`,
     };
 
     return (
