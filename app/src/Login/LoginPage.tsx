@@ -29,6 +29,7 @@ export const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isInvalidLogin, setIsInvalidLogin] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const [users, setUsers] = useState<any[]>([]);
@@ -49,6 +50,7 @@ export const LoginPage: React.FC = () => {
     });
 
     function handleSubmit() {
+        setLoading(true);
         authenticate(email,password)
           .then(async (data)=>{
             isUserSignedIn = true;
@@ -57,8 +59,10 @@ export const LoginPage: React.FC = () => {
             if (users.length === 0) await postUser(user);
 
             // Navigate back to home page
+            setLoading(false);
             navigate('../');
           },(err)=>{
+            setLoading(false);
             setIsInvalidLogin('Username or password is incorrect');
           })
     }
@@ -144,11 +148,20 @@ export const LoginPage: React.FC = () => {
                     width: '45%',
                     bgcolor: 'black',
                     textTransform: 'none',
-                    fontSize: '2.5vh'
+                    fontSize: 'clamp(1px, 20px, 2.8vw)'
                 }}
             >
                 Continue
             </Button>
+
+            {loading && 
+                <div className='loading-comps'>
+                    <div className='loading-spinner center'/>
+                    <div className='loading-text'>
+                        Logging in...
+                    </div>
+                </div>
+            }
 
             <Box
                 sx={{

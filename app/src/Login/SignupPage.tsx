@@ -21,6 +21,7 @@ export const SignupPage: React.FC = () => {
     const [isPsw2Invalid, setIsPsw2Invalid] = useState(false);
     const [psw2HelperText, setPsw2HelperText] = useState('');
     const [users, setUsers] = useState<any[]>([]);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     async function handleSubmit() {
@@ -68,7 +69,9 @@ export const SignupPage: React.FC = () => {
             setPsw2HelperText('');
         }
 
+        setLoading(true);
         handleSignup();
+        setLoading(false);
     }
 
     const handleSignup = async () => {
@@ -103,6 +106,7 @@ export const SignupPage: React.FC = () => {
                         // Not verified yet
                         if (users.length === 0) {
                             setIsEmailInvalid(true);
+                            setLoading(false);
                             setEmailHelperText('Account already signed up. Please verify this account.');
                             cognitoUser.resendConfirmationCode((resendErr, result) => {
                                 if (resendErr) {
@@ -111,14 +115,17 @@ export const SignupPage: React.FC = () => {
                             });
                         } else {
                             setIsEmailInvalid(true);
+                            setLoading(false);
                             setEmailHelperText('User is already verified. Please sign in.');
                         }
                     }
                 } else {
+                    setLoading(false);
                     navigate('/login');
                 }
             });
         } catch (error) {
+            setLoading(false);
             console.error('Error:', error);
         }
     };
@@ -197,12 +204,21 @@ export const SignupPage: React.FC = () => {
                     width: '45%',
                     bgcolor: 'black',
                     textTransform: 'none',
-                    fontSize: '2.5vh',
-                    marginTop: '5%'
+                    fontSize: 'clamp(1px, 20px, 2.8vw)',
+                    marginTop: '5%',
                 }}
             >
                 Verify UW Email
             </Button>
+
+            {loading && 
+                <div className='loading-comps'>
+                    <div className='loading-spinner center'/>
+                    <div className='loading-text'>
+                        Loading...
+                    </div>
+                </div>
+            }
 
             <Box
                 sx={{
@@ -213,7 +229,7 @@ export const SignupPage: React.FC = () => {
                     fontWeight: 700,
                 }}
             >
-                <p>Already have an account?
+                <p className='signin'>Already have an account?
                     <button
                         id='sign-in-button'
                         onClick={() => handleSignin()}
