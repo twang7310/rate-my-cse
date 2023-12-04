@@ -89,8 +89,8 @@ export const CourseInfo: React.FC<CourseInfoProps> = (props) => {
         <div className="course-info">
             <div className="left-flexbox">
                 <div className="course-title">
-                    <h1 className="course-num">{ "CSE " + props.classNum }</h1>
-                    <h2 className="course-name">{ props.courseName }</h2>
+                    <h1 className="course-title-num">{ "CSE " + props.classNum }</h1>
+                    <h2 className="course-title-name">{ props.courseName }</h2>
                 </div>
                 {props.loaded ? (
                     <p className="course-desc">{ props.desc }</p>
@@ -129,7 +129,8 @@ export const OverallRatingBox: React.FC<{label: string, rating: string}> = ({ la
     }
 
     const category: React.CSSProperties = {
-       margin: 1.5
+       margin: 1.5,
+       fontSize: `clamp(1px, 117%, 2vw)`,
     };
 
     return (

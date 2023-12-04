@@ -11,31 +11,6 @@
   justify-content: space-around;
 }
 
-.overallratingbox {
-  font-weight: bold;
-  font-size: clamp(1px, 130%, 3vw);
-  display: flex;
-  align-items: center;
-  align-self: flex-end;
-  justify-content: center;
-  height: 15vh;
-  max-height: 4ch;
-  min-width: 3ch;
-  width: 8vw;
-}
-
-.overallratingbox-Difficulty {
-  background-color: #e087e2;
-}
-
-.overallratingbox-Workload {
-  background-color: #8dbbff;
-}
-
-.overallratingbox-Practicality {
-  background-color: #88ecaa;
-}
-
 /* CSS styling for the top portion of the course page */
 
 .top-box {
@@ -63,20 +38,23 @@
   gap: 1rem;
 }
 
-.course-num {
+.course-title-num {
   text-wrap: nowrap;
+  font-size: clamp(1px, 200%, 4vw);
   margin: 0;
 
 }
 
-.course-name {
+.course-title-name {
   text-wrap: balance;
+  font-size: clamp(1px, 150%, 3vw);
   margin: 0;
 }
 
 .course-desc {
   text-align: left;
-  max-width: 30rem;
+  font-size: clamp(1px, 16px, 1.5vw);
+  width: clamp(5rem, 45vw, 50rem);
   height: auto;
   text-wrap: balance;
 }
@@ -95,7 +73,7 @@
   padding: 1.8%;
   border: none;
   outline: none;
-  font-size: 1.04rem;
+  font-size: clamp(1px, 1.04rem, 1.75vw);
   font-weight: 700;
 }
 
@@ -114,7 +92,7 @@
 }
 
 .overall-ratings-header {
-  font-size: 1.75rem;
+  font-size: clamp(1px, 1.75rem, 4vw);
   margin: 0 0 2.5rem 0;
 }
 
@@ -122,6 +100,45 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+/* Media query for screens with a maximum width of 600px */
+@media (max-width: 1004px) {
+  .ratings-flexbox {
+    flex-direction: column;
+  }
+
+  .overall-rating-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .overall-ratings-header {
+    margin: 0 0 1.5rem;
+  }
+}
+
+.overallratingbox {
+  font-weight: bold;
+  font-size: clamp(1px, 130%, 2.5vw);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 4ch;
+  width: clamp(3ch, 8vw, 9vw);
+}
+
+.overallratingbox-Difficulty {
+  background-color: #e087e2;
+}
+
+.overallratingbox-Workload {
+  background-color: #8dbbff;
+}
+
+.overallratingbox-Practicality {
+  background-color: #88ecaa;
 }
 
 /* CSS styling for the bottom portion of the course page (the reviews) */
