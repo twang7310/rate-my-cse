@@ -28,7 +28,7 @@
 
 .loginpage h1, .signuppage h1 {
   font-weight: 700;
-  font-size: clamp(1px, 34px, 7vw);
+  font-size: clamp(1px, 34px, 9vw);
   margin-top: 6.6vh;
   margin-bottom: 6%;
   user-select: none;
