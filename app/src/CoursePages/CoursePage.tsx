@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {ClassRating} from "../Directories/Directory";
-import {getSignInStatus} from "../Login/LoginPage";
+import {getEmail, getSignInStatus} from "../Login/LoginPage";
 import {Link} from 'react-router-dom';
 import Popup from "../Popup/Popup";
 import './CoursePage.css'
@@ -65,16 +65,32 @@ interface CourseInfoProps {
 }
 
 export const CourseInfo: React.FC<CourseInfoProps> = (props) => {
-    const [popupOpen, setPopupOpen] = useState(false);
+    const [loginPopupOpen, setLoginPopupOpen] = useState(false);
+    const [reviewPopupOpen, setReviewPopupOpen] = useState(false);
+    const [review, setReview] = useState<any[]>([]);
     const navigate = useNavigate();
     const courseWebsiteURL = 'https://courses.cs.washington.edu/courses/cse' + props.classNum + '/';
     const dawgPathsURL = 'https://dawgpath.uw.edu/course?id=CSE+' + props.classNum + '&campus=seattle';
 
+    useEffect(() => {
+        const fetchReview = async () => {
+            try {
+                const response = await fetch(`/api/GetReview?num=${props.classNum}&user=${getEmail()}`);
+                const data = await response.json();
+                setReview(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+        fetchReview();
+    }, [props]);
 
     const rateButtonClick = () => {
         // User is not logged in
         if (!getSignInStatus()) {
-            setPopupOpen(true);
+            setLoginPopupOpen(true);
+        } else if (review.length > 0) {
+            setReviewPopupOpen(true);
         } else {
             navigate('/course/' + props.classNum + '/review')
         }
@@ -90,12 +106,18 @@ export const CourseInfo: React.FC<CourseInfoProps> = (props) => {
 
     return (
         <div className="course-info">
-            {popupOpen && 
-                <Popup onClose={() => setPopupOpen(false)} header="Login to Review">
+            {loginPopupOpen && 
+                <Popup onClose={() => setLoginPopupOpen(false)} header="Login to Review">
                     <p>You must be logged in with a UW email address to leave a review.</p>
                     <p>
-                        Click here to <Link to="/login" onClick={() => setPopupOpen(false)}>Login</Link> or <Link to="/signup" onClick={() => setPopupOpen(false)}>Sign Up</Link>
+                        Click here to <Link to="/login" onClick={() => setLoginPopupOpen(false)}>Login</Link> or <Link to="/signup" onClick={() => setLoginPopupOpen(false)}>Sign Up</Link>
                     </p>
+                </Popup>
+            }
+            {reviewPopupOpen && 
+                <Popup onClose={() => setReviewPopupOpen(false)} header="">
+                    <p>You've already left a review on this course!</p>
+                    <p>You can edit or delete your review below.</p>
                 </Popup>
             }
             <div className="left-flexbox">
