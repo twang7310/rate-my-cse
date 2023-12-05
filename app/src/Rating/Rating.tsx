@@ -1,6 +1,7 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {Comment, InputField, RatingDesc, RatingScale, ReviewHeader} from "./Rating-components";
+import {getEmail} from "../Login/LoginPage";
 import './Rating.css'
 
 export const ReviewPage: React.FC = () => {
@@ -59,7 +60,7 @@ export interface ReviewState {
 
 export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
     const initialState : ReviewState = {
-        reviewer: 'test_user',  
+        reviewer: getEmail(),  
         rating_one: 0, 
         rating_two: 0, 
         rating_three: 0,
