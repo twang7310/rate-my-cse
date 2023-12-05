@@ -1,4 +1,40 @@
 import './Homepage.css'
+import {SearchBar} from '../utils/utils';
+
+/* 
+    Template for the rating boxes.
+
+    Parameters:
+    label - Text in the center of the box.
+    rating - Determines the color and position of the box 
+           (Difficulty, workload, practicality).
+*/
+export const RatingBox: React.FC<{label: string, rating: string}> = ({ label, rating }) => {
+    const dynamicClassName = `ratingbox ratingbox-${rating}`;
+  
+    return (
+        <div className={dynamicClassName}>
+            {label}
+        </div>
+    );
+};
+  
+type RatingDescProps = {
+    children: React.ReactNode;
+}
+
+/* 
+    Template for the descriptions underneath the rating boxes that accepts
+    children as the text for the description.
+*/
+export const RatingDesc: React.FC<RatingDescProps> = ( props: RatingDescProps ) => {
+    
+    return (
+        <div className="ratingdesc">
+            {props.children}
+        </div>
+    );
+}
 
 export const HomePage: React.FC = () => {
     return (
@@ -7,6 +43,7 @@ export const HomePage: React.FC = () => {
                 Welcome to RateMyCSE
             </h1>
             <h3 className="tagline">Wondering if a UW CSE class is as hard as they say?</h3>
+            <SearchBar isHeader={false}/>
             <div className="howitworks">
                 <h2>How it works:</h2>
                 <h3 className="explanation">
@@ -33,42 +70,6 @@ export const HomePage: React.FC = () => {
                     </RatingDesc>
                 </div>
             </div>
-        </div>
-    );
-}
-
-/* 
-    Template for the rating boxes.
-
-    Parameters:
-    label - Text in the center of the box.
-    rating - Determines the color and position of the box 
-           (Difficulty, workload, practicality).
-*/
-export const RatingBox: React.FC<{label: string, rating: string}> = ({ label, rating }) => {
-    const dynamicClassName = `ratingbox ratingbox-${rating}`;
-  
-    return (
-        <div className={dynamicClassName}>
-            {label}
-        </div>
-    );
-};
-  
-type RatingDescProps = {
-    children: React.ReactNode;
-}
-  
-
-/* 
-    Template for the descriptions underneath the rating boxes that accepts
-    children as the text for the description.
-*/
-export const RatingDesc: React.FC<RatingDescProps> = ( props: RatingDescProps ) => {
-    
-    return (
-        <div className="ratingdesc">
-            {props.children}
         </div>
     );
 }

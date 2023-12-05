@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes, useLocation} from 'react-router-dom';
 import {HomeLayout} from '../Layout/Layout';
 import {HomePage} from '../Homepage/Homepage';
 import {ClassList} from '../Directories/Directory';
@@ -7,6 +7,19 @@ import {SignupPage} from '../Login/SignupPage';
 import {ResetPswPage} from '../Login/ResetPswPage';
 import {CoursePage} from '../CoursePages/CoursePage';
 import {ReviewPage} from '../Rating/Rating';
+import {useEffect} from 'react';
+
+// Utility component, scrolls to the top of the 
+// page upon route change
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 function App() {
   const classPrefix = 'cse';
@@ -14,6 +27,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop/>
       <HomeLayout>
         <Routes>
           <Route path={"/"} element={<HomePage />} />
@@ -26,6 +40,7 @@ function App() {
           <Route path={'/login'} element={<LoginPage/>}/>
           <Route path={'/signup'} element={<SignupPage/>}/>
           <Route path={'/reset-psw'} element={<ResetPswPage/>}/>
+          <Route path={'/search/:query'} element={<ClassList />} />
           <Route path={'/course/:classNum'} element={<CoursePage/>}/>
           <Route path={'/course/:classNum/review'} element={<ReviewPage/>}/>
         </Routes>

@@ -3,16 +3,68 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import {useNavigate} from 'react-router-dom';
+import {authenticate} from './authenticate';
 import './Login.css'
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
+let isUserSignedIn = false;
+let user: string = '';
+
+export function getSignInStatus(): boolean {
+  return isUserSignedIn;
+}
+
+export function setSignInStatus(b: boolean): void {
+    isUserSignedIn = b;
+}
+
+export function clearUser(): void {
+    user = '';
+}
+
+export function getEmail(): string {
+    return user;
+}
+
+// The eyeball icon in the password fields that toggles the hide/unhide
+export const EyeAdornment: React.FC<{visible: any, setVisible: any}> = ({visible, setVisible}) => (
+    <InputAdornment position="end">
+        <IconButton onClick={() => setVisible(!visible)}>
+            {visible ? <VisibilityOff /> : <Visibility/>}
+        </IconButton>
+    </InputAdornment>
+)
 
 export const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [visible, setVisible] = useState(false);
+    const [isInvalidLogin, setIsInvalidLogin] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     function handleSubmit() {
-        console.log(email);
-        console.log(password);
+        setLoading(true);
+        authenticate(email,password)
+          .then(async (data)=>{
+            isUserSignedIn = true;
+            user = email;
+
+            // Due to asynchronus behavior, we cannot check if the user already exists
+            // We will just accept that we try to POST duplicate usernames and error out
+            // but that is expected since it is a primary key
+            postUser(user);
+
+            // Navigate back to home page
+            setLoading(false);
+            navigate('../');
+          },(err)=>{
+            setLoading(false);
+            setIsInvalidLogin('Username or password is incorrect');
+          })
     }
 
     function handleSignup() {
@@ -23,17 +75,33 @@ export const LoginPage: React.FC = () => {
         navigate('/reset-psw');
     }
 
+    async function postUser(username: string) {
+        try {
+            const response = await fetch(`/api/PostUser?name=${username}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username }),
+            });
+            response.json();
+        } catch (error) {
+            console.error('Error during fetch:', error);
+        }
+    }
+
     return (
         <div className='loginpage'>
             <h1>Login</h1>
 
             <Box
                 sx={{
-                    width: '75%'
+                    width: '75%',
                 }}
             >
                 <TextField
                     fullWidth
+                    error={isInvalidLogin !== ''}
                     id='email'
                     label='UW Email'
                     variant='outlined'
@@ -47,11 +115,15 @@ export const LoginPage: React.FC = () => {
 
             <Box
                 sx={{
-                    width: '75%'
+                    width: '75%',
                 }}
             >
+                
                 <TextField
                     fullWidth
+                    type={visible ? 'text' : 'password'}
+                    error={isInvalidLogin !== ''}
+                    helperText={isInvalidLogin}
                     id='password'
                     label='Password'
                     variant='outlined'
@@ -59,6 +131,7 @@ export const LoginPage: React.FC = () => {
                     onInput={ (e) => {
                         setPassword((e.target as HTMLInputElement).value)
                     }}
+                    InputProps={{endAdornment: <EyeAdornment visible={visible} setVisible={setVisible}/>}}
                 />
             </Box>
 
@@ -77,11 +150,20 @@ export const LoginPage: React.FC = () => {
                     width: '45%',
                     bgcolor: 'black',
                     textTransform: 'none',
-                    fontSize: '2.5vh'
+                    fontSize: 'clamp(1px, 20px, 2.8vw)'
                 }}
             >
                 Continue
             </Button>
+
+            {loading && 
+                <div className='loading-comps'>
+                    <div className='loading-spinner center'/>
+                    <div className='loading-text'>
+                        Logging in...
+                    </div>
+                </div>
+            }
 
             <Box
                 sx={{
@@ -92,7 +174,7 @@ export const LoginPage: React.FC = () => {
                     fontWeight: 700,
                 }}
             >
-                <p>Don't have an account?
+                <p className='signup'>Don't have an account?
                     <button
                         id='sign-up-button'
                         onClick={() => handleSignup()}

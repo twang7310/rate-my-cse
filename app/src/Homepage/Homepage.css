@@ -1,12 +1,14 @@
 
 /* Homepage container/background */
 .homepage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: #d3f4fe;
   position: absolute;
   top: 15%;
   left: 20%;
   right: 5%;
-  min-height: 200vh;
   text-align: center;
   padding: 3%;
 }
@@ -22,6 +24,7 @@
 .tagline {
   font-size: clamp(1px, 16px, 4vw);
   margin-bottom: clamp(0px, 6vh, 10vw);
+  margin: 0;
 }
 
 /* How it works: header */
@@ -30,6 +33,7 @@
   height: 50%;
   width: 100%;
   font-size: clamp(1px, 16px, 4vw);
+  margin: 40px;
 }
 
 /* Explanation below the How it works: header */
@@ -79,6 +83,7 @@
   word-wrap: break-word;
   white-space: normal;
   padding-top: clamp(1px, 10px, 2vw);
+  padding-bottom: 2vh;
   width: 16vw;
   font-size: clamp(1px, 16px, 2vw);
 }

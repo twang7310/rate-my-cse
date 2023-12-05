@@ -7,18 +7,227 @@
   right: 0%;
   margin: 3%;
   gap: 1rem;
+  overflow: scroll;
+  justify-content: space-around;
 }
 
-.topbox {
+/* CSS styling for the top portion of the course page */
+
+.top-box {
+  display: flex;
+  background-color: #d3f5ff;
+  padding: 2rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/*
+  Left portion of the top box containing the course title, description
+  and buttons
+*/
+
+.left-flexbox {
   display: flex;
   flex-direction: column;
-  height: 20rem;
-  text-align: center;
-  background-color: #d3f5ff;
 }
 
-.bottombox {
+.course-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.course-title-num {
+  text-wrap: nowrap;
+  font-size: clamp(1px, 200%, 4vw);
+  margin: 0;
+
+}
+
+.course-title-name {
+  text-wrap: balance;
+  font-size: clamp(1px, 150%, 3vw);
+  margin: 0;
+}
+
+.course-desc {
+  text-align: left;
+  font-size: clamp(1px, 16px, 1.5vw);
+  width: clamp(5rem, 45vw, 50rem);
+  height: auto;
+  text-wrap: balance;
+}
+
+.buttons-flexbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.purple-button {
+  background-color: #B175FF;
+  color: white;
+  box-shadow: 3px 4px 4px 0px rgba(255, 255, 255, 0.35) inset;
+  padding: 1.8%;
+  border: none;
+  outline: none;
+  font-size: clamp(1px, 1.04rem, 1.75vw);
+  font-weight: 700;
+}
+
+.purplebutton:hover {
+  background-color: #8B53D3;
+  cursor: pointer;
+}
+
+/* Right portion of the top box containing the overall ratings */
+
+.right-flexbox {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 40%;
+}
+
+.overall-ratings-header {
+  font-size: clamp(1px, 1.75rem, 4vw);
+  margin: 0 0 2.5rem 0;
+}
+
+.ratings-flexbox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Media query for screens with a maximum width of 600px */
+@media (max-width: 1004px) {
+  .ratings-flexbox {
+    flex-direction: column;
+  }
+
+  .overall-rating-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .overall-ratings-header {
+    margin: 0 0 1.5rem;
+  }
+}
+
+.overallratingbox {
+  font-weight: bold;
+  font-size: clamp(1px, 130%, 2.5vw);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 4ch;
+  width: clamp(3ch, 8vw, 9vw);
+}
+
+.overallratingbox-Difficulty {
+  background-color: #e087e2;
+}
+
+.overallratingbox-Workload {
+  background-color: #8dbbff;
+}
+
+.overallratingbox-Practicality {
+  background-color: #88ecaa;
+}
+
+/* CSS styling for the bottom portion of the course page (the reviews) */
+
+.bottom-box {
+  min-height: 40vh;
   height: auto;
   text-align: center;
   background-color: #d3f5ff;
+}
+
+/* Reviews Section */
+
+/* Header */
+.page-reviews-header {
+  text-align: left;
+  padding-top: 1.5vh;
+  font-size: clamp(1px, 160%, 3.8vw);
+  margin-left: clamp(25px, 3vw, 3vw);
+  font-weight: bold;
+}
+
+/* Holds all reviews */
+.review-holder {
+  padding-left: 1vw;
+  padding-right: 1vw;
+}
+
+.no-reviews {
+  margin-top: 3vh;
+  font-size: clamp(1px, 16px, 3vw);
+}
+
+/* Review Card styling */
+
+.review-card {
+  padding: clamp(7px, 20px, 2vw);
+  cursor: auto;
+}
+
+.review-card-header {
+  display: flex;
+  font-size: clamp(1px, 17px, 1.8vw);
+  margin-bottom: clamp(1px, 1.5vh, 1vw);
+}
+
+.header-quarter {
+  width: 14vw;
+  margin-right: 5vw;
+}
+
+.review-text {
+  margin-right: 2vw;
+  margin-left: 1.8vw;
+  font-size: clamp(1px, 16px, 1.5vw);
+  overflow: hidden;
+  width: 45vw;
+}
+
+@media (max-width: 1000px) {
+  .review-text {
+    width: 32vw;
+  }
+}
+
+.review-ratings {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 5vw;
+}
+
+@media (max-width: 1000px) {
+  .review-ratings {
+    margin-left: 4vw;
+  }
+}
+
+.review-box {
+  margin-top: 3%;
+  margin-bottom: 3%;
+  font-size: clamp(1px, 130%, 2.2vw);
+  max-height: 3ch;
+}
+
+.review-box-category {
+  font-size: clamp(1px, 16px, 1.8vw);
+}
+
+.italics {
+  font-style: italic;
 }

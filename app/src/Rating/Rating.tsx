@@ -1,12 +1,15 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {Comment, RatingDesc, RatingScale, ReviewHeader} from "./Rating-components";
+import {Comment, InputField, RatingDesc, RatingScale, ReviewHeader} from "./Rating-components";
+import {getEmail, getSignInStatus} from "../Login/LoginPage";
+import Popup from "../Popup/Popup";
 import './Rating.css'
 
 export const ReviewPage: React.FC = () => {
     const {classNum} = useParams();
 
     const [course, setCourse] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -14,7 +17,7 @@ export const ReviewPage: React.FC = () => {
                 const response = await fetch(`/api/GetCourseData?num=${classNum}`);
                 const data = await response.json();
                 setCourse(data);
-                console.log(data);
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -24,9 +27,15 @@ export const ReviewPage: React.FC = () => {
 
     return (
         <div className="rating-innerpage">
-            {course.map((courseObject) => (
-                <ReviewHeader num={courseObject.number} name={courseObject.name}/>
-            ))}
+            {loading ? (
+                <ReviewHeader num={classNum!} name="" loaded={false}/>
+            ) : (
+                <div>
+                    {course.map((courseObject) => (
+                        <ReviewHeader num={courseObject.number} name={courseObject.name} loaded={true}/>
+                    ))}
+                </div>
+            )}
             <div className="page-contents">
                 <ReviewHolder classNum={classNum!}/>
                 <div className="rating-instr">
@@ -46,22 +55,32 @@ export interface ReviewState {
     rating_three: number;
     text: string;
     course_number: string;
+    quarter: string;
+    professor: string;
 }
 
 export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
     const initialState : ReviewState = {
-        reviewer: 'test_user',  
+        reviewer: getEmail(),  
         rating_one: 0, 
         rating_two: 0, 
         rating_three: 0,
-        text: '',
+        text: '(No Comment)',
         course_number : classNum,
+        quarter: 'N/A',
+        professor: 'N/A'
     };
     const [ratingContents, setRatingContents] = useState<ReviewState>(initialState);
+    const [popupOpen, setPopupOpen] = useState(!getSignInStatus());
 
     const navigate = useNavigate();
 
     const handleBackClick = () => {
+        navigate('/course/' + classNum);
+    }
+
+    const closePopup = () => {
+        setPopupOpen(false);
         navigate('/course/' + classNum);
     }
 
@@ -83,10 +102,22 @@ export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
 
     return (
         <div className="rating-inputs">
+            {popupOpen && 
+                <Popup onClose={closePopup} header="Login to Review">
+                    <p>You must be logged in with a UW email address to leave a review.</p>
+                    <p>
+                        Click here to <Link to="/login" onClick={() => setPopupOpen(false)}>Login</Link> or <Link to="/signup" onClick={() => setPopupOpen(false)}>Sign Up</Link>
+                    </p>
+                </Popup>
+            }
             <div className="scales">
                 <RatingScale category={1} setReview={setRatingContents}/>
                 <RatingScale category={2} setReview={setRatingContents}/>
                 <RatingScale category={3} setReview={setRatingContents}/>
+            </div>
+            <div className="other-inputs">
+                <InputField setReview={setRatingContents} field="Quarter Taken"/>
+                <InputField setReview={setRatingContents} field="Professor"/>
             </div>
             <Comment setReview={setRatingContents}/>
             <button className="review-button" onClick={postReview}>Submit</button>
