@@ -6,14 +6,16 @@ import '../App/App.css'
 interface ClassListProps {
     classLevelNumber?: string;
 }
+const noResultsFound = "Class not found.";
     
 export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
     const { query } = useParams<{ query: string }>();
     const [classList, setClassList] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
-    let search = false;
 
     useEffect(() => {
+        let search = false;
+
         if (query !== undefined) {
             search = true;
         }
@@ -21,12 +23,12 @@ export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
         const fetchData = async () => {
             try {
                 let apiUrl = '';
+                setLoading(true);
                 if (search) {
                     apiUrl = `/api/GetCourseData?num=${query}`;
                 } else {
                     apiUrl = `/api/GetClassData?level=${classLevelNumber}`;
                 }
-                console.log(classLevelNumber);
                 const response = await fetch(apiUrl);
                 const data = await response.json();
                 setClassList(data);
@@ -61,7 +63,7 @@ export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
                         />
                         ))
                     ) : (
-                        <p>Class(es) not found.</p>
+                        <p>{noResultsFound}</p>
                     )}
                 </div>            
             )}

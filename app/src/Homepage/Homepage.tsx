@@ -1,6 +1,5 @@
-import { useNavigate } from 'react-router-dom';
 import './Homepage.css'
-import { SearchBar } from '../utils/utils';
+import {SearchBar} from '../utils/utils';
 
 /* 
     Template for the rating boxes.
@@ -23,7 +22,6 @@ export const RatingBox: React.FC<{label: string, rating: string}> = ({ label, ra
 type RatingDescProps = {
     children: React.ReactNode;
 }
-  
 
 /* 
     Template for the descriptions underneath the rating boxes that accepts
