@@ -139,6 +139,12 @@ export const SignupPage: React.FC = () => {
         navigate('/login');
     }
 
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            handleSubmit();
+        }
+    };
+
     return (
         <div className='signuppage'>
             {popupOpen &&
@@ -166,6 +172,7 @@ export const SignupPage: React.FC = () => {
                     onInput={ (e) => {
                         setEmail((e.target as HTMLInputElement).value)
                     }}
+                    onKeyDown={handleKeyDown}
                 />
             </Box>
 
@@ -187,6 +194,7 @@ export const SignupPage: React.FC = () => {
                         setPsw1((e.target as HTMLInputElement).value)
                     }}
                     InputProps={{endAdornment: <EyeAdornment visible={visible} setVisible={setVisible}/>}}
+                    onKeyDown={handleKeyDown}
                 />
             </Box>
 
@@ -208,6 +216,7 @@ export const SignupPage: React.FC = () => {
                         setPsw2((e.target as HTMLInputElement).value)
                     }}
                     InputProps={{endAdornment: <EyeAdornment visible={visible} setVisible={setVisible}/>}}
+                    onKeyDown={handleKeyDown}
                 />
             </Box>
 
