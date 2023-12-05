@@ -37,13 +37,14 @@ test('Checks HomeLayout has correct button names and in order within the sidebar
 });
 
 test('Renders LevelTab components with correct names', () => {
+  const mockHandleUnhideLogin = jest.fn();
   render(
     <div>
       <Router>
-        <LevelTab classlevel='test1' />
-        <LevelTab classlevel='random' />
-        <LevelTab classlevel='123' />
-        <LevelTab classlevel='class' />
+        <LevelTab classlevel='test1' isSignInVisible={false} handleUnhideLogin={mockHandleUnhideLogin} />
+        <LevelTab classlevel='random' isSignInVisible={true} handleUnhideLogin={mockHandleUnhideLogin} />
+        <LevelTab classlevel='123' isSignInVisible={false} handleUnhideLogin={mockHandleUnhideLogin} />
+        <LevelTab classlevel='class' isSignInVisible={true} handleUnhideLogin={mockHandleUnhideLogin} />
       </Router>
     </div>
   );

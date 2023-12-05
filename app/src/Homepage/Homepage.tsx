@@ -6,18 +6,26 @@ type LayoutProps = {
 }
 
 export const HomeLayout: React.FC<LayoutProps> = ( props: LayoutProps ) => {
+    var [isSignInHidden, setIsSignInHidden] = useState(false);
+    const setSignInVisible = () => {
+      setIsSignInHidden(false);
+    };
+
+    const setSignInInvisible = () => {
+      setIsSignInHidden(true);
+    };
     return (
         <div className='homelayout'>
             <Header>
-                <Logo/>
-                <Login/>
+                <Logo isSignInVisible={isSignInHidden} handleUnhideLogin={setSignInVisible} />
+                <Login isSignInVisible={isSignInHidden} handleHideLogin={setSignInInvisible} />
             </Header>
             <Sidebar>
-                <LevelTab classlevel='Home'/>
-                <LevelTab classlevel='CSE 100s'/>
-                <LevelTab classlevel='CSE 300s'/>
-                <LevelTab classlevel='CSE 400s'/>
-                <LevelTab classlevel='CSE 500s'/>
+                <LevelTab classlevel='Home' isSignInVisible={isSignInHidden} handleUnhideLogin={setSignInVisible}/>
+                <LevelTab classlevel='CSE 100s' isSignInVisible={isSignInHidden} handleUnhideLogin={setSignInVisible}/>
+                <LevelTab classlevel='CSE 300s' isSignInVisible={isSignInHidden} handleUnhideLogin={setSignInVisible}/>
+                <LevelTab classlevel='CSE 400s' isSignInVisible={isSignInHidden} handleUnhideLogin={setSignInVisible}/>
+                <LevelTab classlevel='CSE 500s' isSignInVisible={isSignInHidden} handleUnhideLogin={setSignInVisible}/>
             </Sidebar>
             {props.children}
         </div>
@@ -36,35 +44,49 @@ export const Header: React.FC<HeaderProps> = ( props: HeaderProps ) => {
   );
 }
 
-export const Logo: React.FC = () => {
-
+export const Logo: React.FC<{ isSignInVisible: boolean; handleUnhideLogin: () => void }> = ({
+  isSignInVisible: isSignInHidden,
+  handleUnhideLogin,
+}) => {
     const navigate = useNavigate();
-    
     const handleClick = () => {
-        navigate('/');
-    };
-
+      navigate('/login');
+      handleUnhideLogin();
+    }
     return (
-        <h1 className="logo" onClick={ handleClick }>
+        <h1 className="logo" 
+        onClick={() => {
+          navigate('/');
+          handleClick();
+        }}>
             RateMyCSE
         </h1>
     );
 }
 
-export const Login: React.FC = () => {
+export const Login: React.FC<{ isSignInVisible: boolean; handleHideLogin: () => void }> = ({
+    isSignInVisible: isSignInHidden,
+    handleHideLogin,
+  }) => {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
-
-    const handleClick = () => {
-        navigate('/login');
-    };
-
-    return (
-        <p className="login" onClick={ handleClick }>
-            Sign In
-        </p>
-    );
-}
+  const handleClick = () => {
+    navigate('/login');
+    handleHideLogin();
+  }
+  
+  return (
+      <p
+          className="login"
+          onClick={() => {
+            handleClick();
+          }}
+          style={{ visibility: isSignInHidden ? 'hidden' : 'visible' }}
+      >
+          Sign In
+      </p>
+  );
+};
 
 type SidebarProps = {
     children: React.ReactNode;
@@ -89,7 +111,11 @@ export const GetClassNumber = ( label : string ) => {
     return label.split(" ", 2)[1];
 }
 
-export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {   
+export const LevelTab: React.FC<{ classlevel: string; isSignInVisible: boolean; handleUnhideLogin: () => void }> = ({
+    classlevel,
+    isSignInVisible: isSignInHidden,
+    handleUnhideLogin,
+  }) => {   
     const navigate = useNavigate();
 
     const fetchData = async () => {
@@ -114,6 +140,7 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
             navigate('/cse' + GetClassNumber(classlevel));
             fetchData();
         }
+        handleUnhideLogin();
     };
     
     return (
