@@ -120,10 +120,10 @@ export const ReviewHolder: React.FC<{ classNum: string, reviewState: ReviewState
                 <RatingScale category={3} setReview={setRatingContents} initialValue={initialState.rating_three}/>
             </div>
             <div className="other-inputs">
-                <InputField setReview={setRatingContents} initialValue={initialState.quarter} field="Quarter Taken"/>
-                <InputField setReview={setRatingContents} initialValue={initialState.professor} field="Professor"/>
+                <InputField setReview={setRatingContents} initialValue={reviewState !== undefined ? initialState.quarter : ""} field="Quarter Taken"/>
+                <InputField setReview={setRatingContents} initialValue={reviewState !== undefined ? initialState.professor : ""} field="Professor"/>
             </div>
-            <Comment setReview={setRatingContents} initialValue={initialState.text}/>
+            <Comment setReview={setRatingContents} initialValue={reviewState !== undefined ? initialState.text : ""}/>
             <button className="review-button" onClick={postReview}>Submit</button>
             <button className="review-button" onClick={handleBackClick}>Back</button>
         </div>

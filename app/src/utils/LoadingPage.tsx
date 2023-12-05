@@ -4,11 +4,12 @@ import {useParams, useNavigate} from 'react-router-dom';
 const LoadingPage: React.FC = () => {
     const {classNum} = useParams();
     const navigate = useNavigate();
+    const milliseconds = 500;
 
     useEffect(() => {
         const timeout = setTimeout(() => {
             navigate('/course/' + classNum);
-        }, 2000);
+        }, milliseconds);
 
         return () => clearTimeout(timeout);
     }, [navigate]);
