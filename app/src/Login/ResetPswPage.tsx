@@ -3,6 +3,8 @@ import {TextField, Box, Button} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import { MuiOtpInput } from 'mui-one-time-password-input';
 import {checkPswValid} from './loginUtils';
+// import {CognitoUser} from 'amazon-cognito-identity-js';
+// import {getCognitoUserPoolAsync} from '../userpool';
 import './Login.css'
 
 const emailRegex = new RegExp('^[a-zA-Z0-9_]+@uw.edu$');
@@ -28,7 +30,7 @@ export const ResetPswPage: React.FC = () => {
     const [showSendCode, setShowSendCode] = useState(false);
     const [showReset, setShowReset] = useState(false);
 
-    function handleSendCode() {
+    async function handleSendCode() {
         // Check email is valid
         if (!email.match(emailRegex)) {
             setIsEmailInvalid(true);
@@ -40,6 +42,37 @@ export const ResetPswPage: React.FC = () => {
         setEmailHelperText('');
         setShowSendEmail(false);
         setShowSendCode(true);
+        // // Forgot password
+        // if (email.length > 0) {
+        //     const userPool = await getCognitoUserPoolAsync();
+        //     const cognitoUser = new CognitoUser({ Username: email, Pool: userPool });
+        //     cognitoUser.forgotPassword({
+        //         onSuccess: function(result) {
+        //             console.log('call result: ' + result);
+        //             // navigate to verficication code page
+        //             setIsEmailInvalid(false);
+        //             setEmailHelperText('');
+        //             setShowSendEmail(false);
+        //             setShowSendCode(true);
+        //         },
+        //         onFailure: function(err) {
+        //             alert(err);
+        //         },
+        //         inputVerificationCode() { // this is optional, and likely won't be implemented as in AWS's example (i.e, prompt to get info)
+        //             var verificationCode = prompt('Please input verification code ', '');
+        //             var newPassword = prompt('Enter new password ', '');
+        //             if (verificationCode === null) {
+        //                 alert("blank code");
+        //                 return;
+        //             }
+        //             if (newPassword === null) {
+        //                 alert("blank password");
+        //                 return;
+        //             }
+        //             cognitoUser.confirmPassword(verificationCode, newPassword, this);
+        //         }
+        //     });
+        // }
     }
 
     const handleChange = (newValue: string) => {
