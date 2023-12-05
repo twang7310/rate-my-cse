@@ -271,11 +271,11 @@
 }
 
 .edit-button {
-  background-image: url("../../images/edit.png"); /* Replace with your edit icon path */
+  background-image: url("../../images/edit.png");
 }
 
 .delete-button {
-  background-image: url("../../images/delete.png"); /* Replace with your delete icon path */
+  background-image: url("../../images/delete.png");
 }
 
 .edit-button, .delete-button {

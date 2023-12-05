@@ -5,7 +5,7 @@ import {getEmail, getSignInStatus} from "../Login/LoginPage";
 import {Link} from 'react-router-dom';
 import Popup from "../Popup/Popup";
 import './CoursePage.css'
-import { ReviewState } from "../Rating/Rating";
+import {ReviewState} from "../Rating/Rating";
 
 export const CoursePage: React.FC = () => {
 
@@ -25,7 +25,6 @@ export const CoursePage: React.FC = () => {
             try {
                 const response = await fetch(`/api/GetCourseData?num=${classNum}`);
                 const data = await response.json();
-
                 setCourse(data);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -166,6 +165,7 @@ export const ReviewHolder: React.FC<{classNum: string}> = ({classNum}) => {
                 const response = await fetch(`/api/GetCourseReviews?num=${classNum}`);
                 const data = await response.json();
 
+                // Sort the reviews such that the signed in user's review is first
                 const sortedReviews = data.sort((a: { reviewer: string }, b: { reviewer: string }) => {
                     if (a.reviewer === getEmail()) return -1; // Current user's review comes first
                     if (b.reviewer === getEmail()) return 1; // Other user's reviews come after
