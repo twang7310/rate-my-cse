@@ -5,6 +5,7 @@ import {getEmail, getSignInStatus} from "../Login/LoginPage";
 import {Link} from 'react-router-dom';
 import Popup from "../Popup/Popup";
 import './CoursePage.css'
+import { ReviewState } from "../Rating/Rating";
 
 export const CoursePage: React.FC = () => {
 
@@ -246,6 +247,20 @@ export const ReviewCard: React.FC<ReviewCardProps> = (props) => {
         }
     };
 
+    const handleEdit = () => {
+        const newReviewState: ReviewState = {
+            reviewer: getEmail(),
+            rating_one: props.rating1, 
+            rating_two: props.rating2, 
+            rating_three: props.rating3,
+            text: props.text,
+            course_number: props.class,
+            quarter: props.quarter,
+            professor: props.professor
+        };
+        navigate(`/course/${props.class}/review`, {state: {reviewState: newReviewState}});
+    };
+
     return(
         <div className="card review-card">
             <div className="review-card-left">
@@ -261,7 +276,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = (props) => {
             </div>
             {props.isCurrentUser && (
                 <div className="icons">
-                    <button className="icon-button edit-button" />
+                    <button className="icon-button edit-button" onClick={handleEdit}/>
                     <button className="icon-button delete-button" onClick={handleDelete} />
                 </div>
             )}

@@ -1,4 +1,4 @@
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {Comment, InputField, RatingDesc, RatingScale, ReviewHeader} from "./Rating-components";
 import {getEmail, getSignInStatus} from "../Login/LoginPage";
@@ -10,7 +10,10 @@ export const ReviewPage: React.FC = () => {
 
     const [course, setCourse] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
+    const location = useLocation();
 
+    const newReviewState: ReviewState = location.state?.reviewState;
+  
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -37,8 +40,8 @@ export const ReviewPage: React.FC = () => {
                 </div>
             )}
             <div className="page-contents">
-                <ReviewHolder classNum={classNum!}/>
-                <div className="rating-instr">
+            <ReviewHolder classNum={classNum!} reviewState={newReviewState} />                
+            <div className="rating-instr">
                     <RatingDesc rating={1}/>
                     <RatingDesc rating={2}/>
                     <RatingDesc rating={3}/>
@@ -59,8 +62,8 @@ export interface ReviewState {
     professor: string;
 }
 
-export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
-    const initialState : ReviewState = {
+export const ReviewHolder: React.FC<{ classNum: string, reviewState: ReviewState }> = ({ classNum, reviewState }) => {
+    const initialState: ReviewState = reviewState ? reviewState : {
         reviewer: getEmail(),  
         rating_one: 0, 
         rating_two: 0, 
@@ -69,7 +72,8 @@ export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
         course_number : classNum,
         quarter: 'N/A',
         professor: 'N/A'
-    };
+    }
+
     const [ratingContents, setRatingContents] = useState<ReviewState>(initialState);
     const [popupOpen, setPopupOpen] = useState(!getSignInStatus());
 
@@ -111,15 +115,15 @@ export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
                 </Popup>
             }
             <div className="scales">
-                <RatingScale category={1} setReview={setRatingContents}/>
-                <RatingScale category={2} setReview={setRatingContents}/>
-                <RatingScale category={3} setReview={setRatingContents}/>
+                <RatingScale category={1} setReview={setRatingContents} initialValue={initialState.rating_one}/>
+                <RatingScale category={2} setReview={setRatingContents} initialValue={initialState.rating_two}/>
+                <RatingScale category={3} setReview={setRatingContents} initialValue={initialState.rating_three}/>
             </div>
             <div className="other-inputs">
-                <InputField setReview={setRatingContents} field="Quarter Taken"/>
-                <InputField setReview={setRatingContents} field="Professor"/>
+                <InputField setReview={setRatingContents} initialValue={initialState.quarter} field="Quarter Taken"/>
+                <InputField setReview={setRatingContents} initialValue={initialState.professor} field="Professor"/>
             </div>
-            <Comment setReview={setRatingContents}/>
+            <Comment setReview={setRatingContents} initialValue={initialState.text}/>
             <button className="review-button" onClick={postReview}>Submit</button>
             <button className="review-button" onClick={handleBackClick}>Back</button>
         </div>
