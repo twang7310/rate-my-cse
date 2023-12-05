@@ -1,164 +1,30 @@
-.App {
-  text-align: center;
-}
 
-/* Header css */
-.header {
-  background-color: #4b2e83;
-  height: 11vh;
-  width: 100%;
-  position: fixed;
-  z-index: 1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  color: white;
-  font-size: 2.5vw;
-  font-weight: 700;
-  margin-left: 2%;
-  user-select: none;
-  cursor: pointer;
-}
-
-.login {
-  color: white;
-  font-size: 2vw;
-  font-weight: 400;
-  margin-right: 2%;
-  user-select: none;
-  cursor: pointer;
-}
-
-/* Sidebar css */
-.sidebar {
-  background-color: #f0f0f0;
-  height: 89vh;
-  width: 15%;
-  bottom: 0%;
-  position: fixed;
-}
-
-/* Classtab css */
-.leveltab {
-  text-align: center;
-  min-height: 9%;
-  width: 100%;
-  display: inline-block;
-  border: none;
-  margin-top: 4%;
-  font-size: 140%;
-}
-
-.leveltab:hover,
-.leveltab.clicked {
-  background-color: rgba(255, 255, 255, 0.897);
-  font-weight: bold;
-  background: linear-gradient(to right, #f0f0f0 7%, 7%,
-                            #c985ff 17%, transparent 17%);
-}
-
+/* Homepage container/background */
 .homepage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: #d3f4fe;
   position: absolute;
   top: 15%;
   left: 20%;
   right: 5%;
-  min-height: 200vh;
   text-align: center;
-}
-
-/* Class directory */
-.innerpage {
-  position: absolute;
-  top: 15%;
-  left: 20%;
-  right: 5%;
-  height: 200vh;
-  text-align: center;
-}
-
-.class-list {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.bold {
-  font-weight: bold;
-}
-
-/* Class directory card */
-.card {
-  border: 1px solid #ccc;
-  display: flex;
-  justify-content: space-between;
-  text-align: left;
-  padding: 1%;
-  margin: 10px;
-  background-color: #fff;
-  flex-grow: 1;
-  overflow: scroll;
-}
-
-/* Class card header and description */
-.class-info {
-  margin-right: 7%;
-  margin-left: 0.5%;
-}
-
-.class-title {
-  display: flex;
-  align-items: center;
-}
-
-.class-number {
-  margin-right: 5px;
-  font-size: x-large;
-}
-
-.class-name {
-  margin-left: 2%;
-}
-
-/* Class card average ratings */
-.class-ratings {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  margin-right: 1%;
-}
-
-.rating-pair {
-  display: flex;
-  justify-content: space-between;
-}
-
-.rating-pair-category {
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  min-width: 60px;
-  margin-right: 1.5vw;
-}
-
-.rating-pair-rating {
-  font-weight: bold;
-  display: flex;
-  font-size: 130%;
-  min-width: 60px;
-  width: 10vh;
-  min-height: 5vh;
-  align-items: center;
-  justify-content: center;
+  padding: 3%;
 }
 
 /* Welcome header */
 .welcome {
   text-align: center;
-  margin-top: 60px;
-  font-size: 300%;
+  margin-top: clamp(1px, 60px, 15vw);
+  font-size: clamp(1px, 300%, 9vw);
+}
+
+/* Header tagline */
+.tagline {
+  font-size: clamp(1px, 16px, 4vw);
+  margin-bottom: clamp(0px, 6vh, 10vw);
+  margin: 0;
 }
 
 /* How it works: header */
@@ -166,32 +32,36 @@
   top: 15%;
   height: 50%;
   width: 100%;
+  font-size: clamp(1px, 16px, 4vw);
+  margin: 40px;
 }
 
 /* Explanation below the How it works: header */
 .explanation {
   font-weight: normal;
+  font-size: clamp(1px, 16px, 4vw);
 }
 
 .ratingsflexbox {
   display: flex;
   justify-content: space-around;
-  min-height: 11%;
-  width: 100%;
 }
 
 /* The rating boxes for difficulty, workload, and practicality */
 .ratingbox {
   font-weight: bold;
-  font-size: 130%;
+  font-size: clamp(1px, 130%, 3vw);
   display: flex;
   align-items: center;
   align-self: flex-end;
   justify-content: center;
   height: 10vh;
-  min-width: 12vw;
+  max-height: 8ch;
+  width: 12vw;
+  min-width: 10ch;
 }
 
+/* Rating box colors */
 .ratingbox-diff {
   background-color: #e087e2;
 }
@@ -212,6 +82,8 @@
   color: gray;
   word-wrap: break-word;
   white-space: normal;
-  padding-top: 10px;
+  padding-top: clamp(1px, 10px, 2vw);
+  padding-bottom: 2vh;
   width: 16vw;
+  font-size: clamp(1px, 16px, 2vw);
 }

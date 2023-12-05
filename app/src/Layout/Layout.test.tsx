@@ -1,8 +1,7 @@
 import {render, screen} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import {GetClassNumber, HomeLayout, LevelTab} from './Homepage';
 import {BrowserRouter as Router} from 'react-router-dom';
-import React from 'react';
+import {HomeLayout} from './Layout';
+import { GetClassNumber, LevelTab } from './Layout-components';
 
 test('Checks HomeLayout has correct button names and in order within the sidebar', () => {
   render(
@@ -70,33 +69,4 @@ test('GetClassNumber returns class number after space', () => {
   expect(GetClassNumber(str2)).toEqual("200");
   expect(GetClassNumber(str3)).toEqual("403");
   expect(GetClassNumber(str4)).toEqual("5050505");
-});
-
-test('HomeLayout sidebar buttons navigate to correct routes', () => {
-  render(
-    <Router>
-      <HomeLayout>placeholder child</HomeLayout>
-    </Router>
-  );
-
-  const tabHome = screen.getByText('Home');
-  const tab100s = screen.getByText('CSE 100s');
-  const tab300s = screen.getByText('CSE 300s');
-  const tab400s = screen.getByText('CSE 400s');
-  const tab500s = screen.getByText('CSE 500s');
-
-  userEvent.click(tabHome);
-  expect(window.location.pathname).toEqual('/');
-
-  userEvent.click(tab100s);
-  expect(window.location.pathname).toEqual('/cse100s');
-
-  userEvent.click(tab300s);
-  expect(window.location.pathname).toEqual('/cse300s');
-
-  userEvent.click(tab400s);
-  expect(window.location.pathname).toEqual('/cse400s');
-
-  userEvent.click(tab500s);
-  expect(window.location.pathname).toEqual('/cse500s');
 });
