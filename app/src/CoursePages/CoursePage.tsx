@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {ClassRating} from "../Directories/Directory";
-import {getSignInStatus} from "../Login/LoginPage";
+import {getEmail, getSignInStatus} from "../Login/LoginPage";
 import {Link} from 'react-router-dom';
 import Popup from "../Popup/Popup";
 import './CoursePage.css'
@@ -24,6 +24,13 @@ export const CoursePage: React.FC = () => {
             try {
                 const response = await fetch(`/api/GetCourseData?num=${classNum}`);
                 const data = await response.json();
+
+                const sortedReviews = data.sort((a: { email: string; }, b: { email: string; }) => {
+                    if (a.email === getEmail()) return -1; // Current user's review comes first
+                    if (b.email === getEmail()) return 1; // Other user's reviews come after
+                    return 0;
+                });
+
                 setCourse(data);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -163,7 +170,14 @@ export const ReviewHolder: React.FC<{classNum: string}> = ({classNum}) => {
             try {
                 const response = await fetch(`/api/GetCourseReviews?num=${classNum}`);
                 const data = await response.json();
-                setReviews(data);
+
+                const sortedReviews = data.sort((a: { reviewer: string }, b: { reviewer: string }) => {
+                    if (a.reviewer === getEmail()) return -1; // Current user's review comes first
+                    if (b.reviewer === getEmail()) return 1; // Other user's reviews come after
+                    return 0;
+                });
+
+                setReviews(sortedReviews);
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -188,7 +202,8 @@ export const ReviewHolder: React.FC<{classNum: string}> = ({classNum}) => {
                         rating2={review.rating_two}
                         rating3={review.rating_three}
                         quarter={(review.quarter !== '') ? review.quarter : 'N/A'}
-                        professor={(review.professor !== '') ? review.professor : 'N/A'}/>
+                        professor={(review.professor !== '') ? review.professor : 'N/A'} 
+                        isCurrentUser={review.reviewer === getEmail()}/>
                     ))}
                 </div>
             )}
@@ -203,6 +218,7 @@ interface ReviewCardProps {
     rating3: number;
     quarter: string;
     professor: string;
+    isCurrentUser?: boolean;
 }
 
 export const ReviewCard: React.FC<ReviewCardProps> = (props) => {
@@ -219,6 +235,12 @@ export const ReviewCard: React.FC<ReviewCardProps> = (props) => {
                 <ClassRating category="Workload" rating={props.rating2} type="work review-box"/>
                 <ClassRating category="Practicality" rating={props.rating3} type="prac review-box"/>
             </div>
+            {props.isCurrentUser && (
+                <div className="icons">
+                    <button className="icon-button edit-button" />
+                    <button className="icon-button delete-button" />
+                </div>
+            )}
         </div>
     );
 }
