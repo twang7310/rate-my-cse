@@ -15,21 +15,29 @@ export const Header: React.FC<HeaderProps> = ( props: HeaderProps ) => {
     );
 }
 
-export const Logo: React.FC = () => {
-    const navigate = useNavigate();
-    
-    const handleClick = () => {
+export const Logo: React.FC<{ isSignInVisible: boolean; handleUnhideLogin: () => void }> = ({
+    isSignInVisible: isSignInHidden,
+    handleUnhideLogin,
+  }) => {
+      const navigate = useNavigate();
+      const handleClick = () => {
         navigate('/');
-    };
+        handleUnhideLogin();
+      }
+      return (
+          <h1 className="logo" 
+          onClick={() => {
+            handleClick();
+          }}>
+              RateMyCSE
+          </h1>
+      );
+  }
 
-    return (
-        <h1 className="logo" onClick={ handleClick }>
-            RateMyCSE
-        </h1>
-    );
-}
-
-export const Login: React.FC = () => {
+  export const Login: React.FC<{ isSignInVisible: boolean; handleHideLogin: () => void }> = ({
+    isSignInVisible: isSignInHidden,
+    handleHideLogin,
+  }) => {
     const location = useLocation();
 
     const navigate = useNavigate();
@@ -38,6 +46,7 @@ export const Login: React.FC = () => {
 
     const handleClick = () => {
         navigate('/login');
+        handleHideLogin();
     };
 
     const handleSignOut = () => {
@@ -57,7 +66,7 @@ export const Login: React.FC = () => {
                             <p className="signout" onClick={handleSignOut}>Sign Out</p>
                         </div>
                     ) : (
-                        <p className="login" onClick={handleClick}>
+                        <p className="login" onClick={handleClick} style={{ visibility: isSignInHidden ? 'hidden' : 'visible' }}>
                             Sign In
                         </p>
                     )}
@@ -106,7 +115,11 @@ export const GetClassNumber = ( label : string ) => {
     return label.split(" ", 2)[1];
 }
 
-export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {   
+export const LevelTab: React.FC<{ classlevel: string; isSignInVisible: boolean; handleUnhideLogin: () => void }> = ({
+    classlevel,
+    isSignInVisible: isSignInHidden,
+    handleUnhideLogin,
+  }) => {   
     const navigate = useNavigate();
     
     const handleClick = () => {
@@ -117,6 +130,7 @@ export const LevelTab: React.FC<{ classlevel: string }> = ({ classlevel }) => {
             // Gets 'X00s' from 'CSE X00s' classlevel and routes to that page
             navigate('/cse' + GetClassNumber(classlevel));
         }
+        handleUnhideLogin();
     };
     
     return (
