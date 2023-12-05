@@ -7,11 +7,9 @@ import {Link} from 'react-router-dom';
 import {EyeAdornment} from './LoginPage';
 import './Login.css'
 import Popup from '../Popup/Popup';
+import {checkPswValid} from './loginUtils';
 
 const emailRegex = new RegExp('^[a-zA-Z0-9_]+@uw.edu$');
-const capitalRegex = new RegExp('[A-Z]');
-const numberRegex = new RegExp('[0-9]');
-const specialRegex = new RegExp('[!@#$%^&*(),.?":{}|<>]');
 
 export const SignupPage: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -39,39 +37,9 @@ export const SignupPage: React.FC = () => {
             setIsEmailInvalid(false);
             setEmailHelperText('');
         }
-        // Check psw1 has at least 8 characters
-        if (psw1.length < 8) {
-            setIsPsw1Invalid(true);
-            setPsw1HelperText('Password must be at least 8 characters long.');
+        if (!checkPswValid(psw1, psw2, setIsPsw1Invalid, setPsw1HelperText,
+                          setIsPsw2Invalid, setPsw2HelperText)) {
             return;
-        }
-        // Check psw1 has at least one capital letter
-        if (!psw1.match(capitalRegex)) {
-            setIsPsw1Invalid(true);
-            setPsw1HelperText('Password must contain at least one capital letter.');
-            return;
-        }
-        // Check psw1 has at least one number
-        if (!psw1.match(numberRegex)) {
-            setIsPsw1Invalid(true);
-            setPsw1HelperText('Password must contain at least one number.');
-            return;
-        }
-        // Check psw1 has at least one special character
-        if (!psw1.match(specialRegex)) {
-            setIsPsw1Invalid(true);
-            setPsw1HelperText('Password must contain at least one special character.');
-            return;
-        }
-        setIsPsw1Invalid(false);
-        setPsw1HelperText('');
-        // Check psw1 and psw2 match
-        if (psw1 !== psw2) {
-            setIsPsw2Invalid(true);
-            setPsw2HelperText('Passwords do not match. Please try again.');
-        } else {
-            setIsPsw2Invalid(false);
-            setPsw2HelperText('');
         }
 
         setLoading(true);
