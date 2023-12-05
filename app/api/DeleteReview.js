@@ -29,7 +29,7 @@ export default async (req, res) => {
           ROUND(AVG(rating_three), 1) AS avg_rating_three
       FROM reviews 
       WHERE class_id = (SELECT class_id FROM courses WHERE number = ?)`;
-    const avgParams = [course_number];
+    const avgParams = [classNumber];
 
     const avgResult = await new Promise((resolve, reject) => {
       pool.query(avgQuery, avgParams, (err, results) => {
@@ -50,7 +50,7 @@ export default async (req, res) => {
       SET rating_one = ?, rating_two = ?, rating_three = ?
       WHERE number = ?
       LIMIT 1`;
-    const updateQueryParams = [avg_rating_one, avg_rating_two, avg_rating_three, course_number];
+    const updateQueryParams = [avg_rating_one, avg_rating_two, avg_rating_three, classNumber];
 
     // Execute the update query
     const updateResult = await new Promise((resolve, reject) => {
