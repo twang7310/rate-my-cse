@@ -7,10 +7,6 @@ import {Link} from 'react-router-dom';
 import {EyeAdornment} from './LoginPage';
 import './Login.css'
 import Popup from '../Popup/Popup';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const emailRegex = new RegExp('^[a-zA-Z0-9_]+@uw.edu$');
 const capitalRegex = new RegExp('[A-Z]');

@@ -29,6 +29,7 @@ export function getEmail(): string {
     return user;
 }
 
+// The eyeball icon in the password fields that toggles the hide/unhide
 export const EyeAdornment: React.FC<{visible: any, setVisible: any}> = ({visible, setVisible}) => (
     <InputAdornment position="end">
         <IconButton onClick={() => setVisible(!visible)}>
