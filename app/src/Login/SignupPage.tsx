@@ -4,8 +4,13 @@ import {useNavigate} from 'react-router-dom';
 import {CognitoUser, CognitoUserAttribute} from 'amazon-cognito-identity-js';
 import {getCognitoUserPoolAsync} from '../userpool';
 import {Link} from 'react-router-dom';
+import {EyeAdornment} from './LoginPage';
 import './Login.css'
 import Popup from '../Popup/Popup';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const emailRegex = new RegExp('^[a-zA-Z0-9_]+@uw.edu$');
 const capitalRegex = new RegExp('[A-Z]');
@@ -16,6 +21,7 @@ export const SignupPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [psw1, setPsw1] = useState('');
     const [psw2, setPsw2] = useState('');
+    const [visible, setVisible] = useState(false);
     const [isEmailInvalid, setIsEmailInvalid] = useState(false);
     const [emailHelperText, setEmailHelperText] = useState('');
     const [isPsw1Invalid, setIsPsw1Invalid] = useState(false);
@@ -173,6 +179,7 @@ export const SignupPage: React.FC = () => {
                 }}
             >
                 <TextField
+                    type='password'
                     error={isPsw1Invalid}
                     helperText={psw1HelperText}
                     fullWidth
@@ -183,6 +190,7 @@ export const SignupPage: React.FC = () => {
                     onInput={ (e) => {
                         setPsw1((e.target as HTMLInputElement).value)
                     }}
+                    InputProps={{endAdornment: <EyeAdornment visible={visible} setVisible={setVisible}/>}}
                 />
             </Box>
 
@@ -195,6 +203,7 @@ export const SignupPage: React.FC = () => {
                     error={isPsw2Invalid}
                     helperText={psw2HelperText}
                     fullWidth
+                    type={visible ? 'text' : 'password'}
                     id='repeat-password'
                     label='Repeat Password'
                     variant='outlined'
@@ -202,6 +211,7 @@ export const SignupPage: React.FC = () => {
                     onInput={ (e) => {
                         setPsw2((e.target as HTMLInputElement).value)
                     }}
+                    InputProps={{endAdornment: <EyeAdornment visible={visible} setVisible={setVisible}/>}}
                 />
             </Box>
 
