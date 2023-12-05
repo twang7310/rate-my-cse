@@ -37,7 +37,7 @@ export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
         };
 
         fetchData();
-    }, [query]);
+    }, [query, classLevelNumber]);
 
     return (
         <div className="innerpage">

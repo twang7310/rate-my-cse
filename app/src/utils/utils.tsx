@@ -37,7 +37,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ isHeader }) => {
         <div className={isHeader ? "header-search-container" : "search-container"}>
             <input
                 type="text"
-                placeholder="Search..."
+                placeholder={isHeader ? "Search..." : "Look up a CSE class"}
                 className={isHeader ? "header-search-bar" : "search-bar"}
                 onKeyDown={handleKeyDown}
             />
