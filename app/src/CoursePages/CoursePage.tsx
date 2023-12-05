@@ -25,12 +25,6 @@ export const CoursePage: React.FC = () => {
                 const response = await fetch(`/api/GetCourseData?num=${classNum}`);
                 const data = await response.json();
 
-                const sortedReviews = data.sort((a: { email: string; }, b: { email: string; }) => {
-                    if (a.email === getEmail()) return -1; // Current user's review comes first
-                    if (b.email === getEmail()) return 1; // Other user's reviews come after
-                    return 0;
-                });
-
                 setCourse(data);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -203,6 +197,7 @@ export const ReviewHolder: React.FC<{classNum: string}> = ({classNum}) => {
                         rating3={review.rating_three}
                         quarter={(review.quarter !== '') ? review.quarter : 'N/A'}
                         professor={(review.professor !== '') ? review.professor : 'N/A'} 
+                        class={classNum}
                         isCurrentUser={review.reviewer === getEmail()}/>
                     ))}
                 </div>
@@ -218,10 +213,39 @@ interface ReviewCardProps {
     rating3: number;
     quarter: string;
     professor: string;
+    class: string;
     isCurrentUser?: boolean;
 }
 
 export const ReviewCard: React.FC<ReviewCardProps> = (props) => {
+    const navigate = useNavigate();
+    const handleDelete = async () => {
+        const confirmDelete = window.confirm("Warning! This action is irreversible. Continue?");
+
+        if (confirmDelete) {
+            const reviewer = getEmail();
+            const classNumber = props.class;
+
+            await fetch(`/api/DeleteReview?reviewer=${reviewer}&classNumber=${classNumber}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => {
+                if (!response.ok) {
+                    console.error("Unable to delete review: status code ", response.status);
+                }
+                response.json();
+            })
+            .catch(error => {
+                console.error('There was a problem with the delete operation:', error);
+            });
+            
+            navigate('/course/' + classNumber + '/loading');
+        }
+    };
+
     return(
         <div className="card review-card">
             <div className="review-card-left">
@@ -238,7 +262,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = (props) => {
             {props.isCurrentUser && (
                 <div className="icons">
                     <button className="icon-button edit-button" />
-                    <button className="icon-button delete-button" />
+                    <button className="icon-button delete-button" onClick={handleDelete} />
                 </div>
             )}
         </div>

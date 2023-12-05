@@ -7,6 +7,7 @@ import {SignupPage} from '../Login/SignupPage';
 import {CoursePage} from '../CoursePages/CoursePage';
 import {ReviewPage} from '../Rating/Rating';
 import {useEffect} from 'react';
+import LoadingPage from '../utils/LoadingPage';
 
 // Utility component, scrolls to the top of the 
 // page upon route change
@@ -38,9 +39,10 @@ function App() {
           ))}
           <Route path={'/login'} element={<LoginPage/>}/>
           <Route path={'/signup'} element={<SignupPage/>}/>
-          <Route path={'/search/:query'} element={<ClassList />} />
+          <Route path={'/search/:query'} element={<ClassList/>} />
           <Route path={'/course/:classNum'} element={<CoursePage/>}/>
           <Route path={'/course/:classNum/review'} element={<ReviewPage/>}/>
+          <Route path={'/course/:classNum/loading'} element={<LoadingPage/>}/>
         </Routes>
       </HomeLayout>
     </Router>
