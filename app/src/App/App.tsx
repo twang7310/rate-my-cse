@@ -38,6 +38,7 @@ function App() {
           ))}
           <Route path={'/login'} element={<LoginPage/>}/>
           <Route path={'/signup'} element={<SignupPage/>}/>
+          <Route path={'/search/:query'} element={<ClassList />} />
           <Route path={'/course/:classNum'} element={<CoursePage/>}/>
           <Route path={'/course/:classNum/review'} element={<ReviewPage/>}/>
         </Routes>

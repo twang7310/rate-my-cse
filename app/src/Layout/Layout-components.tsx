@@ -1,5 +1,6 @@
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from 'react-router-dom';
 import {clearUser, getSignInStatus, getEmail, setSignInStatus} from '../Login/LoginPage';
+import {SearchBar} from '../utils/utils';
 import './Layout.css'
 
 type HeaderProps = {
@@ -29,6 +30,8 @@ export const Logo: React.FC = () => {
 }
 
 export const Login: React.FC = () => {
+    const location = useLocation();
+
     const navigate = useNavigate();
     const isSignedIn = getSignInStatus();
     const email = getEmail();
@@ -43,20 +46,42 @@ export const Login: React.FC = () => {
         navigate('../');
     }
 
-    return (
-        <div>
-            {isSignedIn ? (
-                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '25px'}}>
-                    <p className="email">{email}</p>
-                    <p className="signout" onClick={handleSignOut}>Sign Out</p>
+    const renderContent = () => {
+        if (location.pathname !== '/') {
+            return (
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', position: 'relative', width: '40%' }}>
+                    <SearchBar isHeader={true}/>
+                    {isSignedIn ? (
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '25px' }}>
+                            <p className="email">{email}</p>
+                            <p className="signout" onClick={handleSignOut}>Sign Out</p>
+                        </div>
+                    ) : (
+                        <p className="login" onClick={handleClick}>
+                            Sign In
+                        </p>
+                    )}
                 </div>
-            ) : (
-                <p className="login" onClick={handleClick}>
-                    Sign In
-                </p>
-            )}
-        </div>
-    );
+            );
+        } else {
+            return (
+                <div>
+                    {isSignedIn ? (
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '25px' }}>
+                            <p className="email">{email}</p>
+                            <p className="signout" onClick={handleSignOut}>Sign Out</p>
+                        </div>
+                    ) : (
+                        <p className="login" onClick={handleClick}>
+                            Sign In
+                        </p>
+                    )}
+                </div>
+            );
+        }
+    };
+    
+    return renderContent();
 }
 
 type SidebarProps = {
