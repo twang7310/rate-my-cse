@@ -32,9 +32,8 @@ function App() {
           <Route path={"/"} element={<HomePage />} />
           {classNumbers.map((classNumber) => (
             <Route
-              key={classNumber}
               path={"/" + classPrefix + classNumber}
-              element={<ClassList classLevelNumber={classNumber[0]}/>}
+              element={<ClassList classLevelNumber={classNumber[0]} />}
             />
           ))}
           <Route path={'/login'} element={<LoginPage/>}/>
