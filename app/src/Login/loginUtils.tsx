@@ -3,6 +3,7 @@ export const checkPswValid = (psw1: string, psw2:string, setIsPsw1Invalid: any,
     setPsw1HelperText: any, setIsPsw2Invalid: any, setPsw2HelperText: any) => {
 
     const capitalRegex = new RegExp('[A-Z]');
+    const lowerRegex = new RegExp('[a-z]');
     const numberRegex = new RegExp('[0-9]');
     const specialRegex = new RegExp('[!@#$%^&*(),.?":{}|<>]');
 
@@ -16,6 +17,12 @@ export const checkPswValid = (psw1: string, psw2:string, setIsPsw1Invalid: any,
     if (!psw1.match(capitalRegex)) {
         setIsPsw1Invalid(true);
         setPsw1HelperText('Password must contain at least one capital letter.');
+        return false;
+    }
+    // Check psw1 has at least one lower case letter
+    if (!psw1.match(lowerRegex)) {
+        setIsPsw1Invalid(true);
+        setPsw1HelperText('Password must contain at least one lower case letter.');
         return false;
     }
     // Check psw1 has at least one number
