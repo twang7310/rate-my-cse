@@ -1,6 +1,8 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {Comment, InputField, RatingDesc, RatingScale, ReviewHeader} from "./Rating-components";
+import {getEmail, getSignInStatus} from "../Login/LoginPage";
+import Popup from "../Popup/Popup";
 import './Rating.css'
 
 export const ReviewPage: React.FC = () => {
@@ -59,7 +61,7 @@ export interface ReviewState {
 
 export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
     const initialState : ReviewState = {
-        reviewer: 'test_user',  
+        reviewer: getEmail(),  
         rating_one: 0, 
         rating_two: 0, 
         rating_three: 0,
@@ -69,10 +71,16 @@ export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
         professor: 'N/A'
     };
     const [ratingContents, setRatingContents] = useState<ReviewState>(initialState);
+    const [popupOpen, setPopupOpen] = useState(!getSignInStatus());
 
     const navigate = useNavigate();
 
     const handleBackClick = () => {
+        navigate('/course/' + classNum);
+    }
+
+    const closePopup = () => {
+        setPopupOpen(false);
         navigate('/course/' + classNum);
     }
 
@@ -94,6 +102,14 @@ export const ReviewHolder: React.FC<{classNum : string}> = ({classNum}) => {
 
     return (
         <div className="rating-inputs">
+            {popupOpen && 
+                <Popup onClose={closePopup} header="Login to Review">
+                    <p>You must be logged in with a UW email address to leave a review.</p>
+                    <p>
+                        Click here to <Link to="/login" onClick={() => setPopupOpen(false)}>Login</Link> or <Link to="/signup" onClick={() => setPopupOpen(false)}>Sign Up</Link>
+                    </p>
+                </Popup>
+            }
             <div className="scales">
                 <RatingScale category={1} setReview={setRatingContents}/>
                 <RatingScale category={2} setReview={setRatingContents}/>
