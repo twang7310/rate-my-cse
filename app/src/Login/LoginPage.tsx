@@ -5,6 +5,10 @@ import Button from '@mui/material/Button';
 import {useNavigate} from 'react-router-dom';
 import {authenticate} from './authenticate';
 import './Login.css'
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 let isUserSignedIn = false;
 let user: string = '';
@@ -25,9 +29,19 @@ export function getEmail(): string {
     return user;
 }
 
+// The eyeball icon in the password fields that toggles the hide/unhide
+export const EyeAdornment: React.FC<{visible: any, setVisible: any}> = ({visible, setVisible}) => (
+    <InputAdornment position="end">
+        <IconButton onClick={() => setVisible(!visible)}>
+            {visible ? <VisibilityOff /> : <Visibility/>}
+        </IconButton>
+    </InputAdornment>
+)
+
 export const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [visible, setVisible] = useState(false);
     const [isInvalidLogin, setIsInvalidLogin] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -89,7 +103,7 @@ export const LoginPage: React.FC = () => {
             console.error('Error adding user to database:', error);
         }
     }
-    
+
     return (
         <div className='loginpage'>
             <h1>Login</h1>
@@ -121,6 +135,7 @@ export const LoginPage: React.FC = () => {
                 
                 <TextField
                     fullWidth
+                    type={visible ? 'text' : 'password'}
                     error={isInvalidLogin !== ''}
                     helperText={isInvalidLogin}
                     id='password'
@@ -130,6 +145,7 @@ export const LoginPage: React.FC = () => {
                     onInput={ (e) => {
                         setPassword((e.target as HTMLInputElement).value)
                     }}
+                    InputProps={{endAdornment: <EyeAdornment visible={visible} setVisible={setVisible}/>}}
                 />
             </Box>
 
