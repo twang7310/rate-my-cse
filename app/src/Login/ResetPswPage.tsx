@@ -3,8 +3,8 @@ import {TextField, Box, Button} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import { MuiOtpInput } from 'mui-one-time-password-input';
 import {checkPswValid} from './loginUtils';
-// import {CognitoUser} from 'amazon-cognito-identity-js';
-// import {getCognitoUserPoolAsync} from '../userpool';
+import {CognitoUser} from 'amazon-cognito-identity-js';
+import {getCognitoUserPoolAsync} from '../userpool';
 import './Login.css'
 
 const emailRegex = new RegExp('^[a-zA-Z0-9_]+@uw.edu$');
@@ -38,60 +38,52 @@ export const ResetPswPage: React.FC = () => {
             return;
         }
         // TODO: Send email address to backend to send code
-        setIsEmailInvalid(false);
-        setEmailHelperText('');
-        setShowSendEmail(false);
-        setShowSendCode(true);
-        // // Forgot password
-        // if (email.length > 0) {
-        //     const userPool = await getCognitoUserPoolAsync();
-        //     const cognitoUser = new CognitoUser({ Username: email, Pool: userPool });
-        //     cognitoUser.forgotPassword({
-        //         onSuccess: function(result) {
-        //             console.log('call result: ' + result);
-        //             // navigate to verficication code page
-        //             setIsEmailInvalid(false);
-        //             setEmailHelperText('');
-        //             setShowSendEmail(false);
-        //             setShowSendCode(true);
-        //         },
-        //         onFailure: function(err) {
-        //             alert(err);
-        //         },
-        //         inputVerificationCode() { // this is optional, and likely won't be implemented as in AWS's example (i.e, prompt to get info)
-        //             var verificationCode = prompt('Please input verification code ', '');
-        //             var newPassword = prompt('Enter new password ', '');
-        //             if (verificationCode === null) {
-        //                 alert("blank code");
-        //                 return;
-        //             }
-        //             if (newPassword === null) {
-        //                 alert("blank password");
-        //                 return;
-        //             }
-        //             cognitoUser.confirmPassword(verificationCode, newPassword, this);
-        //         }
-        //     });
-        // }
+        // Forgot password
+        if (email.length > 0) {
+            const userPool = await getCognitoUserPoolAsync();
+            const cognitoUser = new CognitoUser({ Username: email, Pool: userPool });
+            cognitoUser.forgotPassword({
+                onSuccess: function(result) {
+                    console.log('call result: ' + result);
+                    // navigate to verficication code page
+                    setIsEmailInvalid(false);
+                    setEmailHelperText('');
+                    setShowSendEmail(false);
+                    setShowLayout(false);
+                    setShowReset(true);
+                },
+                onFailure: function(err) {
+                    alert(err);
+                }
+            });
+        }
     }
 
-    const handleChange = (newValue: string) => {
-        setOtp(newValue)
-    }
-
-    function handleVerify() {
+    async function handleVerify() {
         // Check code is valid
         if (otp.length !== 6) {
             setIsCodeInvalid(true);
             setCodeHelperText('Please enter a valid 6 digit code.');
             return;
         }
-        // TODO: Send code to backend to verify
-        setIsCodeInvalid(false);
-        setCodeHelperText(sentText);
-        setShowSendCode(false);
-        setShowLayout(false);
-        setShowReset(true);
+        // Send code to backend to verify
+        const userPool = await getCognitoUserPoolAsync();
+        const cognitoUser = new CognitoUser({ Username: email, Pool: userPool });
+        cognitoUser.confirmPassword(otp, psw1, {
+            onSuccess: function(confirmResult) {
+                console.log('call result: ' + confirmResult);
+                // navigate to login page
+                navigate('/login');
+            },
+            onFailure: function(err) {
+                alert(err);
+            }
+        });
+        // setIsCodeInvalid(false);
+        // setCodeHelperText(sentText);
+        // setShowSendCode(false);
+        // setShowLayout(false);
+        // setShowReset(true);
     }
 
     function handleSubmit() {
@@ -99,7 +91,10 @@ export const ResetPswPage: React.FC = () => {
                      setIsPsw2Invalid, setPsw2HelperText)) {
             return;
         }
-        // TODO: Send new password to backend
+        // toggle to verification code page
+        setShowLayout(true);
+        setShowSendCode(true);
+        setShowReset(false);
     }
 
     function handleResend() {
@@ -168,7 +163,8 @@ export const ResetPswPage: React.FC = () => {
                     marginTop: '15%'
                 }}
             >
-                 <MuiOtpInput length={6} value={otp} onChange={handleChange} />
+                <MuiOtpInput length={6} value={otp} onChange={
+                    (newValue: string) => { setOtp(newValue) }} />
             </Box>
             
             <p 
