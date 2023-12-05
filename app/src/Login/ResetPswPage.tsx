@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {TextField, Box, Button} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
-import { MuiOtpInput } from 'mui-one-time-password-input';
+import {MuiOtpInput} from 'mui-one-time-password-input';
 import {checkPswValid} from './loginUtils';
 import {CognitoUser} from 'amazon-cognito-identity-js';
 import {getCognitoUserPoolAsync} from '../userpool';
@@ -30,33 +30,19 @@ export const ResetPswPage: React.FC = () => {
     const [showSendCode, setShowSendCode] = useState(false);
     const [showReset, setShowReset] = useState(false);
 
-    async function handleSendCode() {
+    async function handleContinue() {
         // Check email is valid
         if (!email.match(emailRegex)) {
             setIsEmailInvalid(true);
             setEmailHelperText('Please enter a valid @uw.edu email.');
             return;
         }
-        // TODO: Send email address to backend to send code
-        // Forgot password
-        if (email.length > 0) {
-            const userPool = await getCognitoUserPoolAsync();
-            const cognitoUser = new CognitoUser({ Username: email, Pool: userPool });
-            cognitoUser.forgotPassword({
-                onSuccess: function(result) {
-                    console.log('call result: ' + result);
-                    // navigate to verficication code page
-                    setIsEmailInvalid(false);
-                    setEmailHelperText('');
-                    setShowSendEmail(false);
-                    setShowLayout(false);
-                    setShowReset(true);
-                },
-                onFailure: function(err) {
-                    alert(err);
-                }
-            });
-        }
+        // Continue to reset password
+        setIsEmailInvalid(false);
+        setEmailHelperText('');
+        setShowSendEmail(false);
+        setShowLayout(false);
+        setShowReset(true);
     }
 
     async function handleVerify() {
@@ -66,9 +52,9 @@ export const ResetPswPage: React.FC = () => {
             setCodeHelperText('Please enter a valid 6 digit code.');
             return;
         }
-        // Send code to backend to verify
         const userPool = await getCognitoUserPoolAsync();
         const cognitoUser = new CognitoUser({ Username: email, Pool: userPool });
+        // Send code to backend to verify
         cognitoUser.confirmPassword(otp, psw1, {
             onSuccess: function(confirmResult) {
                 console.log('call result: ' + confirmResult);
@@ -79,19 +65,25 @@ export const ResetPswPage: React.FC = () => {
                 alert(err);
             }
         });
-        // setIsCodeInvalid(false);
-        // setCodeHelperText(sentText);
-        // setShowSendCode(false);
-        // setShowLayout(false);
-        // setShowReset(true);
     }
 
-    function handleSubmit() {
+    async function handleSubmit() {
         if (!checkPswValid(psw1, psw2, setIsPsw1Invalid, setPsw1HelperText,
                      setIsPsw2Invalid, setPsw2HelperText)) {
             return;
         }
-        // toggle to verification code page
+        // Forgot password
+        const userPool = await getCognitoUserPoolAsync();
+        const cognitoUser = new CognitoUser({ Username: email, Pool: userPool });
+        cognitoUser.forgotPassword({
+            onSuccess: function(result) {
+                console.log('Email has been sent: ' + result);
+            },
+            onFailure: function(err) {
+                alert(err);
+            }
+        });
+        // Continue to verification code page
         setShowLayout(true);
         setShowSendCode(true);
         setShowReset(false);
@@ -142,7 +134,7 @@ export const ResetPswPage: React.FC = () => {
 
             <Button 
                 style={{ display: showSendEmail ? undefined : 'none' }}
-                onClick={() => handleSendCode()}
+                onClick={() => handleContinue()}
                 variant="contained"
                 sx={{
                     borderRadius: 28,
@@ -153,7 +145,7 @@ export const ResetPswPage: React.FC = () => {
                     marginTop: '5%'
                 }}
             >
-                Send Verification Code
+                Continue
             </Button>
 
             <Box 
