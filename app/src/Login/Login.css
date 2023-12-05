@@ -49,3 +49,7 @@
   color: #159500;
   font-weight: 700;
 }
+
+.hidden {
+  display: none;
+}

@@ -4,22 +4,28 @@ import {useNavigate} from 'react-router-dom';
 import { MuiOtpInput } from 'mui-one-time-password-input';
 import './Login.css'
 
+const sentText = 'An email has been sent to your inbox with a verification code.';
 
 export const EnterCodePage: React.FC = () => {
     const [otp, setOtp] = React.useState('')
     const [isCodeInvalid, setIsCodeInvalid] = useState(false);
-    const [codeHelperText, setCodeHelperText] = useState('');
+    const [codeHelperText, setCodeHelperText] = useState(sentText);
     const navigate = useNavigate();
 
-    // function handleChange(newValue: string) {
-    //     setOtp(newValue)
-    // }
     const handleChange = (newValue: string) => {
         setOtp(newValue)
     }
 
     function handleVerify() {
-
+        // Check code is valid
+        if (otp.length !== 6) {
+            setIsCodeInvalid(true);
+            setCodeHelperText('Please enter a valid 6 digit code.');
+            return;
+        }
+        setIsCodeInvalid(false);
+        setCodeHelperText(sentText);
+        navigate('/reset-password');
     }
 
     function handleResend() {
@@ -30,21 +36,25 @@ export const EnterCodePage: React.FC = () => {
         navigate('/login');
     }
 
+    const EnterCodePage  = () => {
+
+    }
+
     return (
         <div className='signuppage'>
             <h1>Please verify your UW email</h1>
 
             <Box
                 sx={{
-                    width: '45%',
+                    width: '55%',
                     marginTop: '15%'
                 }}
             >
-                 <MuiOtpInput value={otp} onChange={handleChange} />
+                 <MuiOtpInput length={6} value={otp} onChange={handleChange} />
             </Box>
-
-            <p id='email-sent'>
-                An email has been sent to your inbox with a verification code.
+            
+            <p id='email-sent' style={{color: isCodeInvalid ? "#ff0000" : "#159500"}}>
+                {codeHelperText}
             </p>
 
             <Button

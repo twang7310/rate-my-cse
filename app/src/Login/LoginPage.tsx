@@ -20,7 +20,7 @@ export const LoginPage: React.FC = () => {
     }
 
     function handleForgot() {
-        navigate('/verify-email');
+        navigate('/reset-psw');
     }
 
     return (
