@@ -81,8 +81,7 @@ export const ResetPswPage: React.FC = () => {
         // Send code to backend to verify
         cognitoUser.confirmPassword(otp, psw1, {
             onSuccess: function(confirmResult) {
-                // popup saying reset successful and navigate to login page
-                // navigate('/login');
+                // popup saying reset successful
                 setPopupOpen(true);
             },
             onFailure: function(err) {
@@ -106,7 +105,13 @@ export const ResetPswPage: React.FC = () => {
     return (
         <div className='signuppage' id='container'>
             {popupOpen && 
-                <Popup onClose={() => setPopupOpen(false)} header="">
+                <Popup 
+                    onClose={() => {
+                        setPopupOpen(false);
+                        navigate('/login');
+                    }} 
+                    header=""
+                >
                     <p>Password changed successfully!</p>
                 </Popup>
             }
