@@ -83,8 +83,8 @@ export const ResetPswPage: React.FC = () => {
             onSuccess: function(confirmResult) {
                 console.log('call result: ' + confirmResult);
                 // popup saying reset successful and navigate to login page
-                setPopupOpen(true);
                 navigate('/login');
+                setPopupOpen(true);
             },
             onFailure: function(err) {
                 setIsCodeInvalid(true);
