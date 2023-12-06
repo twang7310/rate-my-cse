@@ -220,30 +220,14 @@ interface ReviewCardProps {
 
 export const ReviewCard: React.FC<ReviewCardProps> = (props) => {
     const navigate = useNavigate();
+    const [popupOpen, setPopupOpen] = useState(false);
+    const [confirmDelete, setDelete] = useState(false);
+
     const handleDelete = async () => {
-        const confirmDelete = window.confirm("Warning! This action is irreversible. Continue?");
+        setPopupOpen(true);
 
         if (confirmDelete) {
-            const reviewer = getEmail();
-            const classNumber = props.class;
-
-            await fetch(`/api/DeleteReview?reviewer=${reviewer}&classNumber=${classNumber}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then(response => {
-                if (!response.ok) {
-                    console.error("Unable to delete review: status code ", response.status);
-                }
-                response.json();
-            })
-            .catch(error => {
-                console.error('There was a problem with the delete operation:', error);
-            });
             
-            navigate('/course/' + classNumber + '/loading');
         }
     };
 
@@ -261,8 +245,44 @@ export const ReviewCard: React.FC<ReviewCardProps> = (props) => {
         navigate(`/course/${props.class}/review`, {state: {reviewState: newReviewState}});
     };
 
+    const classNumber = props.class;
+
+    const handleConfirmation = async () => {
+        setPopupOpen(false);
+
+        const reviewer = getEmail();
+
+        await fetch(`/api/DeleteReview?reviewer=${reviewer}&classNumber=${classNumber}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+                console.error("Unable to delete review: status code ", response.status);
+            }
+            response.json();
+        })
+        .catch(error => {
+            console.error('There was a problem with the delete operation:', error);
+        });
+        
+        navigate('/course/' + classNumber + '/loading');
+    }
+
+    const handleX = () => {
+        setPopupOpen(false);
+        navigate('/course/' + classNumber);
+    }
+
     return(
         <div className="card review-card">
+            {popupOpen && 
+                <Popup onClose={() => { handleConfirmation() }} onX={() => {handleX()}} header="">
+                    <p>"Warning! This action is irreversible. Continue?"</p>
+                </Popup>
+            }
             <div className="review-card-left">
                 <ReviewCardHeader quarter={props.quarter} professor={props.professor}/>
                 <div className={`review-text ${(props.text === '(No Comment)') ? 'italics' : ''}`}>
