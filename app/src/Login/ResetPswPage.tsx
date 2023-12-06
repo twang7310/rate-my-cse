@@ -190,7 +190,9 @@ export const ResetPswPage: React.FC = () => {
             <p 
                 id='email-sent'
                 style={{ color: isCodeInvalid ? "#ff0000" : "#159500",
-                         display: showSendCode ? undefined : 'none'}}>
+                         display: showSendCode ? undefined : 'none',
+                         fontSize: 'clamp(1px, 16px, 3vw)'}}
+                >
                 {codeHelperText}
             </p>
 
