@@ -4,6 +4,7 @@ import {HomePage} from '../Homepage/Homepage';
 import {ClassList} from '../Directories/Directory';
 import {LoginPage} from '../Login/LoginPage';
 import {SignupPage} from '../Login/SignupPage';
+import {ResetPswPage} from '../Login/ResetPswPage';
 import {CoursePage} from '../CoursePages/CoursePage';
 import {ReviewPage} from '../Rating/Rating';
 import {useEffect} from 'react';
@@ -38,6 +39,7 @@ function App() {
           ))}
           <Route path={'/login'} element={<LoginPage/>}/>
           <Route path={'/signup'} element={<SignupPage/>}/>
+          <Route path={'/reset-psw'} element={<ResetPswPage/>}/>
           <Route path={'/search/:query'} element={<ClassList />} />
           <Route path={'/course/:classNum'} element={<CoursePage/>}/>
           <Route path={'/course/:classNum/review'} element={<ReviewPage/>}/>
