@@ -1,4 +1,3 @@
-
 /* Homepage container/background */
 .homepage {
   display: flex;
@@ -10,7 +9,7 @@
   left: 20%;
   right: 5%;
   text-align: center;
-  padding: 3%;
+  padding: 3% 4%;
 }
 
 /* Welcome header */
@@ -33,13 +32,13 @@
   height: 50%;
   width: 100%;
   font-size: clamp(1px, 16px, 4vw);
-  margin: 40px;
 }
 
 /* Explanation below the How it works: header */
 .explanation {
   font-weight: normal;
   font-size: clamp(1px, 16px, 4vw);
+  margin-top: 3vh;
 }
 
 .ratingsflexbox {
@@ -86,4 +85,15 @@
   padding-bottom: 2vh;
   width: 16vw;
   font-size: clamp(1px, 16px, 2vw);
+}
+
+.page-instructions {
+  margin-top: 4vh;
+}
+
+.example-button {
+  align-items: center;
+  margin-left: 1ch;
+  padding: 1.5% !important;
+  font-size: clamp(1px, 14px, 3vw) !important;
 }
