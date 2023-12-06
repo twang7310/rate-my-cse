@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 
-const LoadingPage: React.FC = () => {
+export const LoadingPage: React.FC = () => {
     const {classNum} = useParams();
     const navigate = useNavigate();
     const milliseconds = 500;
@@ -12,14 +12,12 @@ const LoadingPage: React.FC = () => {
         }, milliseconds);
 
         return () => clearTimeout(timeout);
-    }, [navigate]);
+    }, [navigate, classNum]);
 
     return (
         <div className="innerpage">
         <div className="loading-spinner center" />
         <div className="loading-text">Loading...</div>
         </div>
-  ) ;
+    );
 };
-
-export default LoadingPage;

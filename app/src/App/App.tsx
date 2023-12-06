@@ -7,7 +7,7 @@ import {SignupPage} from '../Login/SignupPage';
 import {CoursePage} from '../CoursePages/CoursePage';
 import {ReviewPage} from '../Rating/Rating';
 import {useEffect} from 'react';
-import LoadingPage from '../utils/LoadingPage';
+import {LoadingPage} from '../utils/LoadingPage';
 
 // Utility component, scrolls to the top of the 
 // page upon route change

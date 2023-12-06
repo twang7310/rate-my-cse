@@ -221,14 +221,9 @@ interface ReviewCardProps {
 export const ReviewCard: React.FC<ReviewCardProps> = (props) => {
     const navigate = useNavigate();
     const [popupOpen, setPopupOpen] = useState(false);
-    const [confirmDelete, setDelete] = useState(false);
 
     const handleDelete = async () => {
         setPopupOpen(true);
-
-        if (confirmDelete) {
-            
-        }
     };
 
     const handleEdit = () => {

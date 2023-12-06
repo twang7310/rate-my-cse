@@ -40,8 +40,8 @@ export const ReviewPage: React.FC = () => {
                 </div>
             )}
             <div className="page-contents">
-            <ReviewHolder classNum={classNum!} reviewState={newReviewState} />                
-            <div className="rating-instr">
+                <ReviewHolder classNum={classNum!} reviewState={newReviewState} />                
+                <div className="rating-instr">
                     <RatingDesc rating={1}/>
                     <RatingDesc rating={2}/>
                     <RatingDesc rating={3}/>
@@ -63,15 +63,19 @@ export interface ReviewState {
 }
 
 export const ReviewHolder: React.FC<{ classNum: string, reviewState: ReviewState }> = ({ classNum, reviewState }) => {
+    const blankComment = '(No Comment)';
+    const blankQuarter = 'N/A';
+    const blankProfessor = 'N/A';
+
     const initialState: ReviewState = reviewState ? reviewState : {
         reviewer: getEmail(),  
         rating_one: 0, 
         rating_two: 0, 
         rating_three: 0,
-        text: '(No Comment)',
+        text: blankComment,
         course_number : classNum,
-        quarter: 'N/A',
-        professor: 'N/A'
+        quarter: blankQuarter,
+        professor: blankProfessor
     }
 
     const [ratingContents, setRatingContents] = useState<ReviewState>(initialState);
@@ -104,6 +108,10 @@ export const ReviewHolder: React.FC<{ classNum: string, reviewState: ReviewState
         }
     };
 
+    const initialQuarter = (reviewState !== undefined && initialState.quarter !== blankQuarter) ? initialState.quarter : "";
+    const initialProfessor = (reviewState !== undefined && initialState.professor !== blankProfessor) ? initialState.professor : "";
+    const initialComment = (reviewState !== undefined && initialState.text !== blankComment) ? initialState.text : "";
+
     return (
         <div className="rating-inputs">
             {popupOpen && 
@@ -120,10 +128,10 @@ export const ReviewHolder: React.FC<{ classNum: string, reviewState: ReviewState
                 <RatingScale category={3} setReview={setRatingContents} initialValue={initialState.rating_three}/>
             </div>
             <div className="other-inputs">
-                <InputField setReview={setRatingContents} initialValue={reviewState !== undefined ? initialState.quarter : ""} field="Quarter Taken"/>
-                <InputField setReview={setRatingContents} initialValue={reviewState !== undefined ? initialState.professor : ""} field="Professor"/>
+                <InputField setReview={setRatingContents} initialValue={initialQuarter} field="Quarter Taken"/>
+                <InputField setReview={setRatingContents} initialValue={initialProfessor} field="Professor"/>
             </div>
-            <Comment setReview={setRatingContents} initialValue={reviewState !== undefined ? initialState.text : ""}/>
+            <Comment setReview={setRatingContents} initialValue={initialComment}/>
             <button className="review-button" onClick={postReview}>Submit</button>
             <button className="review-button" onClick={handleBackClick}>Back</button>
         </div>
