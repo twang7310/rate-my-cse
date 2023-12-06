@@ -1,4 +1,4 @@
-# RateMyCSE v0.4.4
+# RateMyCSE v0.4.4 (old)
 RateMyCSE is a website for UW students to rate, review, and better understand the structure of CSE classes at UW.
 The website will be a center for all the information a student would need in order to create a balanced schedule 
 for their quarters; a collection of student opinions and experiences about specific CSE courses.
@@ -28,10 +28,10 @@ The folder for CI pipeline workflows and the bug report template.
 ### `app`
 The folder for all of our development files.
   - `api` - All of the API calls used for SQL queries throughout the site like retrieving course information, inputting user reviews, etc.
-  - `images` - Where we keep logos and icons
   - `public` - Contains the index.html file needed for the react app to render
   - `src` - Code for all the React components and pages that you see on the site
     - `__mocks__` - Mocked content for the mui-one-time-password-input package to let Jest allow third-party imports
+    -  `images` - Where we keep logos and icons
     - `App` - The base layout of the site containing the URL routes and page definitions
     - `CoursePages` - The page for each individual course containing the course’s information and reviews
     - `Directories` - The page contents that appear when clicking on the sidebar tabs (CSE 100s, CSE 300s, etc.)
