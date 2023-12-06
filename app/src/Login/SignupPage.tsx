@@ -23,7 +23,6 @@ export const SignupPage: React.FC = () => {
     const [psw1HelperText, setPsw1HelperText] = useState('');
     const [isPsw2Invalid, setIsPsw2Invalid] = useState(false);
     const [psw2HelperText, setPsw2HelperText] = useState('');
-    const [users, setUsers] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);
     const [popupOpen, setPopupOpen] = useState(false);
     const navigate = useNavigate();
@@ -63,35 +62,19 @@ export const SignupPage: React.FC = () => {
             userPool.signUp(email, psw1, attributeList, attributeList, (err: { message: string }, data: any) => {
                 if (err) {
                     const cognitoUser = new CognitoUser({ Username: email, Pool: userPool });
-        
-                    // Find if the user is already in our database
-                    const fetchData = async () => {
-                        try {
-                            const response = await fetch(`/api/GetUsers?name=${email}`);
-                            const data = await response.json();
-                            setUsers(data);
-                        } catch (error) {
-                            console.error('Error fetching data:', error);
-                        }
-                    };
-                    fetchData();
 
                     if (err.message === 'An account with the given email already exists.') {
-                        // Not verified yet
-                        if (users.length === 0) {
-                            setIsEmailInvalid(true);
-                            setLoading(false);
-                            setEmailHelperText('Account already signed up. Please verify this account.');
-                            cognitoUser.resendConfirmationCode((resendErr, result) => {
-                                if (resendErr) {
-                                    console.error(resendErr);
-                                } 
-                            });
-                        } else {
-                            setIsEmailInvalid(true);
-                            setLoading(false);
-                            setEmailHelperText('User is already verified. Please sign in.');
-                        }
+                        setIsEmailInvalid(true);
+                        setLoading(false);
+                        setEmailHelperText(err.message);
+
+                        // We send another confirmation in case the user forgot to verify
+                        // even if they are already verified
+                        cognitoUser.resendConfirmationCode((resendErr, result) => {
+                            if (resendErr) {
+                                console.error(resendErr);
+                            } 
+                        });
                     }
                 } else {
                     setLoading(false);

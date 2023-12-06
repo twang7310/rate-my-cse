@@ -5,6 +5,7 @@ import {MuiOtpInput} from 'mui-one-time-password-input';
 import {checkPswValid} from './loginUtils';
 import {CognitoUser} from 'amazon-cognito-identity-js';
 import {getCognitoUserPoolAsync} from '../userpool';
+import {EyeAdornment} from './LoginPage';
 import Popup from "../Popup/Popup";
 import './Login.css'
 
@@ -15,7 +16,9 @@ export const ResetPswPage: React.FC = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [psw1, setPsw1] = useState('');
+    const [visible1, setVisible1] = useState(false);
     const [psw2, setPsw2] = useState('');
+    const [visible2, setVisible2] = useState(false);
     const [isEmailInvalid, setIsEmailInvalid] = useState(false);
     const [emailHelperText, setEmailHelperText] = useState('');
     const [isPsw1Invalid, setIsPsw1Invalid] = useState(false);
@@ -233,6 +236,7 @@ export const ResetPswPage: React.FC = () => {
                 }}
             >
                 <TextField
+                    type={visible1 ? 'text' : 'password'}
                     error={isPsw1Invalid}
                     helperText={psw1HelperText}
                     fullWidth
@@ -244,6 +248,7 @@ export const ResetPswPage: React.FC = () => {
                         setPsw1((e.target as HTMLInputElement).value)
                     }}
                     onKeyDown={handleKeyDownSubmit}
+                    InputProps={{endAdornment: <EyeAdornment visible={visible1} setVisible={setVisible1}/>}}
                 />
             </Box>
 
@@ -254,6 +259,7 @@ export const ResetPswPage: React.FC = () => {
                 }}
             >
                 <TextField
+                    type={visible2 ? 'text' : 'password'}
                     error={isPsw2Invalid}
                     helperText={psw2HelperText}
                     fullWidth
@@ -265,6 +271,7 @@ export const ResetPswPage: React.FC = () => {
                         setPsw2((e.target as HTMLInputElement).value)
                     }}
                     onKeyDown={handleKeyDownSubmit}
+                    InputProps={{endAdornment: <EyeAdornment visible={visible2} setVisible={setVisible2}/>}}
                 />
             </Box>
 
