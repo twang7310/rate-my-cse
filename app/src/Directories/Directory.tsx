@@ -64,7 +64,7 @@ export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
                         />
                         ))
                     ) : (
-                        <div>
+                        <div className="no-results">
                             <p>{noResultsFound}</p>
                             <p>{searchReminder}</p>
                         </div>
