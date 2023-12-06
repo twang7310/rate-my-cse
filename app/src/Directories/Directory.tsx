@@ -13,7 +13,6 @@ export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
     const { query } = useParams<{ query: string }>();
     const [classList, setClassList] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
-    const currentPath = window.location.pathname;
 
     useEffect(() => {
         let search = false;

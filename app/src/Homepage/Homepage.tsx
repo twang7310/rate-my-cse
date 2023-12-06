@@ -1,5 +1,6 @@
 import './Homepage.css'
 import {SearchBar} from '../utils/SearchBar';
+import CoursePageExample from './course-page.png';
 
 /* 
     Template for the rating boxes.
@@ -68,6 +69,24 @@ export const HomePage: React.FC = () => {
                         How useful is this class in the real world? Have you
                         seen the material in the industry?
                     </RatingDesc>
+                </div>
+                <div className="page-instructions">
+                    <h3 className="explanation">
+                        View course lists using the tabs on the left or search by 
+                        course number in the searchbar to navigate to a course page.
+                    </h3>
+                    <img 
+                        src={CoursePageExample} 
+                        alt="Example course page" 
+                        width="90%" 
+                        height="auto"
+                        className="example-img"
+                    />
+                    <h3 className="explanation">
+                        Here you can read reviews, or leave a review yourself by Signing In at the top right then clicking
+                        <button className="purple-button example-button">Rate This Class</button>
+                    </h3>
+
                 </div>
             </div>
         </div>
