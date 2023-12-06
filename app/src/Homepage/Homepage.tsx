@@ -1,5 +1,5 @@
 import './Homepage.css'
-import {SearchBar} from '../utils/utils';
+import {SearchBar} from '../utils/SearchBar';
 import CoursePageExample from '../images/course-page.png';
 
 /* 
