@@ -19,13 +19,13 @@ Weekly status reports
 Main application
 -  `api` - API endpoints to query database, used by Vercel
     - To create a new endpoint for a unique query, add a file `[name].js` to this folder to create the endpoint `/api/[name]`
-- `images` - Where we keep logos and icons
 - `public` - Contains the index.html file needed for the react app to render
 - `src` - Application code
     - `__mocks__` - Mocked content for the mui-one-time-password-input package to let Jest allow third-party imports
     - `App`: routing logic and page definitions
     - `CoursePages` - logic and styling of course pages
     - `Homepage` - logic and styling homepage
+    - `images` - Where we keep logos and icons
     - `Layout` - logic and styling of the site layout (e.g. header and sidebar)
     - `Login` - logic and styling of the login, signup, and "forget password" pages
     - `Popup` - logic and styling for pop-up alerts on RateMyCSE (e.g. when a user tries to leave a review for a course they've already reviewed)
