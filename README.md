@@ -48,12 +48,15 @@ The folder for our weekly status reports.
 ## Build and Test
 
 To build and test the system locally, built-in React scripts are used. 
-
-Before either building or testing, enter the `app` directory and run this command to install project dependencies:
-```bash
-npm install
-```
-
+First make sure you have cloned our repository.
+  1. Navigate to [our GitHub page](https://github.com/twang7310/rate-my-cse) and clone the repository to your IDE
+      - See [this documentation](https://docs.google.com/document/d/1LwtVxxJOj7jnUVf5e_kKqspS8TplsrqHjAzqN-fwkPc/edit?usp=sharing) to set up in VSCode
+  2. If not already installed, install Node.js using [any of these options](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs)
+  3. Navigate into the `app` directory and install packages with the following commands:
+  ```bash
+  cd app
+  npm install
+  ```
 To build, run this command in the `app` directory to generate a deployable version of the application in a build directory:
 ```bash
 npm run build
