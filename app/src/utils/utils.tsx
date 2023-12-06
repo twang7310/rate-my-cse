@@ -14,10 +14,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({ isHeader }) => {
             isHeader ? '.header-search-bar' : '.search-bar'
         );
         if (searchInput && searchInput.value !== '') {
-            const searchString = searchInput.value;
+            const searchString = searchInput.value.toLowerCase();
 
             // Replaces all strings and instances of CSE
-            const stringWithoutSpacesOrCSE = searchString.replace(/\s|CSE|cse/g, '');
+            const stringWithoutSpacesOrCSE = searchString.replace(/\s|cse/g, '');
 
             navigate(`/search/${stringWithoutSpacesOrCSE}`);
         }
