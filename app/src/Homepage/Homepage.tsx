@@ -80,6 +80,7 @@ export const HomePage: React.FC = () => {
                         alt="Example course page" 
                         width="90%" 
                         height="auto"
+                        className="example-img"
                     />
                     <h3 className="explanation">
                         Here you can read reviews, or leave a review yourself by Signing In at the top right then clicking

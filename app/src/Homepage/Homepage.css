@@ -97,3 +97,7 @@
   padding: 1.5% !important;
   font-size: clamp(1px, 14px, 3vw) !important;
 }
+
+.example-img {
+  border: 2px solid #4b2e83;
+}
