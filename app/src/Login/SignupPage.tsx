@@ -7,17 +7,16 @@ import {Link} from 'react-router-dom';
 import {EyeAdornment} from './LoginPage';
 import './Login.css'
 import Popup from '../Popup/Popup';
+import {checkPswValid} from './loginUtils';
 
 const emailRegex = new RegExp('^[a-zA-Z0-9_]+@uw.edu$');
-const capitalRegex = new RegExp('[A-Z]');
-const numberRegex = new RegExp('[0-9]');
-const specialRegex = new RegExp('[!@#$%^&*(),.?":{}|<>]');
 
 export const SignupPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [psw1, setPsw1] = useState('');
     const [psw2, setPsw2] = useState('');
     const [visible, setVisible] = useState(false);
+    const [visible2, setVisible2] = useState(false);
     const [isEmailInvalid, setIsEmailInvalid] = useState(false);
     const [emailHelperText, setEmailHelperText] = useState('');
     const [isPsw1Invalid, setIsPsw1Invalid] = useState(false);
@@ -39,39 +38,9 @@ export const SignupPage: React.FC = () => {
             setIsEmailInvalid(false);
             setEmailHelperText('');
         }
-        // Check psw1 has at least 8 characters
-        if (psw1.length < 8) {
-            setIsPsw1Invalid(true);
-            setPsw1HelperText('Password must be at least 8 characters long.');
+        if (!checkPswValid(psw1, psw2, setIsPsw1Invalid, setPsw1HelperText,
+                          setIsPsw2Invalid, setPsw2HelperText)) {
             return;
-        }
-        // Check psw1 has at least one capital letter
-        if (!psw1.match(capitalRegex)) {
-            setIsPsw1Invalid(true);
-            setPsw1HelperText('Password must contain at least one capital letter.');
-            return;
-        }
-        // Check psw1 has at least one number
-        if (!psw1.match(numberRegex)) {
-            setIsPsw1Invalid(true);
-            setPsw1HelperText('Password must contain at least one number.');
-            return;
-        }
-        // Check psw1 has at least one special character
-        if (!psw1.match(specialRegex)) {
-            setIsPsw1Invalid(true);
-            setPsw1HelperText('Password must contain at least one special character.');
-            return;
-        }
-        setIsPsw1Invalid(false);
-        setPsw1HelperText('');
-        // Check psw1 and psw2 match
-        if (psw1 !== psw2) {
-            setIsPsw2Invalid(true);
-            setPsw2HelperText('Passwords do not match. Please try again.');
-        } else {
-            setIsPsw2Invalid(false);
-            setPsw2HelperText('');
         }
 
         setLoading(true);
@@ -139,6 +108,12 @@ export const SignupPage: React.FC = () => {
         navigate('/login');
     }
 
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            handleSubmit();
+        }
+    };
+
     return (
         <div className='signuppage'>
             {popupOpen &&
@@ -166,6 +141,7 @@ export const SignupPage: React.FC = () => {
                     onInput={ (e) => {
                         setEmail((e.target as HTMLInputElement).value)
                     }}
+                    onKeyDown={handleKeyDown}
                 />
             </Box>
 
@@ -175,7 +151,7 @@ export const SignupPage: React.FC = () => {
                 }}
             >
                 <TextField
-                    type='password'
+                    type={visible ? 'text' : 'password'}
                     error={isPsw1Invalid}
                     helperText={psw1HelperText}
                     fullWidth
@@ -187,6 +163,7 @@ export const SignupPage: React.FC = () => {
                         setPsw1((e.target as HTMLInputElement).value)
                     }}
                     InputProps={{endAdornment: <EyeAdornment visible={visible} setVisible={setVisible}/>}}
+                    onKeyDown={handleKeyDown}
                 />
             </Box>
 
@@ -199,7 +176,7 @@ export const SignupPage: React.FC = () => {
                     error={isPsw2Invalid}
                     helperText={psw2HelperText}
                     fullWidth
-                    type={visible ? 'text' : 'password'}
+                    type={visible2 ? 'text' : 'password'}
                     id='repeat-password'
                     label='Repeat Password'
                     variant='outlined'
@@ -207,7 +184,8 @@ export const SignupPage: React.FC = () => {
                     onInput={ (e) => {
                         setPsw2((e.target as HTMLInputElement).value)
                     }}
-                    InputProps={{endAdornment: <EyeAdornment visible={visible} setVisible={setVisible}/>}}
+                    InputProps={{endAdornment: <EyeAdornment visible={visible2} setVisible={setVisible2}/>}}
+                    onKeyDown={handleKeyDown}
                 />
             </Box>
 

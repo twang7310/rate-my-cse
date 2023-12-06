@@ -39,7 +39,7 @@
   user-select: none;
 }
 
-#forgot-psw, #sign-up-button, #sign-in-button {
+#forgot-psw, #sign-up-button, #sign-in-button, #resend-code-button {
   color: #2400ff;
   background-color: inherit;
   font-size: clamp(1px, 16px, 3vw); 
@@ -51,4 +51,13 @@
 
 .loading-comps {
   margin-top: 1vw;
+}
+
+#email-sent {
+  color: #159500;
+  font-weight: 700;
+}
+
+.hidden {
+  display: none;
 }

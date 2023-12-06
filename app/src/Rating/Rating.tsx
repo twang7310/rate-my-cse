@@ -7,29 +7,62 @@ import './Rating.css'
 
 export const ReviewPage: React.FC = () => {
     const {classNum} = useParams();
+    const navigate = useNavigate();
 
     const [course, setCourse] = useState<any[]>([]);
+    const [review, setReview] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
+    const [signPopupOpen, setSignPopupOpen] = useState(!getSignInStatus());
     const location = useLocation();
 
     const newReviewState: ReviewState = location.state?.reviewState;
   
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchCourse = async () => {
             try {
                 const response = await fetch(`/api/GetCourseData?num=${classNum}`);
                 const data = await response.json();
                 setCourse(data);
-                setLoading(false);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
-        fetchData();
+
+        const fetchReview = async () => {
+            try {
+                const response = await fetch(`/api/GetReview?num=${classNum}&user=${getEmail()}`);
+                const data = await response.json();
+                setReview(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+        fetchCourse();
+        fetchReview();
+        setLoading(false);
     }, [classNum]);
+
+    const closePopup = () => {
+        setSignPopupOpen(false);
+        navigate('/course/' + classNum);
+    }
 
     return (
         <div className="rating-innerpage">
+            {signPopupOpen && 
+                <Popup onClose={closePopup} header="Login to Review">
+                    <p>You must be logged in with a UW email address to leave a review.</p>
+                    <p>
+                        Click here to <Link to="/login" onClick={() => setSignPopupOpen(false)}>Login</Link> or <Link to="/signup" onClick={() => setSignPopupOpen(false)}>Sign Up</Link>
+                    </p>
+                </Popup>
+            }
+            {(!signPopupOpen) && (review.length > 0) &&
+                <Popup onClose={closePopup} header="">
+                    <p>You've already left a review on this course!</p>
+                    <p>You can edit or delete your review on the course page.</p>
+                </Popup>
+            }
             {loading ? (
                 <ReviewHeader num={classNum!} name="" loaded={false}/>
             ) : (
@@ -79,16 +112,11 @@ export const ReviewHolder: React.FC<{ classNum: string, reviewState: ReviewState
     }
 
     const [ratingContents, setRatingContents] = useState<ReviewState>(initialState);
-    const [popupOpen, setPopupOpen] = useState(!getSignInStatus());
+
 
     const navigate = useNavigate();
 
     const handleBackClick = () => {
-        navigate('/course/' + classNum);
-    }
-
-    const closePopup = () => {
-        setPopupOpen(false);
         navigate('/course/' + classNum);
     }
 
@@ -114,14 +142,6 @@ export const ReviewHolder: React.FC<{ classNum: string, reviewState: ReviewState
 
     return (
         <div className="rating-inputs">
-            {popupOpen && 
-                <Popup onClose={closePopup} header="Login to Review">
-                    <p>You must be logged in with a UW email address to leave a review.</p>
-                    <p>
-                        Click here to <Link to="/login" onClick={() => setPopupOpen(false)}>Login</Link> or <Link to="/signup" onClick={() => setPopupOpen(false)}>Sign Up</Link>
-                    </p>
-                </Popup>
-            }
             <div className="scales">
                 <RatingScale category={1} setReview={setRatingContents} initialValue={initialState.rating_one}/>
                 <RatingScale category={2} setReview={setRatingContents} initialValue={initialState.rating_two}/>

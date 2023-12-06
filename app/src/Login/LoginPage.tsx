@@ -72,8 +72,14 @@ export const LoginPage: React.FC = () => {
     }
 
     function handleForgot() {
-        alert('Can\'t do much! Try again');
+        navigate('/reset-psw');
     }
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            handleSubmit();
+        }
+    };
 
     async function postUser(username: string) {
         try {
@@ -110,6 +116,7 @@ export const LoginPage: React.FC = () => {
                     onInput={ (e) => {
                         setEmail((e.target as HTMLInputElement).value)
                     }}
+                    onKeyDown={handleKeyDown}
                 />
             </Box>
 
@@ -132,6 +139,7 @@ export const LoginPage: React.FC = () => {
                         setPassword((e.target as HTMLInputElement).value)
                     }}
                     InputProps={{endAdornment: <EyeAdornment visible={visible} setVisible={setVisible}/>}}
+                    onKeyDown={handleKeyDown}
                 />
             </Box>
 
