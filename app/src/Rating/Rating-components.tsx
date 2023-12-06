@@ -19,10 +19,11 @@ export const ReviewHeader: React.FC<{num : string, name: string, loaded: boolean
 interface RatingScaleProps {
     category: number;
     setReview: React.Dispatch<React.SetStateAction<ReviewState>>;
+    initialValue: number;
 }
 
 export const RatingScale: React.FC<RatingScaleProps> = (props) => {
-    const [selectedRating, setSelectedRating] = useState(0);
+    const [selectedRating, setSelectedRating] = useState(props.initialValue);
     const [hoverRating, setHoverRating] = useState(0);
 
     let categoryNames: string[] = ['Difficulty', 'Workload', 'Practicality'];
@@ -82,10 +83,11 @@ export const RatingScale: React.FC<RatingScaleProps> = (props) => {
 
 interface CommentProps {
     setReview: React.Dispatch<React.SetStateAction<ReviewState>>;
+    initialValue: string;
 }
 
 export const Comment: React.FC<CommentProps> = (props) => {
-    const [input, setInput] = useState('');
+    const [input, setInput] = useState(props.initialValue);
 
     const handleInputChange = (e : React.ChangeEvent<HTMLTextAreaElement>) => {
         setInput(e.target.value);
@@ -112,10 +114,11 @@ export const Comment: React.FC<CommentProps> = (props) => {
 interface InputProps {
     field: string;
     setReview: React.Dispatch<React.SetStateAction<ReviewState>>;
+    initialValue: string;
 }
 
 export const InputField: React.FC<InputProps> = (props) => {
-    const [input, setInput] = useState('');
+    const [input, setInput] = useState(props.initialValue);
 
     const dynamicClassName = `comment-field small-comment field-${props.field}`;
 

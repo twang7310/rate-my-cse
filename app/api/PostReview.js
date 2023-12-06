@@ -3,7 +3,28 @@ const pool = require('./db');
 export default async (req, res) => {
   try {
     const { reviewer, rating_one, rating_two, rating_three, text, course_number, quarter, professor } = req.body;
+    
+    // Delete any existing review in that course
+    const deleteQuery = `
+    DELETE FROM reviews 
+    WHERE
+      reviewer = ? 
+      AND class_id = (SELECT class_id FROM courses WHERE number = ?)
+    `;
+    const deleteParams = [reviewer, course_number];
 
+    await new Promise((resolve, reject) => {
+        pool.query(deleteQuery, deleteParams, (err, results) => {
+            if (err && err.code === 'ER_BAD_FIELD_ERROR') {
+              // Handling an error indicating the review doesn't exist but still considered successful deletion
+              resolve({ message: 'Review does not exist, no action needed' });
+            } else if (err) {
+              reject(err); // Reject for other errors
+            } else {
+              resolve(results); // Resolve for successful deletion
+            }
+        });
+    });
     // Insert data into the database
     const insertQuery = 'INSERT INTO reviews (reviewer, rating_one, rating_two, rating_three, text, class_id, quarter, professor) VALUES (?, ?, ?, ?, ?, (SELECT class_id FROM courses WHERE number = ?), ?, ?)';
     const insertParams = [reviewer, rating_one, rating_two, rating_three, text, course_number, quarter, professor];

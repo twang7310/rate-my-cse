@@ -5,6 +5,7 @@ import {getEmail, getSignInStatus} from "../Login/LoginPage";
 import {Link} from 'react-router-dom';
 import Popup from "../Popup/Popup";
 import './CoursePage.css'
+import {ReviewState} from "../Rating/Rating";
 
 export const CoursePage: React.FC = () => {
 
@@ -185,7 +186,15 @@ export const ReviewHolder: React.FC<{classNum: string}> = ({classNum}) => {
             try {
                 const response = await fetch(`/api/GetCourseReviews?num=${classNum}`);
                 const data = await response.json();
-                setReviews(data);
+
+                // Sort the reviews such that the signed in user's review is first
+                const sortedReviews = data.sort((a: { reviewer: string }, b: { reviewer: string }) => {
+                    if (a.reviewer === getEmail()) return -1; // Current user's review comes first
+                    if (b.reviewer === getEmail()) return 1; // Other user's reviews come after
+                    return 0;
+                });
+
+                setReviews(sortedReviews);
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -210,7 +219,9 @@ export const ReviewHolder: React.FC<{classNum: string}> = ({classNum}) => {
                         rating2={review.rating_two}
                         rating3={review.rating_three}
                         quarter={(review.quarter !== '') ? review.quarter : 'N/A'}
-                        professor={(review.professor !== '') ? review.professor : 'N/A'}/>
+                        professor={(review.professor !== '') ? review.professor : 'N/A'} 
+                        class={classNum}
+                        isCurrentUser={review.reviewer === getEmail()}/>
                     ))}
                 </div>
             )}
@@ -225,11 +236,70 @@ interface ReviewCardProps {
     rating3: number;
     quarter: string;
     professor: string;
+    class: string;
+    isCurrentUser?: boolean;
 }
 
 export const ReviewCard: React.FC<ReviewCardProps> = (props) => {
+    const navigate = useNavigate();
+    const [popupOpen, setPopupOpen] = useState(false);
+
+    const handleDelete = async () => {
+        setPopupOpen(true);
+    };
+
+    const handleEdit = () => {
+        const newReviewState: ReviewState = {
+            reviewer: getEmail(),
+            rating_one: props.rating1, 
+            rating_two: props.rating2, 
+            rating_three: props.rating3,
+            text: props.text,
+            course_number: props.class,
+            quarter: props.quarter,
+            professor: props.professor
+        };
+        navigate(`/course/${props.class}/review`, {state: {reviewState: newReviewState}});
+    };
+
+    const classNumber = props.class;
+
+    const handleConfirmation = async () => {
+        setPopupOpen(false);
+
+        const reviewer = getEmail();
+
+        await fetch(`/api/DeleteReview?reviewer=${reviewer}&classNumber=${classNumber}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+                console.error("Unable to delete review: status code ", response.status);
+            }
+            response.json();
+        })
+        .catch(error => {
+            console.error('There was a problem with the delete operation:', error);
+        });
+        
+        navigate('/course/' + classNumber + '/loading');
+    }
+
+    const handleX = () => {
+        setPopupOpen(false);
+        navigate('/course/' + classNumber);
+    }
+
     return(
         <div className="card review-card">
+            {popupOpen && 
+                <Popup onClose={() => { handleConfirmation() }} onX={() => {handleX()}} header="">
+                    <p>"Warning! This action is irreversible. Continue?"</p>
+                </Popup>
+            }
             <div className="review-card-left">
                 <ReviewCardHeader quarter={props.quarter} professor={props.professor}/>
                 <div className={`review-text ${(props.text === '(No Comment)') ? 'italics' : ''}`}>
@@ -241,6 +311,12 @@ export const ReviewCard: React.FC<ReviewCardProps> = (props) => {
                 <ClassRating category="Workload" rating={props.rating2} type="work review-box"/>
                 <ClassRating category="Practicality" rating={props.rating3} type="prac review-box"/>
             </div>
+            {props.isCurrentUser && (
+                <div className="icons">
+                    <button className="icon-button edit-button" onClick={handleEdit}/>
+                    <button className="icon-button delete-button" onClick={handleDelete} />
+                </div>
+            )}
         </div>
     );
 }

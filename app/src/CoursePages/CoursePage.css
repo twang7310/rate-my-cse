@@ -182,6 +182,7 @@
 /* Review Card styling */
 
 .review-card {
+  position: relative;
   padding: clamp(7px, 20px, 2vw);
   cursor: auto;
 }
@@ -198,11 +199,19 @@
 }
 
 .review-text {
+  position: relative;
+  bottom: 1.5vh;
   margin-right: 2vw;
   margin-left: 1.8vw;
   font-size: clamp(1px, 16px, 1.5vw);
   overflow: hidden;
   width: 45vw;
+}
+
+@media (max-width: 425px) {
+  .review-text {
+    bottom: 1vh;
+  }
 }
 
 @media (max-width: 1000px) {
@@ -237,4 +246,46 @@
 
 .italics {
   font-style: italic;
+}
+
+/* Edit and delete */
+.icons {
+  position: absolute;
+  bottom: 1vh;
+  left: 1vh;
+  height: auto;
+  display: flex;
+}
+
+.icon-button {
+  width: 4vh;
+  height: 4vh;
+  border: none;
+  background-size: cover;
+  background: none;
+  cursor: pointer;
+}
+
+@media (max-width: 425px) {
+  .icons {
+    bottom: 0.5vh;
+    left: 0.5vh;
+  }
+  .icon-button {
+    width: 2vh;
+    height: 2vh;
+  }
+}
+
+.edit-button {
+  background-image: url("../../images/edit.png");
+}
+
+.delete-button {
+  background-image: url("../../images/delete.png");
+}
+
+.edit-button, .delete-button {
+  background-size: contain;
+  background-repeat: no-repeat;
 }
