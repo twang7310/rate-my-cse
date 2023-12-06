@@ -7,6 +7,7 @@ interface ClassListProps {
     classLevelNumber?: string;
 }
 const noResultsFound = "Class not found.";
+const searchReminder = "Remember to search by course number, not name."
     
 export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
     const { query } = useParams<{ query: string }>();
@@ -63,7 +64,10 @@ export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
                         />
                         ))
                     ) : (
-                        <p>{noResultsFound}</p>
+                        <div>
+                            <p>{noResultsFound}</p>
+                            <p>{searchReminder}</p>
+                        </div>
                     )}
                 </div>            
             )}
@@ -113,7 +117,7 @@ export const ClassCard: React.FC<ClassCardProps> = (props) => {
                     <p className="class-number bold">{`CSE ${props.num}`}</p>
                     <p className="class-name bold">{props.name}</p>
                 </div>
-                <p className="class-description">Description: {props.desc}</p>
+                <p className="class-description">{props.desc}</p>
             </div>
             <div className="class-ratings">
                 <ClassRating category="Difficulty" type="diff" rating={props.rating1}/>
