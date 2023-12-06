@@ -117,7 +117,7 @@ export const ClassCard: React.FC<ClassCardProps> = (props) => {
                     <p className="class-number bold">{`CSE ${props.num}`}</p>
                     <p className="class-name bold">{props.name}</p>
                 </div>
-                <p className="class-description">Description: {props.desc}</p>
+                <p className="class-description">{props.desc}</p>
             </div>
             <div className="class-ratings">
                 <ClassRating category="Difficulty" type="diff" rating={props.rating1}/>
