@@ -58,15 +58,15 @@ export const ResetPswPage: React.FC = () => {
         cognitoUser.forgotPassword({
             onSuccess: function(result) {
                 console.log('Email has been sent: ' + result);
+                // Continue to verification code page
+                setShowLayout(true);
+                setShowSendCode(true);
+                setShowReset(false);
             },
             onFailure: function(err) {
                 alert(err);
             }
         });
-        // Continue to verification code page
-        setShowLayout(true);
-        setShowSendCode(true);
-        setShowReset(false);
     }
 
     async function handleVerify() {
@@ -81,9 +81,8 @@ export const ResetPswPage: React.FC = () => {
         // Send code to backend to verify
         cognitoUser.confirmPassword(otp, psw1, {
             onSuccess: function(confirmResult) {
-                console.log('call result: ' + confirmResult);
                 // popup saying reset successful and navigate to login page
-                navigate('/login');
+                // navigate('/login');
                 setPopupOpen(true);
             },
             onFailure: function(err) {
@@ -96,6 +95,8 @@ export const ResetPswPage: React.FC = () => {
     function handleResend() {
         setShowSendEmail(true);
         setShowSendCode(false);
+        setIsEmailInvalid(false);
+        setEmailHelperText(sentText);
     }
 
     function handleSignin() {
