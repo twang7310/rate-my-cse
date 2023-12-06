@@ -1,5 +1,5 @@
 import './Homepage.css'
-import {SearchBar} from '../utils/utils';
+import {SearchBar} from '../utils/SearchBar';
 
 /* 
     Template for the rating boxes.
