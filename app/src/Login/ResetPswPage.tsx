@@ -56,8 +56,7 @@ export const ResetPswPage: React.FC = () => {
         const userPool = await getCognitoUserPoolAsync();
         const cognitoUser = new CognitoUser({ Username: email, Pool: userPool });
         cognitoUser.forgotPassword({
-            onSuccess: function(result) {
-                console.log('Email has been sent: ' + result);
+            onSuccess: function() {
                 // Continue to verification code page
                 setShowLayout(true);
                 setShowSendCode(true);
@@ -80,11 +79,11 @@ export const ResetPswPage: React.FC = () => {
         const cognitoUser = new CognitoUser({ Username: email, Pool: userPool });
         // Send code to backend to verify
         cognitoUser.confirmPassword(otp, psw1, {
-            onSuccess: function(confirmResult) {
+            onSuccess: function() {
                 // popup saying reset successful
                 setPopupOpen(true);
             },
-            onFailure: function(err) {
+            onFailure: function() {
                 setIsCodeInvalid(true);
                 setCodeHelperText('Code does not match, please try again.');
             }
@@ -115,13 +114,11 @@ export const ResetPswPage: React.FC = () => {
                     <p>Password changed successfully!</p>
                 </Popup>
             }
-            <h1 style={{ display: showLayout ? undefined : 'none' }}
-            >
+            <h1 style={{ display: showLayout ? undefined : 'none' }}>
                 Please enter your UW email
             </h1>
 
-            <h1 style={{ display: showReset ? undefined : 'none' }}
-            >
+            <h1 style={{ display: showReset ? undefined : 'none' }}>
                 Reset Password
             </h1>
 
