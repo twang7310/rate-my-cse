@@ -44,29 +44,7 @@ export const ResetPswPage: React.FC = () => {
         setShowLayout(false);
         setShowReset(true);
     }
-
-    async function handleVerify() {
-        // Check code is valid
-        if (otp.length !== 6) {
-            setIsCodeInvalid(true);
-            setCodeHelperText('Please enter a valid 6 digit code.');
-            return;
-        }
-        const userPool = await getCognitoUserPoolAsync();
-        const cognitoUser = new CognitoUser({ Username: email, Pool: userPool });
-        // Send code to backend to verify
-        cognitoUser.confirmPassword(otp, psw1, {
-            onSuccess: function(confirmResult) {
-                console.log('call result: ' + confirmResult);
-                // navigate to login page
-                navigate('/login');
-            },
-            onFailure: function(err) {
-                alert(err);
-            }
-        });
-    }
-
+ 
     async function handleSubmit() {
         if (!checkPswValid(psw1, psw2, setIsPsw1Invalid, setPsw1HelperText,
                      setIsPsw2Invalid, setPsw2HelperText)) {
@@ -89,6 +67,29 @@ export const ResetPswPage: React.FC = () => {
         setShowReset(false);
     }
 
+    async function handleVerify() {
+        // Check code is valid
+        if (otp.length !== 6) {
+            setIsCodeInvalid(true);
+            setCodeHelperText('Please enter a valid 6 digit code.');
+            return;
+        }
+        const userPool = await getCognitoUserPoolAsync();
+        const cognitoUser = new CognitoUser({ Username: email, Pool: userPool });
+        // Send code to backend to verify
+        cognitoUser.confirmPassword(otp, psw1, {
+            onSuccess: function(confirmResult) {
+                console.log('call result: ' + confirmResult);
+                // navigate to login page
+                navigate('/login');
+            },
+            onFailure: function(err) {
+                setIsCodeInvalid(true);
+                setCodeHelperText('Code does not match, please try again.');
+            }
+        });
+    }
+
     function handleResend() {
         setShowSendEmail(true);
         setShowSendCode(false);
@@ -102,7 +103,7 @@ export const ResetPswPage: React.FC = () => {
         <div className='signuppage' id='container'>
             <h1 style={{ display: showLayout ? undefined : 'none' }}
             >
-                Please verify your UW email
+                Please enter your UW email
             </h1>
 
             <h1 style={{ display: showReset ? undefined : 'none' }}
