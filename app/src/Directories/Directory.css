@@ -90,3 +90,8 @@
   align-items: center;
   justify-content: center;
 }
+
+/* No results message after search */
+.no-results {
+  text-align: left;
+}
