@@ -1,6 +1,6 @@
 import './Homepage.css'
 import {SearchBar} from '../utils/utils';
-import CoursePageExample from './course-page.png';
+import CoursePageExample from '../images/course-page.png';
 
 /* 
     Template for the rating boxes.

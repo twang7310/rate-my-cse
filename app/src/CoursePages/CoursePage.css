@@ -278,11 +278,11 @@
 }
 
 .edit-button {
-  background-image: url("../../images/edit.png");
+  background-image: url("../images/edit.png");
 }
 
 .delete-button {
-  background-image: url("../../images/delete.png");
+  background-image: url("../images/delete.png");
 }
 
 .edit-button, .delete-button {

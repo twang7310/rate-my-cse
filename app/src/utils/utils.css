@@ -30,7 +30,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    background-image: url('../../images/magnifying_glass.png');
+    background-image: url('../images/magnifying_glass.png');
     background-size: contain;
     background-repeat: no-repeat;
 }
