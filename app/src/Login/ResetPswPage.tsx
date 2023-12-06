@@ -104,6 +104,18 @@ export const ResetPswPage: React.FC = () => {
         navigate('/login');
     }
 
+    const handleKeyDownContinue = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            handleContinue();
+        }
+    };
+
+    const handleKeyDownSubmit = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            handleSubmit();
+        }
+    };
+
     return (
         <div className='signuppage' id='container'>
             {popupOpen && 
@@ -117,11 +129,11 @@ export const ResetPswPage: React.FC = () => {
                     <p>Password changed successfully!</p>
                 </Popup>
             }
-            <h1 style={{ display: showLayout ? undefined : 'none' }}>
+            <h1 style={{ display: showLayout ? undefined : 'none', fontSize: 'clamp(1px, 34px, 6vw)', paddingLeft: '2vw', paddingRight: '2vw' }}>
                 Please enter your UW email
             </h1>
 
-            <h1 style={{ display: showReset ? undefined : 'none' }}>
+            <h1 style={{ display: showReset ? undefined : 'none', fontSize: 'clamp(1px, 34px, 6vw)', paddingLeft: '2vw', paddingRight: '2vw' }}>
                 Reset Password
             </h1>
 
@@ -144,6 +156,7 @@ export const ResetPswPage: React.FC = () => {
                     onInput={ (e) => {
                         setEmail((e.target as HTMLInputElement).value)
                     }}
+                    onKeyDown={handleKeyDownContinue}
                 />
             </Box>
 
@@ -156,7 +169,7 @@ export const ResetPswPage: React.FC = () => {
                     width: '45%',
                     bgcolor: 'black',
                     textTransform: 'none',
-                    fontSize: '2.5vh',
+                    fontSize: 'clamp(1px, 20px, 2.8vw)',
                     marginTop: '5%'
                 }}
             >
@@ -190,7 +203,7 @@ export const ResetPswPage: React.FC = () => {
                     width: '45%',
                     bgcolor: 'black',
                     textTransform: 'none',
-                    fontSize: '2.5vh',
+                    fontSize: 'clamp(1px, 20px, 2.8vw)',
                     marginTop: '5%'
                 }}
             >
@@ -234,6 +247,7 @@ export const ResetPswPage: React.FC = () => {
                     onInput={ (e) => {
                         setPsw1((e.target as HTMLInputElement).value)
                     }}
+                    onKeyDown={handleKeyDownSubmit}
                     InputProps={{endAdornment: <EyeAdornment visible={visible1} setVisible={setVisible1}/>}}
                 />
             </Box>
@@ -256,6 +270,7 @@ export const ResetPswPage: React.FC = () => {
                     onInput={ (e) => {
                         setPsw2((e.target as HTMLInputElement).value)
                     }}
+                    onKeyDown={handleKeyDownSubmit}
                     InputProps={{endAdornment: <EyeAdornment visible={visible2} setVisible={setVisible2}/>}}
                 />
             </Box>
@@ -286,7 +301,7 @@ export const ResetPswPage: React.FC = () => {
                     fontWeight: 700,
                 }}
             >
-                <p>Already have an account?
+                <p className='signin'>Changed your mind?
                     <button
                         id='sign-in-button'
                         onClick={() => handleSignin()}
