@@ -7,18 +7,41 @@ for their quarters; a collection of student opinions and experiences about speci
 
 [Developer Guidelines](https://github.com/twang7310/rate-my-cse/blob/main/developer-guidelines.md)
 
-## Current Use Cases
-- The user can navigate between course directory pages, which display all courses of a level (100s, 300s, 400s, 500s) with their, name, description, and average review ratings in the three rating categories. Once one of these pages is navigated to, all this information on all relevant classes is fetched from the database and parsed into a displayed list of these 'class cards'.
-- The user can click on a course from a directory page and be to that course's page, which displays that course's name, description, and average review ratings (fetched from the database), and has a button which takes the user to that course's review page.
-- On a course's review page, the user can leave a comment reviewing that course and select their ratings out of 5 on the three review categories. They can click the submit button to submit their review to the database, which returns them to the course page, or hit the back button to return without submitting.
+## Features & Functionality
+### [Directory Tabs](https://github.com/twang7310/rate-my-cse/blob/main/user-manual.md#directory-tabs)
+On the left hand side of the screen there are tabs to separate courses by their course number (CSE154: Web Programming would be found in the CSE100s tab) and users can click on those tabs to find all the courses in that course level.
+
+### [Search Bar](https://github.com/twang7310/rate-my-cse/blob/main/user-manual.md#search-bar-work-in-progress)
+On the home page there is a search bar where you can enter the name of the course you’re looking for or the course number and the matching courses will appear. Whenever the user is not on the home page, a search bar can be found on the top right.
+
+### [RateMyCSE Accounts](https://github.com/twang7310/rate-my-cse/blob/main/user-manual.md#creating-an-account-work-in-progress)
+Although an account isn't required to view courses and their reviews, you can create an account using a valid UW email (@uw.edu) and log in and out of RateMyCSE to submit/edit/delete your reviews.
+
+### [Review Submissions](https://github.com/twang7310/rate-my-cse/blob/main/user-manual.md#submitting-a-review-work-in-progress)
+Users with accounts can leave reviews with numerical ratings for difficulty, workload, and practicality.
+Optionally, they can leave a text review and the quarter and professor that they took.
+Users have the option to go back and edit or remove their reviews as well.
 
 ## Repository Layout
-We are in our early stages of development. Our current repo layout is:
-
 ### `.github`
 The folder for CI pipeline workflows and the bug report template.
 ### `app`
 The folder for all of our development files.
+  - `api` - All of the API calls used for SQL queries throughout the site like retrieving course information, inputting user reviews, etc.
+  - `images` - Where we keep logos and icons
+  - `public` - Contains the index.html file needed for the react app to render
+  - `src` - Code for all the React components and pages that you see on the site
+    - `__mocks__` - Mocked content for the mui-one-time-password-input package to let Jest allow third-party imports
+    - `App` - The base layout of the site containing the URL routes and page definitions
+    - `CoursePages` - The page for each individual course containing the course’s information and reviews
+    - `Directories` - The page contents that appear when clicking on the sidebar tabs (CSE 100s, CSE 300s, etc.)
+    - `Homepage` - The page that first loads when visiting RateMyCSE
+    - `Layout` - The components that stay consistent on RateMyCSE (The header, and sidebar)
+    - `Login` - The login pages including the sign up and forget password pages
+    - `Popup` - Component used for alerts on RateMyCSE
+    - `Rating` - The page for users to leave their review and ratings
+    - `utils` - A folder for our helpers or factored-out code that is used in multiple folders
+
 ### `reports`
 The folder for our weekly status reports.
 
@@ -26,7 +49,7 @@ The folder for our weekly status reports.
 
 To build and test the system locally, built-in React scripts are used. 
 
-Before either, enter the `app` directory and run this command to install project dependencies:
+Before either building or testing, enter the `app` directory and run this command to install project dependencies:
 ```bash
 npm install
 ```
