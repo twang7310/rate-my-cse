@@ -284,7 +284,7 @@ export const ResetPswPage: React.FC = () => {
                     width: '45%',
                     bgcolor: 'black',
                     textTransform: 'none',
-                    fontSize: '2.5vh',
+                    fontSize: 'clamp(1px, 20px, 2.8vw)',
                     marginTop: '15%'
                 }}
             >
