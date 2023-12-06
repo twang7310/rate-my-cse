@@ -130,7 +130,7 @@ export const ResetPswPage: React.FC = () => {
                 Please enter your UW email
             </h1>
 
-            <h1 style={{ display: showReset ? undefined : 'none' }}>
+            <h1 style={{ display: showReset ? undefined : 'none', fontSize: 'clamp(1px, 34px, 6vw)', paddingLeft: '2vw', paddingRight: '2vw' }}>
                 Reset Password
             </h1>
 
