@@ -12,16 +12,16 @@
 
 .logo {
   color: white;
-  font-size: 2.5vw;
+  font-size: clamp(1vh, 2.5vw, 5vh);
   font-weight: 700;
-  margin-left: 2%;
+  margin-left: 2.5vh;
   user-select: none;
   cursor: pointer;
 }
 
 .login {
   color: white;
-  font-size: 2vw;
+  font-size: clamp(0.8vh, 2vw, 4vh);
   font-weight: 400;
   margin-right: 2.5vh;
   user-select: none;
@@ -30,20 +30,24 @@
 
 .email {
   color: white;
-  font-size: 1.5vw;
+  font-size: clamp(0.7vh, 1.5vw, 3vh);
   font-weight: 400;
   user-select: none;
-  margin: 20px;
+  margin-left: 0;
+  margin-top: clamp(1px, 20px, 5vh);
+  margin-bottom: clamp(1px, 20px, 5vh);
+  margin-right: 2vh;
 }
 
 .signout {
   color: white;
-  font-size: 1vw;
+  font-size: clamp(0.6vh, 1vw, 2vh);
   font-weight: 400;
   user-select: none;
   cursor: pointer;
   position: relative;
   margin: -10px;
+  margin-right: 0.7vh !important;
 }
 
 /* Sidebar css */

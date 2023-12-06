@@ -49,10 +49,10 @@ export const Login: React.FC = () => {
     const renderContent = () => {
         if (location.pathname !== '/') {
             return (
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', position: 'relative', width: '40%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', position: 'relative', width: '40%', gap: '1vw' }}>
                     <SearchBar isHeader={true}/>
                     {isSignedIn ? (
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '25px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '25px'}}>
                             <p className="email">{email}</p>
                             <p className="signout" onClick={handleSignOut}>Sign Out</p>
                         </div>

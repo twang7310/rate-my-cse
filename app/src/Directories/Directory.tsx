@@ -6,7 +6,7 @@ import '../App/App.css'
 interface ClassListProps {
     classLevelNumber?: string;
 }
-const noResultsFound = "Class not found.";
+const noResultsFound = "Class not found. Remember to search by course number, not name.";
     
 export const ClassList: React.FC<ClassListProps> = ({ classLevelNumber }) => {
     const { query } = useParams<{ query: string }>();
