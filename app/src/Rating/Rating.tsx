@@ -57,7 +57,7 @@ export const ReviewPage: React.FC = () => {
                     </p>
                 </Popup>
             }
-            {(!signPopupOpen) && (review.length > 0) &&
+            {(!signPopupOpen) && (review.length > 0) && (newReviewState === undefined) &&
                 <Popup onClose={closePopup} header="">
                     <p>You've already left a review on this course!</p>
                     <p>You can edit or delete your review on the course page.</p>
