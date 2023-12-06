@@ -16,6 +16,7 @@ export const SignupPage: React.FC = () => {
     const [psw1, setPsw1] = useState('');
     const [psw2, setPsw2] = useState('');
     const [visible, setVisible] = useState(false);
+    const [visible2, setVisible2] = useState(false);
     const [isEmailInvalid, setIsEmailInvalid] = useState(false);
     const [emailHelperText, setEmailHelperText] = useState('');
     const [isPsw1Invalid, setIsPsw1Invalid] = useState(false);
@@ -150,7 +151,7 @@ export const SignupPage: React.FC = () => {
                 }}
             >
                 <TextField
-                    type='password'
+                    type={visible ? 'text' : 'password'}
                     error={isPsw1Invalid}
                     helperText={psw1HelperText}
                     fullWidth
@@ -175,7 +176,7 @@ export const SignupPage: React.FC = () => {
                     error={isPsw2Invalid}
                     helperText={psw2HelperText}
                     fullWidth
-                    type={visible ? 'text' : 'password'}
+                    type={visible2 ? 'text' : 'password'}
                     id='repeat-password'
                     label='Repeat Password'
                     variant='outlined'
@@ -183,7 +184,7 @@ export const SignupPage: React.FC = () => {
                     onInput={ (e) => {
                         setPsw2((e.target as HTMLInputElement).value)
                     }}
-                    InputProps={{endAdornment: <EyeAdornment visible={visible} setVisible={setVisible}/>}}
+                    InputProps={{endAdornment: <EyeAdornment visible={visible2} setVisible={setVisible2}/>}}
                     onKeyDown={handleKeyDown}
                 />
             </Box>
