@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import './utils.css';
+import './SearchBar.css';
 
 interface SearchBarProps {
     isHeader: boolean;

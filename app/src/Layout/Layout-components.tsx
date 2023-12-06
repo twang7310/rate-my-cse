@@ -1,6 +1,6 @@
 import {useLocation, useNavigate} from 'react-router-dom';
 import {clearUser, getSignInStatus, getEmail, setSignInStatus} from '../Login/LoginPage';
-import {SearchBar} from '../utils/utils';
+import {SearchBar} from '../utils/SearchBar';
 import './Layout.css'
 
 type HeaderProps = {
