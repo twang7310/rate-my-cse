@@ -297,7 +297,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = (props) => {
         <div className="card review-card">
             {popupOpen && 
                 <Popup onClose={() => { handleConfirmation() }} onX={() => {handleX()}} header="">
-                    <p>"Warning! This action is irreversible. Continue?"</p>
+                    <p>Warning! This action is irreversible. Continue?</p>
                 </Popup>
             }
             <div className="review-card-left">
