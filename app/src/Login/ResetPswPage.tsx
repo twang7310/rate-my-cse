@@ -5,6 +5,7 @@ import {MuiOtpInput} from 'mui-one-time-password-input';
 import {checkPswValid} from './loginUtils';
 import {CognitoUser} from 'amazon-cognito-identity-js';
 import {getCognitoUserPoolAsync} from '../userpool';
+import Popup from "../Popup/Popup";
 import './Login.css'
 
 const emailRegex = new RegExp('^[a-zA-Z0-9_]+@uw.edu$');
@@ -29,6 +30,7 @@ export const ResetPswPage: React.FC = () => {
     const [showSendEmail, setShowSendEmail] = useState(true);
     const [showSendCode, setShowSendCode] = useState(false);
     const [showReset, setShowReset] = useState(false);
+    const [popupOpen, setPopupOpen] = useState(false);
 
     async function handleContinue() {
         // Check email is valid
@@ -80,7 +82,8 @@ export const ResetPswPage: React.FC = () => {
         cognitoUser.confirmPassword(otp, psw1, {
             onSuccess: function(confirmResult) {
                 console.log('call result: ' + confirmResult);
-                // navigate to login page
+                // popup saying reset successful and navigate to login page
+                setPopupOpen(true);
                 navigate('/login');
             },
             onFailure: function(err) {
@@ -101,6 +104,11 @@ export const ResetPswPage: React.FC = () => {
 
     return (
         <div className='signuppage' id='container'>
+            {popupOpen && 
+                <Popup onClose={() => setPopupOpen(false)} header="">
+                    <p>Password changed successfully!</p>
+                </Popup>
+            }
             <h1 style={{ display: showLayout ? undefined : 'none' }}
             >
                 Please enter your UW email
